@@ -8,6 +8,7 @@ import ProductCard, { type ColorVariant, getColorHex } from '@/components/Produc
 import ProductCardSkeleton from '@/components/skeletons/ProductCardSkeleton';
 import AnimatedSection, { AnimatedGrid } from '@/components/AnimatedSection';
 import CollectionCards from '@/components/CollectionCards';
+import HeroVideo from '@/components/HeroVideo';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { useStorePricing } from '@/context/StorePricingContext';
@@ -106,18 +107,7 @@ export default function Home() {
     <main className="min-h-screen bg-white">
 
       <section className="relative w-full h-[88vh] md:h-screen overflow-hidden bg-brand-deep">
-        <video
-          className="absolute inset-0 w-full h-full object-cover object-center"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster="/hero_home_poster.jpg"
-          aria-label="HairBudget model presenting luxury hair"
-        >
-          <source src="/hero.mp4" type="video/mp4" />
-        </video>
+        <HeroVideo />
 
         <div className="absolute inset-0 bg-black/20" />
         <div className="absolute inset-0 bg-gradient-to-r from-brand-deep/80 via-brand-deep/25 to-transparent" />
