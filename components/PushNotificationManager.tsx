@@ -39,8 +39,8 @@ export default function PushNotificationManager() {
 
         new Notification('Notifications Enabled! 🎉', {
           body: 'You will now receive updates about orders, deals, and more.',
-          icon: '/icon-192x192.png',
-          badge: '/icon-192x192.png',
+          icon: '/icon-192.png',
+          badge: '/icon-192.png',
           tag: 'welcome-notification'
         });
       }

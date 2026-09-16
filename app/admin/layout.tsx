@@ -185,14 +185,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         {/* Brand */}
         <div className="flex items-center gap-3 px-5 py-5 border-b border-slate-800/60 flex-shrink-0">
-          <Link href="/admin" className="flex items-center gap-3 w-full">
-            <div className="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center flex-shrink-0">
-              <span className="text-slate-950 font-black text-xs">L</span>
-            </div>
-            <div className="min-w-0">
-              <p className="text-white text-sm font-bold truncate leading-tight">HairBudget</p>
-              <p className="text-[8px] font-black tracking-[0.4em] uppercase text-blue-500/70">Admin Panel</p>
-            </div>
+          <Link href="/admin" className="flex items-center gap-3 w-full min-w-0">
+            <img
+              src="/logo-light.png"
+              alt="HairBudget"
+              className="h-8 w-auto max-w-[140px] object-contain object-left"
+            />
+            <p className="text-[8px] font-black tracking-[0.3em] uppercase text-brand-gold hidden xl:block">Admin</p>
           </Link>
         </div>
 

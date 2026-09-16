@@ -17,7 +17,7 @@ interface SEOProps {
 
 export function generateMetadata({
   title = 'HairBudget | Confidence in every strand',
-  description = 'Shop quality wigs, bundles, and hair care at HairBudget — styles you will love, shipped with care.',
+  description = 'Stylish and quality hair products at budget-friendly prices. Shop wigs, extensions, bundles and shapewear — retail and wholesale in Ghana.',
   keywords = [],
   ogImage,
   ogType = 'website',
@@ -29,19 +29,20 @@ export function generateMetadata({
   author,
   noindex = false
 }: SEOProps): Metadata {
-  const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://example.com';
-  const defaultOgImage = `${siteUrl}/logo.png`;
+  const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://hairbudgetgh.com';
+  const defaultOgImage = `${siteUrl}/og-image.png`;
   const resolvedOgImage = ogImage || defaultOgImage;
   const siteName = 'HairBudget';
   const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
 
   const defaultKeywords = [
-    'wigs',
-    'hair bundles',
-    'wig shop',
     'HairBudget',
-    'human hair wigs',
-    'synthetic wigs'
+    'Hair Budget GH',
+    'wigs Ghana',
+    'hair extensions Ghana',
+    'hair bundles Accra',
+    'wholesale hair Ghana',
+    'Adenta hair shop',
   ];
 
   const allKeywords = [...new Set([...keywords, ...defaultKeywords])];
@@ -57,7 +58,7 @@ export function generateMetadata({
       images: [{ url: resolvedOgImage, width: 1200, height: 630, alt: title }],
       type: ogType as any,
       siteName,
-      locale: 'en_US'
+      locale: 'en_GH'
     },
     twitter: {
       card: 'summary_large_image',
@@ -168,8 +169,12 @@ export function generateOrganizationSchema() {
     name: 'HairBudget',
     url: siteUrl,
     logo: `${siteUrl}/logo.png`,
-    image: `${siteUrl}/logo.png`,
-    sameAs: [] as string[]
+    image: `${siteUrl}/og-image.png`,
+    sameAs: [
+      'https://www.instagram.com/hairbudget_yassi/',
+      'https://www.tiktok.com/@hairbudget22',
+      'https://www.snapchat.com/add/hairbudget',
+    ]
   };
 }
 

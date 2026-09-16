@@ -2,8 +2,8 @@
 
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import Image from 'next/image';
 import { usePageTitle } from '@/hooks/usePageTitle';
+import PageHero from '@/components/PageHero';
 import ProductCard, { type ColorVariant } from '@/components/ProductCard';
 import ProductCardSkeleton from '@/components/skeletons/ProductCardSkeleton';
 import { getColorHex } from '@/components/ProductCard';
@@ -203,100 +203,29 @@ function ShopContent() {
   return (
     <main className="min-h-screen bg-white">
 
-      {/* ── SHOP HERO ───────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-slate-950">
-
-        {/* Background image */}
-        <Image
-          src="/hero_trio.jpg"
-          alt="Shop hero background"
-          fill
-          className="object-cover object-top"
-          priority
-          sizes="100vw"
-          quality={82}
-        />
-
-        {/* Dark overlay — keeps text crisp */}
-        <div className="absolute inset-0 bg-slate-950/80 z-0" />
-
-        {/* Subtle top accent line */}
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-400/30 to-transparent z-20" />
-
-        {/* Film grain texture */}
-        <div
-          className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none z-10"
-          style={{
-            backgroundImage:
-              'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")',
-          }}
-        />
-
-        {/* Ghost decorative letter */}
-        <div
-          aria-hidden="true"
-          className="absolute -right-8 -top-6 leading-none pointer-events-none select-none font-serif italic text-white/[0.02]"
-          style={{ fontSize: 'clamp(10rem, 28vw, 22rem)' }}
-        >
-          S
-        </div>
-
-        {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-
-          {/* Top row: eyebrow + breadcrumb */}
-          <div className="flex items-center justify-between mb-10">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-px bg-blue-400/60" />
-              <span className="text-blue-400/80 text-[9px] font-black tracking-[0.5em] uppercase">
-                Shop All
-              </span>
-            </div>
-            <div className="hidden sm:flex items-center gap-2 text-[10px] tracking-widest uppercase text-slate-600">
-              <span className="hover:text-slate-400 transition-colors cursor-pointer">Home</span>
-              <i className="ri-arrow-right-s-line text-slate-700 text-xs" />
-              <span className="text-slate-400">Shop</span>
-            </div>
-          </div>
-
-          {/* Main heading + description row */}
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 lg:gap-16">
-            <div className="max-w-xl">
-              <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white leading-[1.08] tracking-tight">
-                Everything You{' '}
-                <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-blue-500">
-                  Need
-                </span>
-              </h1>
-              <p className="text-slate-500 text-sm md:text-base font-light leading-relaxed mt-5 max-w-md">
-                Wigs, bundles, closures &amp; hair care essentials — all curated and priced for you.
-              </p>
-            </div>
-
-            {/* Stats — hidden on mobile, visible from sm and up */}
-            <div className="hidden sm:flex items-center gap-8 lg:gap-10 lg:pb-1.5">
-              {[
-                { value: heroStats.totalItems > 0 ? `${heroStats.totalItems}+` : '—', label: 'Items' },
-                { value: heroStats.totalCategories > 0 ? `${heroStats.totalCategories}+` : '—', label: 'Styles' },
-                { value: heroStats.minPrice > 0 ? `GH₵${heroStats.minPrice}` : '—', label: 'From' },
-              ].map((s, i) => (
-                <div key={s.label} className="flex items-center gap-8">
-                  <div>
-                    <div className="text-2xl font-bold text-white tracking-tight font-serif">{s.value}</div>
-                    <div className="text-[9px] font-bold tracking-[0.3em] uppercase text-slate-600 mt-0.5">{s.label}</div>
-                  </div>
-                  {i < 2 && <div className="w-px h-8 bg-slate-800 hidden sm:block" />}
-                </div>
-              ))}
-            </div>
-          </div>
-
-
-        </div>
-
-        {/* Bottom border glow */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
-      </section>
+      <PageHero
+        image="/hero_shop.jpg"
+        imageAlt="HairBudget shop — wigs, bundles and braiding hair"
+        eyebrow="Shop All"
+        breadcrumb={[
+          { label: 'Home', href: '/' },
+          { label: 'Shop' },
+        ]}
+        ghostLetter="S"
+        minHeightClass="min-h-[44vh] md:min-h-[52vh]"
+        title={
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl">
+            Everything You{' '}
+            <span className="italic font-light text-brand-gold">Need</span>
+          </h1>
+        }
+        description="Wigs, bundles, closures and hair care — curated and priced for you."
+        stats={[
+          { value: heroStats.totalItems > 0 ? `${heroStats.totalItems}+` : '—', label: 'Items' },
+          { value: heroStats.totalCategories > 0 ? `${heroStats.totalCategories}+` : '—', label: 'Styles' },
+          { value: heroStats.minPrice > 0 ? `GH₵${heroStats.minPrice}` : '—', label: 'From' },
+        ]}
+      />
 
       {/* ── MOBILE TOOLBAR (sticky) ────────────────────────────── */}
       <div className={`lg:hidden fixed left-0 right-0 z-30 bg-white border-b border-slate-100 shadow-sm transition-[top] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${headerHidden ? 'top-0' : 'top-[68px]'}`}>

@@ -19,19 +19,26 @@ export const DEFAULT_KEYWORDS = [
   'HairBudget',
   'Hair Budget GH',
   'HairBudget by Yassi',
+  'HairBudget Ghana',
   'wigs Ghana',
   'buy wigs Accra',
-  'human hair wigs',
+  'buy wigs Adenta',
+  'human hair wigs Ghana',
   'hair extensions Ghana',
-  'braiding extensions',
-  'hair bundles',
-  'body wave hair',
-  'bob wigs',
+  'braiding extensions Ghana',
+  'jumbo braid Ghana',
+  'hair bundles Accra',
+  'body wave hair Ghana',
+  'bob wigs Ghana',
   'blonde wigs Ghana',
+  'coloured wigs Ghana',
   'shapewear Ghana',
   'wholesale hair Ghana',
+  'hair reseller Ghana',
   'Adenta hair shop',
   'budget wigs',
+  'affordable wigs Ghana',
+  'confidence in every strand',
 ];
 
 type SeoInput = {
@@ -63,7 +70,7 @@ export function buildMetadata({
     ? image.startsWith('http')
       ? image
       : `${SITE.url}${image}`
-    : `${SITE.url}/og-image.png`;
+    : `${SITE.url}${BRAND.ogImage}`;
 
   const allKeywords = Array.from(new Set([...keywords, ...DEFAULT_KEYWORDS]));
 
@@ -125,12 +132,15 @@ export function organizationJsonLd() {
     url: SITE.url,
     logo: {
       '@type': 'ImageObject',
-      url: `${SITE.url}/icon-512.png`,
-      width: 512,
-      height: 512,
+      url: `${SITE.url}${BRAND.logo}`,
+      width: 1021,
+      height: 196,
+      caption: `${SITE.name} logo`,
     },
-    image: `${SITE.url}/og-image.png`,
+    image: [`${SITE.url}${BRAND.ogImage}`, `${SITE.url}${BRAND.logo}`],
     description: SITE.description,
+    slogan: SITE.tagline,
+    foundingDate: String(BRAND.foundedYear),
     sameAs: [
       BRAND.social.instagram,
       BRAND.social.tiktok,
@@ -138,12 +148,69 @@ export function organizationJsonLd() {
     ],
     email: BRAND.contact.email,
     telephone: BRAND.contact.phoneTel,
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        contactType: 'customer service',
+        telephone: BRAND.contact.phoneTel,
+        email: BRAND.contact.email,
+        areaServed: 'GH',
+        availableLanguage: ['en'],
+      },
+      {
+        '@type': 'ContactPoint',
+        contactType: 'sales',
+        telephone: `+${BRAND.contact.whatsappE164}`,
+        url: BRAND.contact.whatsappUrl,
+        areaServed: 'GH',
+        availableLanguage: ['en'],
+      },
+    ],
     address: {
       '@type': 'PostalAddress',
       streetAddress: BRAND.contact.store,
       addressLocality: 'Adenta',
+      addressRegion: 'Greater Accra',
       addressCountry: 'GH',
     },
+  };
+}
+
+export function localBusinessJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': ['Store', 'HairSalon'],
+    '@id': `${SITE.url}/#store`,
+    name: SITE.name,
+    alternateName: [BRAND.legalName, BRAND.shortName],
+    url: SITE.url,
+    logo: `${SITE.url}${BRAND.logo}`,
+    image: `${SITE.url}${BRAND.ogImage}`,
+    description: SITE.description,
+    slogan: SITE.tagline,
+    telephone: BRAND.contact.phoneTel,
+    email: BRAND.contact.email,
+    priceRange: 'GH₵',
+    currenciesAccepted: SITE.currency,
+    paymentAccepted: 'Mobile Money, Credit Card, Debit Card',
+    areaServed: {
+      '@type': 'Country',
+      name: 'Ghana',
+    },
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: BRAND.contact.store,
+      addressLocality: 'Adenta',
+      addressRegion: 'Greater Accra',
+      addressCountry: 'GH',
+    },
+    hasMap: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(BRAND.contact.store)}`,
+    sameAs: [
+      BRAND.social.instagram,
+      BRAND.social.tiktok,
+      BRAND.social.snapchat,
+    ],
+    parentOrganization: { '@id': `${SITE.url}/#organization` },
   };
 }
 

@@ -32,3 +32,6 @@ yarn-error.log*
 
 # Vercel
 .vercel
+
+# Original logo upload (white background)
+public/logo-source.png

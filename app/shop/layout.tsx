@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Shop All — Wigs, Bundles, Closures & Hair Care',
+  title: 'Shop Wigs, Extensions & Bundles',
   description:
-    'Discover the full HairBudget collection — premium wigs, hair bundles, closures, frontals and styling essentials, delivered across Ghana.',
+    'Shop HairBudget wigs, human hair, braiding extensions, bundles, body wave, bobs, blonde and coloured hair, plus shapewear. Retail and wholesale in Ghana.',
   path: '/shop',
-  keywords: ['shop wigs Ghana', 'buy wigs online', 'wig store', 'hair bundles shop'],
+  keywords: ['shop wigs Ghana', 'buy wigs online Accra', 'hair extensions shop', 'wholesale hair Ghana'],
 });
 
 export default function ShopLayout({ children }: { children: React.ReactNode }) {

@@ -32,6 +32,14 @@ export const BRAND = {
   countryCode: 'GH',
   themeColor: BRAND_COLORS.forest,
   colors: BRAND_COLORS,
+  logo: '/logo.png',
+  ogImage: '/og-image.png',
+  icons: {
+    favicon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+    pwa192: '/icon-192.png',
+    pwa512: '/icon-512.png',
+  },
   contact: {
     phoneDisplay: '059 892 8819',
     phoneTel: '+233598928819',

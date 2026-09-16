@@ -146,7 +146,7 @@ export default function SignupPage() {
       <main className="min-h-screen flex">
         <div className="hidden lg:flex lg:w-[52%] relative bg-slate-950 flex-col justify-between p-14 overflow-hidden">
           <Image
-            src="/hero_portrait.jpg"
+            src="/hero_home_poster.jpg"
             alt=""
             fill
             className="object-cover object-center"
@@ -220,7 +220,7 @@ export default function SignupPage() {
       {/* ── LEFT PANEL ─────────────────────────────────── */}
       <div className="hidden lg:flex lg:w-[52%] relative bg-slate-950 flex-col justify-between p-14 overflow-hidden">
         <Image
-          src="/hero_portrait.jpg"
+          src="/hero_home_poster.jpg"
           alt=""
           fill
           className="object-cover object-center"
@@ -245,7 +245,7 @@ export default function SignupPage() {
         </div>
 
         <div className="relative z-10">
-          <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-500 mb-6">Join the Century</p>
+          <p className="text-[9px] font-black tracking-[0.5em] uppercase text-brand-cream/80 mb-6">Join HairBudget</p>
           <h2
             className="font-serif italic text-white leading-[0.9]"
             style={{ fontSize: 'clamp(2.8rem, 4.5vw, 5rem)' }}

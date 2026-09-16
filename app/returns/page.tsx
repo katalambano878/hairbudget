@@ -76,7 +76,7 @@ export default function ReturnsPortalPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50 py-12">
+    <main className="min-h-screen bg-white py-12">
         <div className="max-w-4xl mx-auto px-4">
           <div className="mb-8 rounded-2xl bg-brand-forest text-brand-ivory p-6">
             <p className="text-[10px] font-black tracking-[0.35em] uppercase text-brand-gold mb-2">Returns policy</p>

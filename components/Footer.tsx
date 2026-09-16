@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useCMS } from '@/context/CMSContext';
 import { BRAND, whatsappHref } from '@/lib/brand';
+import BrandLogo from '@/components/BrandLogo';
 
 export default function Footer() {
   const { getSetting } = useCMS();
@@ -61,11 +62,10 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-10 md:gap-8 pb-12">
           {/* Brand */}
           <div className="col-span-2 space-y-4">
-            <Link href="/" className="inline-block group">
-              <h3 className="font-serif text-2xl md:text-3xl tracking-tight group-hover:text-blue-300 transition-colors">
-                {siteName}
-              </h3>
-            </Link>
+            <BrandLogo
+              onDark
+              imgClassName="h-10 md:h-11 w-auto max-w-[220px]"
+            />
             <p className="text-brand-gold text-sm leading-relaxed max-w-xs">{siteTagline}</p>
             <p className="text-[11px] font-black tracking-[0.35em] uppercase text-brand-gold/80">
               Est. {BRAND.foundedYear} · Adenta, Ghana

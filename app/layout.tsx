@@ -4,7 +4,7 @@ import { Pacifico, Playfair_Display, Outfit } from "next/font/google";
 import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 import StoreLayoutShell from "@/components/StoreLayoutShell";
-import { SITE, buildMetadata, organizationJsonLd, websiteJsonLd, jsonLdScript } from "@/lib/seo";
+import { SITE, buildMetadata, organizationJsonLd, websiteJsonLd, localBusinessJsonLd, jsonLdScript } from "@/lib/seo";
 import "./globals.css";
 
 const pacifico = Pacifico({ weight: '400', subsets: ['latin'], variable: '--font-pacifico' });
@@ -93,6 +93,7 @@ export default function RootLayout({
         {/* Site-wide JSON-LD: Organization + WebSite (with sitelinks search). */}
         <script {...jsonLdScript(organizationJsonLd())} />
         <script {...jsonLdScript(websiteJsonLd())} />
+        <script {...jsonLdScript(localBusinessJsonLd())} />
       </head>
 
       {GA_MEASUREMENT_ID && (

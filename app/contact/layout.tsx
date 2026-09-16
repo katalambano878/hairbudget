@@ -4,9 +4,9 @@ import { buildMetadata } from '@/lib/seo';
 export const metadata: Metadata = buildMetadata({
   title: 'Contact Us',
   description:
-    'Talk to the HairBudget team about an order, a styling question, partnerships or anything else. We typically reply within one business day.',
+    'Visit HairBudget at 1 Kwei-Fio St, Adenta, WhatsApp 054 295 0338, or email info@hairbudgetgh.com. Pickup and delivery available.',
   path: '/contact',
-  keywords: ['contact HairBudget', 'wig customer service', 'wig support Ghana'],
+  keywords: ['contact HairBudget', 'HairBudget WhatsApp', 'hair shop Adenta'],
 });
 
 export default function ContactLayout({ children }: { children: React.ReactNode }) {

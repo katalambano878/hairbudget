@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState } from 'react';
+import PageHero from '@/components/PageHero';
 import CartCountdown from '@/components/CartCountdown';
 import AdvancedCouponSystem from '@/components/AdvancedCouponSystem';
 import { useCart } from '@/context/CartContext';
@@ -50,32 +50,24 @@ export default function CartPage() {
   return (
     <div className="min-h-screen bg-white">
 
-      {/* ── HERO BANNER ──────────────────────────────────── */}
-      <section className="relative bg-slate-950 overflow-hidden" style={{ minHeight: '38vh' }}>
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-400/40 to-transparent" />
-
-        {/* Ghost letter */}
-        <div
-          aria-hidden="true"
-          className="absolute -right-4 bottom-0 font-serif italic text-white/[0.04] leading-none pointer-events-none select-none"
-          style={{ fontSize: 'clamp(8rem, 22vw, 20rem)' }}
-        >C</div>
-
-        <div
-          className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex flex-col justify-center"
-          style={{ minHeight: '38vh' }}
-        >
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-8 h-px bg-blue-400" />
-            <span className="text-blue-400 text-[9px] font-black tracking-[0.55em] uppercase">Your Bag</span>
-          </div>
-          <h1 className="font-serif italic text-white leading-[0.9]" style={{ fontSize: 'clamp(2.5rem, 7vw, 6rem)' }}>
-            Shopping<br />
-            <span className="text-blue-400">Cart</span>
+      <PageHero
+        image="/hero_cart.jpg"
+        imageAlt="Your HairBudget shopping cart"
+        eyebrow="Your Bag"
+        ghostLetter="C"
+        minHeightClass="min-h-[32vh] md:min-h-[38vh]"
+        breadcrumb={[
+          { label: 'Home', href: '/' },
+          { label: 'Cart' },
+        ]}
+        title={
+          <h1 className="italic leading-[0.9]" style={{ fontSize: 'clamp(2.25rem, 6vw, 4.5rem)' }}>
+            Shopping
+            <br />
+            <span className="text-brand-gold">Cart</span>
           </h1>
-        </div>
-      </section>
+        }
+      />
 
       {/* ── MAIN CONTENT ─────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

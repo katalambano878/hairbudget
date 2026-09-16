@@ -91,7 +91,7 @@ export default function PaymentPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <main className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-700 rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600">Loading order details...</p>
@@ -102,7 +102,7 @@ export default function PaymentPage() {
 
   if (error && !order) {
     return (
-      <main className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+      <main className="min-h-screen bg-white flex items-center justify-center px-4">
         <div className="text-center max-w-md">
           <div className="w-20 h-20 mx-auto mb-6 bg-red-50 rounded-full flex items-center justify-center">
             <i className="ri-error-warning-line text-4xl text-red-500"></i>
@@ -125,7 +125,7 @@ export default function PaymentPage() {
   const customerName = order?.metadata?.first_name || shippingAddress.firstName || 'Customer';
 
   return (
-    <main className="min-h-screen bg-gray-50 py-12 px-4">
+    <main className="min-h-screen bg-white py-12 px-4">
       <div className="max-w-lg mx-auto">
         {/* Header */}
         <div className="text-center mb-8">

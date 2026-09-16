@@ -66,7 +66,7 @@ export default function MyTicketsPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-gray-50 py-12">
+      <main className="min-h-screen bg-white py-12">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between mb-8">
             <div>

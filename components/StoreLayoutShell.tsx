@@ -42,7 +42,7 @@ export default function StoreLayoutShell({
           <NavigationProgress />
         </Suspense>
         <ScrollToTop />
-        <div id="main-content" className="min-h-screen bg-brand-ivory">
+        <div id="main-content" className="min-h-screen bg-white">
 
           <PWAInstaller />
           <Header />

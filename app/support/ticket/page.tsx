@@ -67,7 +67,7 @@ export default function SupportTicketPage() {
     return (
       <>
         <Header />
-        <main className="min-h-screen bg-gray-50 flex items-center justify-center py-12">
+        <main className="min-h-screen bg-white flex items-center justify-center py-12">
           <div className="max-w-md mx-auto px-4 text-center">
             <div className="bg-white rounded-xl shadow-lg p-8">
               <div className="w-20 h-20 flex items-center justify-center bg-blue-100 rounded-full mx-auto mb-6">
@@ -108,7 +108,7 @@ export default function SupportTicketPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-gray-50 py-12">
+      <main className="min-h-screen bg-white py-12">
         <div className="max-w-4xl mx-auto px-4">
           <Link
             href="/help"

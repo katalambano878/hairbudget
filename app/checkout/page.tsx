@@ -446,7 +446,7 @@ export default function CheckoutPage() {
 
   if (cart.length === 0 && !isLoading) {
     return (
-      <main className="min-h-screen bg-gray-50 py-20">
+      <main className="min-h-screen bg-white py-20">
         <div className="max-w-md mx-auto text-center px-4">
           <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
             <i className="ri-shopping-cart-line text-4xl text-gray-300"></i>
@@ -462,7 +462,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-white">
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="mb-8">
           <Link href="/cart" className="text-gray-600 hover:text-gray-900 font-medium inline-flex items-center whitespace-nowrap">

@@ -113,7 +113,7 @@ export default function HelpCenterPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-gray-50">
+      <main className="min-h-screen bg-white">
         <div className="bg-gradient-to-br from-blue-700 to-blue-900 text-white py-16">
           <div className="max-w-4xl mx-auto px-4 text-center">
             <h1 className="text-4xl font-bold mb-4">How can we help you?</h1>

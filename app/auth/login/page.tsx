@@ -71,7 +71,7 @@ export default function LoginPage() {
       {/* ── LEFT PANEL — editorial / decorative ──────────── */}
       <div className="hidden lg:flex lg:w-[52%] relative bg-slate-950 flex-col justify-between p-14 overflow-hidden">
         <Image
-          src="/hero_portrait.jpg"
+          src="/hero_home_poster.jpg"
           alt=""
           fill
           className="object-cover object-center"
@@ -79,8 +79,8 @@ export default function LoginPage() {
           sizes="52vw"
           quality={75}
         />
-        <div className="absolute inset-0 bg-slate-950/75" />
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-400/40 to-transparent" />
+        <div className="absolute inset-0 bg-brand-deep/78" />
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brand-gold/60 to-transparent" />
 
         {/* Ghost letter */}
         <div
@@ -91,18 +91,18 @@ export default function LoginPage() {
 
         {/* Brand eyebrow */}
         <div className="relative z-10 flex items-center gap-3">
-          <div className="w-8 h-px bg-blue-400" />
-          <span className="text-blue-400 text-[9px] font-black tracking-[0.55em] uppercase">HairBudget</span>
+          <div className="w-8 h-px bg-brand-gold" />
+          <span className="text-brand-gold text-[9px] font-black tracking-[0.55em] uppercase">HairBudget</span>
         </div>
 
         {/* Hero text */}
         <div className="relative z-10">
-          <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-500 mb-6">Member Access</p>
-          <h2 className="font-serif italic text-white leading-[0.9]" style={{ fontSize: 'clamp(2.8rem, 4.5vw, 5rem)' }}>
+          <p className="text-[9px] font-black tracking-[0.5em] uppercase text-brand-gold mb-6">Member Access</p>
+          <h2 className="font-serif italic text-brand-ivory leading-[0.9]" style={{ fontSize: 'clamp(2.8rem, 4.5vw, 5rem)' }}>
             Your Style,<br />
-            <span className="text-blue-400">Your Way.</span>
+            <span className="text-brand-gold">Your Way.</span>
           </h2>
-          <p className="text-slate-400 text-sm font-light mt-8 max-w-xs leading-relaxed">
+          <p className="text-brand-cream/95 text-sm font-normal mt-8 max-w-xs leading-relaxed">
             Sign in to access your orders, wishlist, and exclusive deals.
           </p>
         </div>

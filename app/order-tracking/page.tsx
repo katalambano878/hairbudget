@@ -184,7 +184,7 @@ function OrderTrackingContent() {
   // Search form
   if (!isTracking || !order) {
     return (
-      <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <main className="min-h-screen bg-white py-12 px-4">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-gray-900 mb-2">Track Your Order</h1>
@@ -272,7 +272,7 @@ function OrderTrackingContent() {
     .toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 
   return (
-    <main className="min-h-screen bg-gray-50 py-12 px-4">
+    <main className="min-h-screen bg-white py-12 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
           <button 
@@ -438,7 +438,7 @@ function OrderTrackingContent() {
 export default function OrderTrackingPage() {
   return (
     <Suspense fallback={
-      <main className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <main className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <div className="w-12 h-12 border-4 border-slate-700 border-t-transparent rounded-full animate-spin mx-auto"></div>
         </div>

@@ -4,7 +4,7 @@ import path from 'path';
 
 export function GET() {
   try {
-    const filePath = path.join(process.cwd(), 'public', 'logo.png');
+    const filePath = path.join(process.cwd(), 'public', 'favicon.ico');
     const buffer = fs.readFileSync(filePath);
     return new NextResponse(buffer, {
       headers: {

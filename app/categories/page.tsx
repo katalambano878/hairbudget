@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import type { Metadata } from 'next';
-import { supabase } from '@/lib/supabase';
+import PageHero from '@/components/PageHero';
+import { supabaseAdmin as supabase } from '@/lib/supabase-admin';
 import { buildMetadata } from '@/lib/seo';
 
 export const revalidate = 0;
@@ -39,47 +39,27 @@ export default async function CategoriesPage() {
   return (
     <div className="min-h-screen bg-white">
 
-      {/* ── HERO ─────────────────────────────────────────── */}
-      <section className="relative bg-slate-950 overflow-hidden" style={{ minHeight: '68vh' }}>
-        <Image
-          src="/hero_salon.jpg"
-          alt="Shop by Category"
-          fill
-          className="object-cover object-center"
-          priority
-          sizes="100vw"
-          quality={82}
-        />
-        <div className="absolute inset-0 bg-slate-950/75" />
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-400/40 to-transparent" />
-
-        {/* Ghost letter */}
-        <div
-          aria-hidden="true"
-          className="absolute -right-4 bottom-0 font-serif italic text-white/[0.03] leading-none pointer-events-none select-none"
-          style={{ fontSize: 'clamp(12rem, 30vw, 28rem)' }}
-        >C</div>
-
-        <div
-          className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex flex-col justify-center"
-          style={{ minHeight: '68vh' }}
-        >
-          <div className="flex items-center gap-4 mb-10">
-            <div className="w-10 h-px bg-blue-400" />
-            <span className="text-blue-400 text-[9px] font-black tracking-[0.55em] uppercase">Collections</span>
-          </div>
-
-          <h1 className="font-serif italic leading-[0.95] drop-shadow-xl">
-            <span className="block text-white" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}>Shop by</span>
-            <span className="block text-blue-400 drop-shadow-md" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}>Category</span>
-            <span className="block text-white/90 mt-2 font-medium" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>Find Your Style</span>
+      <PageHero
+        image="/hero_categories.jpg"
+        imageAlt="HairBudget collections — wigs, bundles and braiding hair"
+        eyebrow="Collections"
+        ghostLetter="C"
+        minHeightClass="min-h-[52vh] md:min-h-[60vh]"
+        breadcrumb={[
+          { label: 'Home', href: '/' },
+          { label: 'Categories' },
+        ]}
+        title={
+          <h1 className="italic leading-[0.95] drop-shadow-xl">
+            <span className="block" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}>Shop by</span>
+            <span className="block text-brand-gold" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}>Category</span>
+            <span className="block text-brand-ivory mt-2 font-medium not-italic" style={{ fontSize: 'clamp(1.25rem, 3vw, 2rem)' }}>
+              Find your style
+            </span>
           </h1>
-
-          <p className="text-slate-100 text-base md:text-lg font-normal mt-8 max-w-sm leading-relaxed drop-shadow-md">
-            Wigs, bundles, closures, hair care and styling essentials — all in one place.
-          </p>
-        </div>
-      </section>
+        }
+        description="Wigs, bundles, closures and hair care — all in one place."
+      />
 
       {/* ── GRID ─────────────────────────────────────────── */}
       <section className="py-16 lg:py-24">
@@ -87,8 +67,8 @@ export default async function CategoriesPage() {
 
           <div className="flex items-end justify-between mb-12 pb-6 border-b border-slate-100">
             <div>
-              <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-300 mb-2">Browse All</p>
-              <h2 className="font-serif text-4xl lg:text-5xl text-slate-900 italic">Our Collections</h2>
+              <p className="text-[9px] font-black tracking-[0.5em] uppercase text-brand-mid mb-2">Browse All</p>
+              <h2 className="font-serif text-4xl lg:text-5xl text-brand-ink italic">Our Collections</h2>
             </div>
             <Link
               href="/shop"
@@ -124,7 +104,7 @@ export default async function CategoriesPage() {
 
                   {/* Content */}
                   <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <p className="text-[8px] font-black tracking-[0.5em] uppercase text-blue-400/70 mb-1.5">Collection</p>
+                    <p className="text-[8px] font-black tracking-[0.5em] uppercase text-brand-gold mb-1.5">Collection</p>
                     <h3 className="font-serif text-2xl italic text-white font-semibold mb-3">{category.name}</h3>
                     <p className="text-slate-300 text-xs leading-relaxed line-clamp-2 mb-4 max-h-0 group-hover:max-h-12 overflow-hidden transition-all duration-500">
                       {category.description || 'Explore our exclusive collection in this category.'}

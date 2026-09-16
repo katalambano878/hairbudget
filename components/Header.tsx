@@ -11,6 +11,7 @@ import { useStorePricing } from '@/context/StorePricingContext';
 import { resolveProductPrice } from '@/lib/pricing';
 import { useDebouncedValue } from '@/components/useDebouncedValue';
 import type { StorefrontSearchHit } from '@/lib/storefront-search-types';
+import BrandLogo from '@/components/BrandLogo';
 
 const NAV_LINKS = [
   { label: 'Shop', href: '/shop' },
@@ -39,7 +40,6 @@ export default function Header() {
   const { getSetting } = useCMS();
 
   const siteName = getSetting('site_name') || 'HairBudget';
-  const headerLogo = getSetting('site_logo') || '/logo.png';
 
   // Scroll: elevation + auto-hide
   useEffect(() => {
@@ -120,13 +120,10 @@ export default function Header() {
 
             {/* ── LEFT: Logo ── */}
             <div className="flex items-center">
-              <Link href="/" aria-label={siteName}>
-                <img
-                  src={headerLogo}
-                  alt={siteName}
-                  className="h-11 md:h-12 w-auto max-w-[180px] sm:max-w-[220px] object-contain object-left transition-opacity duration-300 hover:opacity-80"
-                />
-              </Link>
+              <BrandLogo
+                imgClassName="h-7 md:h-8 w-auto max-w-[160px] sm:max-w-[200px] transition-opacity duration-300 hover:opacity-80"
+                priority
+              />
             </div>
 
             {/* ── CENTER: Desktop nav ── */}
@@ -347,13 +344,11 @@ export default function Header() {
           >
             {/* Top bar */}
             <div className="flex items-center justify-between px-6 pt-6 pb-4">
-              <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-                <img
-                  src={headerLogo}
-                  alt={siteName}
-                  className="h-11 w-auto max-w-[200px] object-contain object-left"
-                />
-              </Link>
+              <BrandLogo
+                onDark
+                imgClassName="h-8 w-auto max-w-[180px]"
+                className=""
+              />
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-all"

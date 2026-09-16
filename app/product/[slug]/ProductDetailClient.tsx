@@ -763,7 +763,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
         </section>
 
         {/* ── DETAILS / TABS ────────────────────────────── */}
-        <section className="bg-slate-50 py-16 lg:py-24 relative">
+        <section className="bg-white py-16 lg:py-24 relative">
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-3 mb-6">

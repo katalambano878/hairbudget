@@ -60,7 +60,7 @@ export default function ForgotPasswordPage() {
       {/* ── LEFT PANEL — editorial / decorative ──────────── */}
       <div className="hidden lg:flex lg:w-[52%] relative bg-slate-950 flex-col justify-between p-14 overflow-hidden">
         <Image
-          src="/hero_portrait.jpg"
+          src="/hero_home_poster.jpg"
           alt=""
           fill
           className="object-cover object-center"

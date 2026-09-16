@@ -7,63 +7,25 @@ import { supabase } from '@/lib/supabase';
 import ProductCard, { type ColorVariant, getColorHex } from '@/components/ProductCard';
 import ProductCardSkeleton from '@/components/skeletons/ProductCardSkeleton';
 import AnimatedSection, { AnimatedGrid } from '@/components/AnimatedSection';
-import NewsletterSection from '@/components/NewsletterSection';
+import CollectionCards from '@/components/CollectionCards';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { useStorePricing } from '@/context/StorePricingContext';
 import { getProductCardPricing } from '@/lib/pricing';
-import { BRAND } from '@/lib/brand';
 
-const HERO_SLIDES = [
-  {
-    image: '/hero_trio.jpg',
-    tag: 'HairBudget by Yassi',
-    heading: (
-      <>
-        Confidence in{' '}
-        <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-brand-ivory to-brand-gold">
-          every strand
-        </span>
-      </>
-    ),
-    subtext: 'Stylish, quality hair at budget-friendly prices — wigs, extensions, bundles and more for retail and wholesale.',
-    cta: { text: 'Shop Now', href: '/shop' },
-    cta2: { text: 'View Collections', href: '/categories' },
-    position: 'object-top',
-  },
-  {
-    image: '/hero_ombre.jpg',
-    tag: 'Retail + Wholesale',
-    heading: (
-      <>
-        Hair for{' '}
-        <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-brand-ivory to-brand-gold">
-          every look
-        </span>
-      </>
-    ),
-    subtext: 'Human hair wigs, braiding extensions, body wave, bobs, blonde and coloured styles — plus shapewear.',
-    cta: { text: 'Shop Hair', href: '/shop' },
-    cta2: { text: 'Our Story', href: '/about' },
-    position: 'object-top',
-  },
-  {
-    image: '/hero_salon.jpg',
-    tag: 'Pickup & Delivery',
-    heading: (
-      <>
-        Quality without{' '}
-        <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-brand-ivory to-brand-gold">
-          the markup
-        </span>
-      </>
-    ),
-    subtext: 'Visit us in Adenta or chat on WhatsApp. Pickup and delivery available across Ghana.',
-    cta: { text: 'Shop All', href: '/shop' },
-    cta2: { text: 'WhatsApp Us', href: BRAND.contact.whatsappUrl },
-    position: 'object-top',
-  },
-];
+const HERO = {
+  tag: 'HairBudget by Yassi',
+  heading: (
+    <>
+      Confidence in{' '}
+      <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-brand-ivory to-brand-gold">
+        every strand
+      </span>
+    </>
+  ),
+  cta: { text: 'Shop Now', href: '/shop' },
+  cta2: { text: 'View Collections', href: '/categories' },
+};
 
 const TICKER_ITEMS = [
   'Wigs & Human Hair',
@@ -104,14 +66,6 @@ export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -151,155 +105,64 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white">
 
-      {/* ─── HERO SLIDER ──────────────────────────────────────────────── */}
-      <section className="relative w-full h-[88vh] md:h-screen overflow-hidden bg-black">
-        {/* Slide progress bar */}
-        <div className="absolute top-0 inset-x-0 z-50 h-[2px] bg-white/10">
-          <div
-            key={currentSlide}
-            className="h-full bg-gradient-to-r from-white/60 via-white to-white/60 animate-progress origin-left shadow-[0_0_12px_rgba(255,255,255,0.6)]"
-            style={{ animationDuration: '5000ms' }}
-          />
-        </div>
+      <section className="relative w-full h-[88vh] md:h-screen overflow-hidden bg-brand-deep">
+        <video
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster="/hero_home_poster.jpg"
+          aria-label="HairBudget model presenting luxury hair"
+        >
+          <source src="/hero.mp4" type="video/mp4" />
+        </video>
 
-        {/* Slides */}
-        {HERO_SLIDES.map((slide, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-[1500ms] ease-in-out ${
-              index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
-            }`}
-          >
-            {/* Background image */}
-            <div className={`absolute inset-0 ${index === currentSlide ? 'animate-ken-burns' : ''}`}>
-              <Image
-                src={slide.image}
-                alt={`HairBudget — ${slide.tag}`}
-                fill
-                className={`object-cover ${slide.position}`}
-                priority={index === 0}
-                sizes="100vw"
-                quality={85}
-              />
+        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-deep/80 via-brand-deep/25 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/70 via-transparent to-brand-deep/15" />
+
+        <div className="absolute inset-0 z-20 flex flex-col justify-end md:justify-center pb-24 md:pb-0 px-6 sm:px-12 md:px-20 lg:px-28 max-w-7xl mx-auto w-full h-full">
+          <div className="max-w-xl lg:max-w-2xl">
+            <div className="inline-flex items-center gap-3 mb-6">
+              <span className="h-[1px] w-6 bg-brand-gold" />
+              <span className="text-brand-ivory/85 text-[11px] md:text-xs tracking-[0.45em] uppercase font-semibold">
+                {HERO.tag}
+              </span>
+              <span className="h-[1px] w-6 bg-brand-gold" />
             </div>
 
-            {/* Layered overlays for cinematic depth */}
-            <div className="absolute inset-0 bg-black/15" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/25 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10" />
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-serif text-white leading-[1.05] tracking-tight mb-10 drop-shadow-2xl">
+              {HERO.heading}
+            </h1>
 
-            {/* Film grain */}
-            <div
-              className="absolute inset-0 opacity-[0.04] mix-blend-overlay pointer-events-none"
-              style={{
-                backgroundImage:
-                  'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")',
-              }}
-            />
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-2">
+              <Link
+                href={HERO.cta.href}
+                className="group relative inline-flex items-center gap-4 bg-white text-black px-8 py-[15px] text-[11px] font-black tracking-[0.35em] uppercase overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,255,255,0.18)] w-fit"
+              >
+                <span className="absolute inset-0 bg-brand-forest translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]" />
+                <span className="relative z-10 group-hover:text-brand-ivory transition-colors duration-100 delay-[180ms] whitespace-nowrap">
+                  {HERO.cta.text}
+                </span>
+                <span className="relative z-10 w-px h-3.5 bg-black/30 group-hover:bg-white/30 transition-colors duration-100 delay-[180ms]" />
+                <i className="relative z-10 ri-arrow-right-up-line text-sm group-hover:text-brand-ivory group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 delay-[180ms]" />
+              </Link>
 
-            {/* Slide content — left-aligned editorial layout */}
-            <div className="absolute inset-0 z-20 flex flex-col justify-end md:justify-center pb-24 md:pb-0 px-6 sm:px-12 md:px-20 lg:px-28 max-w-7xl mx-auto w-full h-full">
-              <div className="max-w-xl lg:max-w-2xl">
-
-                {/* Tag pill */}
-                <div
-                  className={`inline-flex items-center gap-3 mb-6 transition-all duration-1000 delay-200 ${
-                    index === currentSlide ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-                  }`}
+              <div className="group inline-flex flex-col items-start gap-1.5">
+                <Link
+                  href={HERO.cta2.href}
+                  className="inline-flex items-center gap-2.5 text-white/70 group-hover:text-white text-[11px] font-bold tracking-[0.35em] uppercase transition-colors duration-300 whitespace-nowrap"
                 >
-                  <span className="h-[1px] w-6 bg-white/70" />
-                  <span className="text-white/80 text-[11px] md:text-xs tracking-[0.45em] uppercase font-semibold">
-                    {slide.tag}
-                  </span>
-                  <span className="h-[1px] w-6 bg-white/70" />
-                </div>
-
-                {/* Main heading */}
-                <div
-                  className={`transition-all duration-1000 delay-300 ${
-                    index === currentSlide ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                  }`}
-                >
-                  <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-serif text-white leading-[1.05] tracking-tight mb-6 drop-shadow-2xl">
-                    {slide.heading}
-                  </h1>
-                </div>
-
-                {/* Subtext */}
-                <div
-                  className={`transition-all duration-1000 delay-[420ms] ${
-                    index === currentSlide ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                  }`}
-                >
-                  <p className="text-base md:text-lg lg:text-xl text-white/65 mb-10 font-light leading-relaxed max-w-lg">
-                    {slide.subtext}
-                  </p>
-                </div>
-
-                {/* CTAs */}
-                <div
-                  className={`flex flex-col sm:flex-row items-start sm:items-center gap-6 transition-all duration-1000 delay-500 ${
-                    index === currentSlide ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                  }`}
-                >
-                  {/* Primary — sharp rectangle, black flood fills up on hover */}
-                  <Link
-                    href={slide.cta.href}
-                    className="group relative inline-flex items-center gap-4 bg-white text-black px-8 py-[15px] text-[11px] font-black tracking-[0.35em] uppercase overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,255,255,0.18)] w-fit"
-                  >
-                    {/* Black flood from bottom */}
-                    <span className="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]" />
-                    <span className="relative z-10 group-hover:text-white transition-colors duration-100 delay-[180ms] whitespace-nowrap">
-                      {slide.cta.text}
-                    </span>
-                    <span className="relative z-10 w-px h-3.5 bg-black/30 group-hover:bg-white/30 transition-colors duration-100 delay-[180ms]" />
-                    <i className="relative z-10 ri-arrow-right-up-line text-sm group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 delay-[180ms]" />
-                  </Link>
-
-                  {/* Secondary — pure text, expanding underline from left */}
-                  <div className="group inline-flex flex-col items-start gap-1.5 cursor-pointer">
-                    <Link
-                      href={slide.cta2.href}
-                      className="inline-flex items-center gap-2.5 text-white/70 group-hover:text-white text-[11px] font-bold tracking-[0.35em] uppercase transition-colors duration-300 whitespace-nowrap"
-                    >
-                      {slide.cta2.text}
-                      <i className="ri-arrow-right-up-line text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-                    </Link>
-                    {/* Line expands from left */}
-                    <span className="block h-[1px] w-0 group-hover:w-full bg-white/50 transition-all duration-500 ease-out" />
-                  </div>
-                </div>
+                  {HERO.cta2.text}
+                  <i className="ri-arrow-right-up-line text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                </Link>
+                <span className="block h-[1px] w-0 group-hover:w-full bg-brand-gold/70 transition-all duration-500 ease-out" />
               </div>
             </div>
           </div>
-        ))}
-
-        {/* Slide counter + dot indicators */}
-        <div className="absolute bottom-8 md:bottom-10 right-6 md:right-14 z-30 flex items-center gap-5">
-          <span className="text-white/60 font-serif text-sm tabular-nums">0{currentSlide + 1}</span>
-          <div className="flex gap-2">
-            {HERO_SLIDES.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentSlide(i)}
-                aria-label={`Go to slide ${i + 1}`}
-                className={`relative overflow-hidden rounded-full transition-all duration-500 h-[2px] ${
-                  i === currentSlide ? 'w-14 bg-white/20' : 'w-4 bg-white/25 hover:bg-white/45'
-                }`}
-              >
-                {i === currentSlide && (
-                  <span
-                    className="absolute inset-y-0 left-0 bg-white animate-progress origin-left"
-                    style={{ animationDuration: '5000ms' }}
-                  />
-                )}
-              </button>
-            ))}
-          </div>
-          <span className="text-white/30 font-serif text-xs tabular-nums">03</span>
         </div>
-
-
       </section>
 
       {/* ─── SCROLLING TICKER ────────────────────────────────────────────── */}
@@ -413,7 +276,7 @@ export default function Home() {
       </section>
 
       {/* ─── FEATURED PRODUCTS ─────────────────────────────────────────────── */}
-      <section className="py-16 md:py-24 bg-slate-50">
+      <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <AnimatedSection className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
@@ -526,12 +389,12 @@ export default function Home() {
             {[
               {
                 icon: 'ri-price-tag-3-line',
-                title: 'Affordability Without Compromise',
-                desc: 'Beautiful, high-quality hair at prices that respect your budget — for retail shoppers and wholesale resellers.',
+                title: 'Affordable Quality',
+                desc: 'Quality hair at prices that fit your budget.',
                 highlight: 'Best Value',
               },
               {
-                icon: 'ri-sparkle-line',
+                icon: 'ri-shield-check-line',
                 title: 'Quality You Can Trust',
                 desc: 'Durable, authentic hair products that meet a high standard every time.',
                 highlight: 'Hand-Picked',
@@ -545,15 +408,15 @@ export default function Home() {
             ].map((item) => (
               <div
                 key={item.title}
-                className="group relative bg-slate-50 hover:bg-slate-900 rounded-2xl p-8 transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 overflow-hidden"
+                className="group relative bg-white hover:bg-brand-forest rounded-2xl p-8 border border-brand-gold/40 transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 overflow-hidden"
               >
                 <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400 bg-slate-800 px-2 py-1 rounded-full">
+                  <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-gold bg-brand-deep px-2 py-1 rounded-full">
                     {item.highlight}
                   </span>
                 </div>
-                <div className="w-12 h-12 bg-white group-hover:bg-slate-800 rounded-xl flex items-center justify-center mb-5 shadow-sm transition-colors duration-500">
-                  <i className={`${item.icon} text-2xl text-slate-700 group-hover:text-slate-200 transition-colors duration-500`}></i>
+                <div className="w-12 h-12 bg-white group-hover:bg-brand-deep rounded-xl flex items-center justify-center mb-5 shadow-sm transition-colors duration-500">
+                  <i className={`${item.icon} text-2xl text-brand-forest group-hover:text-brand-gold transition-colors duration-500`} />
                 </div>
                 <h3 className="font-semibold text-gray-900 group-hover:text-white text-lg mb-2 transition-colors duration-500">
                   {item.title}
@@ -578,8 +441,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── NEWSLETTER ─────────────────────────────────────────────────────── */}
-      <NewsletterSection />
+      <CollectionCards />
 
     </main>
   );

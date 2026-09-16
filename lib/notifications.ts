@@ -1,10 +1,10 @@
 import { Resend } from 'resend';
-import { supabase } from '@/lib/supabase';
+import { supabaseAdmin as supabase } from '@/lib/supabase-admin';
 import { escapeHtml } from '@/lib/sanitize';
 
 const resend = new Resend(process.env.RESEND_API_KEY || 'missing_api_key');
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@example.com';
-const EMAIL_FROM = process.env.EMAIL_FROM || 'HairBudget <noreply@example.com>';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@hairbudgetgh.com';
+const EMAIL_FROM = process.env.EMAIL_FROM || 'HairBudget <noreply@hairbudgetgh.com>';
 const BRAND = {
     name: 'HairBudget',
     color: '#0C4534',

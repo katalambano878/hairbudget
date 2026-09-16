@@ -134,30 +134,28 @@ export default function MiniCart({ isOpen, onClose }: MiniCartProps) {
               </div>
             </div>
 
-            <div className="border-t border-gray-200 p-6 bg-gray-50">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-gray-700 font-medium">Subtotal</span>
-                <span className="text-2xl font-bold text-gray-900">GH₵{subtotal.toFixed(2)}</span>
+            <div className="border-t border-gray-200 px-4 py-3 bg-gray-50">
+              <div className="flex items-baseline justify-between mb-1">
+                <span className="text-sm text-gray-700 font-medium">Subtotal</span>
+                <span className="text-lg font-bold text-gray-900">GH₵{subtotal.toFixed(2)}</span>
               </div>
-
-              <p className="text-sm text-gray-600 mb-4 text-center">
+              <p className="text-[11px] text-gray-500 mb-2.5">
                 Shipping calculated at checkout
               </p>
-
-              <div className="space-y-3">
-                <Link
-                  href="/checkout"
-                  onClick={onClose}
-                  className="block w-full py-4 bg-slate-700 text-white text-center rounded-lg font-semibold hover:bg-slate-800 transition-colors whitespace-nowrap cursor-pointer"
-                >
-                  Proceed to Checkout
-                </Link>
+              <div className="flex gap-2">
                 <Link
                   href="/cart"
                   onClick={onClose}
-                  className="block w-full py-4 border-2 border-gray-900 text-gray-900 text-center rounded-lg font-semibold hover:bg-gray-50 transition-colors whitespace-nowrap cursor-pointer"
+                  className="flex-1 py-2 border border-gray-900 text-gray-900 text-center rounded-md text-sm font-semibold hover:bg-gray-50 transition-colors whitespace-nowrap cursor-pointer"
                 >
                   View Cart
+                </Link>
+                <Link
+                  href="/checkout"
+                  onClick={onClose}
+                  className="flex-1 py-2 bg-slate-700 text-white text-center rounded-md text-sm font-semibold hover:bg-slate-800 transition-colors whitespace-nowrap cursor-pointer"
+                >
+                  Checkout
                 </Link>
               </div>
             </div>

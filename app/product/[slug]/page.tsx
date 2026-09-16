@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { createClient } from '@supabase/supabase-js';
+import { supabaseAdmin } from '@/lib/supabase-admin';
 import {
   buildMetadata,
   productJsonLd,
@@ -9,13 +9,9 @@ import {
 } from '@/lib/seo';
 import ProductDetailClient from './ProductDetailClient';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-
 async function fetchProduct(slug: string) {
   try {
-    const supabase = createClient(supabaseUrl, supabaseKey);
-    const { data } = await supabase
+    const { data } = await supabaseAdmin
       .from('products')
       .select(
         'id, name, slug, description, short_description, price, sale_price, sku, status, image_urls, stock_quantity, category:categories(name, slug)'

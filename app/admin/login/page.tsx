@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { supabase } from '@/lib/supabase';
 import { useRecaptcha } from '@/hooks/useRecaptcha';
+import BrandLogo from '@/components/BrandLogo';
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -66,7 +67,7 @@ export default function AdminLoginPage() {
       {/* ── LEFT — editorial brand panel ───────────────────────────── */}
       <aside className="hidden lg:flex lg:flex-col lg:w-[48%] relative bg-slate-950 overflow-hidden">
         <Image
-          src="/hero_portrait.jpg"
+          src="/hero_about.jpg"
           alt=""
           fill
           priority
@@ -86,15 +87,10 @@ export default function AdminLoginPage() {
 
         {/* TOP — brand bar */}
         <header className="relative z-10 flex items-center justify-between px-10 pt-10">
-          <Link href="/" className="flex items-center gap-3 group">
-            <Image
-              src="/logo.png"
-              alt="HairBudget"
-              width={140}
-              height={42}
-              className="h-10 w-auto object-contain object-left drop-shadow-[0_6px_20px_rgba(59,130,246,0.45)]"
-            />
-          </Link>
+          <BrandLogo
+            onDark
+            imgClassName="h-10 w-auto max-w-[200px]"
+          />
           <div className="flex items-center gap-2 text-[9px] font-black tracking-[0.4em] uppercase text-blue-300">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
@@ -158,15 +154,7 @@ export default function AdminLoginPage() {
       <section className="flex-1 flex flex-col justify-center px-6 sm:px-12 lg:px-16 xl:px-24 py-12 relative">
         {/* Mobile brand header */}
         <div className="lg:hidden mb-10 flex items-center justify-between">
-          <Link href="/">
-            <Image
-              src="/logo.png"
-              alt="HairBudget"
-              width={140}
-              height={42}
-              className="h-9 w-auto object-contain object-left"
-            />
-          </Link>
+          <BrandLogo imgClassName="h-9 w-auto max-w-[180px]" />
           <span className="text-[9px] font-black tracking-[0.4em] uppercase text-blue-600">Admin</span>
         </div>
 

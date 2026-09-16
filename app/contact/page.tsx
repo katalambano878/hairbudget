@@ -1,7 +1,7 @@
 "use client";
 
-import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import PageHero from '@/components/PageHero';
 import { supabase } from '@/lib/supabase';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { useRecaptcha } from '@/hooks/useRecaptcha';
@@ -96,47 +96,27 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-white">
 
-      {/* ── HERO ─────────────────────────────────────────── */}
-      <section className="relative bg-slate-950 overflow-hidden" style={{ minHeight: '65vh' }}>
-        <Image
-          src="/hero_salon.jpg"
-          alt="Contact Us"
-          fill
-          className="object-cover object-center"
-          priority
-          sizes="100vw"
-          quality={82}
-        />
-        <div className="absolute inset-0 bg-slate-950/75" />
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-400/40 to-transparent" />
-
-        {/* Ghost letter */}
-        <div
-          aria-hidden="true"
-          className="absolute -right-4 bottom-0 font-serif italic text-white/[0.03] leading-none pointer-events-none select-none"
-          style={{ fontSize: 'clamp(12rem, 30vw, 28rem)' }}
-        >G</div>
-
-        <div
-          className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex flex-col justify-center"
-          style={{ minHeight: '65vh' }}
-        >
-          <div className="flex items-center gap-4 mb-10">
-            <div className="w-10 h-px bg-blue-400" />
-            <span className="text-blue-400 text-[9px] font-black tracking-[0.55em] uppercase">Reach Out</span>
-          </div>
-
-          <h1 className="font-serif italic leading-[0.92]">
-            <span className="block text-white" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 3rem)' }}>Get In</span>
-            <span className="block text-blue-400" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 3rem)' }}>Touch</span>
-            <span className="block text-white/40" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 3rem)' }}>We&apos;re Here</span>
+      <PageHero
+        image="/hero_contact.jpg"
+        imageAlt="Contact HairBudget — Adenta, Ghana"
+        eyebrow="Reach Out"
+        ghostLetter="G"
+        minHeightClass="min-h-[50vh] md:min-h-[58vh]"
+        breadcrumb={[
+          { label: 'Home', href: '/' },
+          { label: 'Contact' },
+        ]}
+        title={
+          <h1 className="italic leading-[0.92]">
+            <span className="block" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>Get In</span>
+            <span className="block text-brand-gold" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>Touch</span>
+            <span className="block text-brand-ivory not-italic font-medium" style={{ fontSize: 'clamp(1.25rem, 2.5vw, 2rem)' }}>
+              We&apos;re here
+            </span>
           </h1>
-
-          <p className="text-slate-400 text-sm font-light mt-10 max-w-xs leading-relaxed">
-            Have a question about our collections or your order? We&apos;re here to help.
-          </p>
-        </div>
-      </section>
+        }
+        description="Questions about our hair or your order? WhatsApp, call, or visit us in Adenta."
+      />
 
       {/* ── MAIN CONTENT ─────────────────────────────────── */}
       <section className="py-16 lg:py-24">
@@ -145,7 +125,7 @@ export default function ContactPage() {
 
             {/* ── FORM ──────────────────────────────────── */}
             <div>
-              <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-300 mb-4">Send a Message</p>
+              <p className="text-[9px] font-black tracking-[0.5em] uppercase text-brand-mid mb-4">Send a Message</p>
               <h2 className="font-serif text-3xl sm:text-4xl italic text-slate-900 mb-2 leading-tight">
                 We&apos;d Love to<br />
                 <span className="text-slate-400 font-light">Hear From You</span>
@@ -320,7 +300,7 @@ export default function ContactPage() {
 
               {/* FAQ */}
               <div>
-                <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-300 mb-4">Common Questions</p>
+                <p className="text-[9px] font-black tracking-[0.5em] uppercase text-brand-mid mb-4">Common Questions</p>
                 <h2 className="font-serif text-3xl sm:text-4xl italic text-slate-900 mb-8 leading-tight">
                   Quick<br />
                   <span className="text-slate-400 font-light">Answers</span>

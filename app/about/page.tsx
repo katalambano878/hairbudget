@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
+import PageHero from '@/components/PageHero';
 import { useCMS } from '@/context/CMSContext';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import WhatsAppButton from '@/components/WhatsAppButton';
@@ -49,44 +50,30 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-brand-ivory">
-      <section className="relative bg-brand-deep overflow-hidden" style={{ minHeight: '72vh' }}>
-        <Image
-          src="/pack-label.png"
-          alt="HairBudget Jumbo Braid"
-          fill
-          className="object-cover object-top"
-          priority
-          sizes="100vw"
-          quality={82}
-        />
-        <div className="absolute inset-0 bg-brand-deep/75" />
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brand-gold/70 to-transparent" />
-
-        <div
-          className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex flex-col justify-center"
-          style={{ minHeight: '72vh' }}
-        >
-          <div className="flex items-center gap-4 mb-10">
-            <div className="w-10 h-px bg-brand-gold" />
-            <span className="text-brand-gold text-[9px] font-black tracking-[0.55em] uppercase">Who We Are</span>
-          </div>
-
-          <h1 className="font-serif italic leading-[0.95] drop-shadow-xl">
+    <div className="min-h-screen bg-white">
+      <PageHero
+        image="/hero_about.jpg"
+        imageAlt="HairBudget — our story since 2017"
+        eyebrow="Who We Are"
+        ghostLetter="H"
+        minHeightClass="min-h-[58vh] md:min-h-[68vh]"
+        breadcrumb={[
+          { label: 'Home', href: '/' },
+          { label: 'About' },
+        ]}
+        title={
+          <h1 className="italic leading-[0.95] drop-shadow-xl">
             <span className="block text-brand-ivory" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}>Our</span>
-            <span className="block text-brand-gold drop-shadow-md" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}>Story</span>
-            <span className="block text-brand-cream mt-2 font-medium" style={{ fontSize: 'clamp(1.4rem, 3vw, 2rem)' }}>
+            <span className="block text-brand-gold" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}>Story</span>
+            <span className="block text-brand-cream mt-2 font-medium not-italic" style={{ fontSize: 'clamp(1.25rem, 3vw, 1.75rem)' }}>
               {BRAND.tagline}
             </span>
           </h1>
+        }
+        description="Quality wigs, extensions and braiding hair at budget-friendly prices — retail and wholesale from Adenta since 2017."
+      />
 
-          <p className="text-brand-cream text-base md:text-lg font-normal mt-8 max-w-lg leading-relaxed">
-            Stylish, quality hair at budget-friendly prices — wigs, extensions, bundles and shapewear for retail and wholesale.
-          </p>
-        </div>
-      </section>
-
-      <div className="relative z-20 bg-brand-ivory">
+      <div className="relative z-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
           <div className="flex justify-center gap-4">
             {[
@@ -131,7 +118,7 @@ export default function AboutPage() {
             </div>
 
             <div className="relative order-1 md:order-2 group">
-              <div className="aspect-[3/4] bg-brand-cream relative overflow-hidden flex items-center justify-center">
+              <div className="aspect-[3/4] bg-white relative overflow-hidden flex items-center justify-center">
                 <img
                   src="/pack-label.png"
                   alt="HairBudget"
@@ -164,7 +151,7 @@ export default function AboutPage() {
         )}
       </div>
 
-      <div className="bg-brand-gold py-24">
+      <div className="bg-white py-24 border-t border-brand-gold/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <p className="text-[9px] font-black tracking-[0.5em] uppercase text-brand-forest mb-3">The Foundation</p>
@@ -173,9 +160,9 @@ export default function AboutPage() {
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-brand-forest/20">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-brand-gold/50">
             {values.map((value, i) => (
-              <div key={i} className="bg-brand-gold p-8">
+              <div key={i} className="bg-white p-8">
                 <p className="text-[9px] font-black tracking-[0.5em] uppercase text-brand-forest/50 mb-6">
                   {String(i + 1).padStart(2, '0')}
                 </p>
@@ -190,7 +177,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="bg-brand-ivory py-24 border-t border-brand-gold">
+      <div className="bg-white py-24 border-t border-brand-gold">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8">
             <div>

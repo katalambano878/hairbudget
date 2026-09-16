@@ -1,11 +1,8 @@
 import type { MetadataRoute } from 'next';
-import { createClient } from '@supabase/supabase-js';
+import { supabaseAdmin } from '@/lib/supabase-admin';
 import { SITE } from '@/lib/seo';
 
 export const revalidate = 3600;
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 type Entry = MetadataRoute.Sitemap[number];
 
@@ -33,7 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let categoryPages: Entry[] = [];
 
   try {
-    const supabase = createClient(supabaseUrl, supabaseKey);
+    const supabase = supabaseAdmin;
 
     const [{ data: products }, { data: categories }] = await Promise.all([
       supabase.from('products').select('slug, updated_at').eq('status', 'active'),

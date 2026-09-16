@@ -1,62 +1,123 @@
 'use client';
 
-import React, { useState } from 'react';
+import type { ReactNode } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
-interface PageHeroProps {
-    title: string;
-    subtitle?: string;
-    backgroundImage?: string;
-}
+export type PageHeroStat = { value: string; label: string };
 
-export default function PageHero({ title, subtitle, backgroundImage }: PageHeroProps) {
-    const [imgError, setImgError] = useState(false);
-    const showImage = backgroundImage && !imgError;
+type PageHeroProps = {
+  image?: string;
+  imageAlt?: string;
+  eyebrow: string;
+  title: ReactNode;
+  description?: string;
+  stats?: PageHeroStat[];
+  minHeightClass?: string;
+  ghostLetter?: string;
+  breadcrumb?: { label: string; href?: string }[];
+  children?: ReactNode;
+};
 
-    return (
-        <div className={`relative overflow-hidden flex items-center justify-center min-h-[60vh] bg-slate-900`}>
-            {showImage && (
-                <>
-                    <Image
-                        src={backgroundImage}
-                        alt={title}
-                        fill
-                        className="object-cover"
-                        priority
-                        sizes="100vw"
-                        quality={82}
-                        onError={() => setImgError(true)}
-                    />
-                    <div className="absolute inset-0 bg-black/50" />
-                </>
-            )}
+export default function PageHero({
+  image,
+  imageAlt = '',
+  eyebrow,
+  title,
+  description,
+  stats,
+  minHeightClass = 'min-h-[42vh] md:min-h-[48vh]',
+  ghostLetter,
+  breadcrumb,
+  children,
+}: PageHeroProps) {
+  return (
+    <section className={`relative overflow-hidden bg-brand-deep ${minHeightClass}`}>
+      {image ? (
+        <Image
+          src={image}
+          alt={imageAlt}
+          fill
+          className="object-cover object-center"
+          priority
+          sizes="100vw"
+          quality={85}
+        />
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-deep via-brand-forest to-brand-deep" />
+      )}
 
-            {/* Fallback texture (shown when no image or image fails) */}
-            {!showImage && (
-                <div className="absolute inset-0">
-                    <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950" />
-                    <div className="absolute inset-0 opacity-[0.07] bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
-                    <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-400/30 to-transparent" />
-                </div>
-            )}
+      <div className="absolute inset-0 bg-brand-deep/78 z-0" />
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brand-gold/70 to-transparent z-20" />
 
-            <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center z-10 flex flex-col items-center">
-                <div className="mb-6">
-                    <span className="inline-block py-1 px-4 text-white/90 text-sm tracking-[0.3em] uppercase font-semibold border border-white/20 rounded-full backdrop-blur-md bg-white/5">
-                        {title.split(' ')[0]} Collection
-                    </span>
-                </div>
-
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif italic font-medium text-white mb-8 leading-[1.1] drop-shadow-2xl">
-                    {title}
-                </h1>
-
-                {subtitle && (
-                    <p className="text-lg md:text-2xl text-slate-50/90 max-w-2xl mx-auto leading-relaxed font-light drop-shadow-lg">
-                        {subtitle}
-                    </p>
-                )}
-            </div>
+      {ghostLetter ? (
+        <div
+          aria-hidden="true"
+          className="absolute -right-6 -top-4 leading-none pointer-events-none select-none font-serif italic text-brand-ivory/[0.04] z-10"
+          style={{ fontSize: 'clamp(10rem, 28vw, 22rem)' }}
+        >
+          {ghostLetter}
         </div>
-    );
+      ) : null}
+
+      <div className={`relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12 flex flex-col justify-center ${minHeightClass}`}>
+        <div className="flex items-center justify-between gap-4 mb-8 md:mb-10">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-px bg-brand-gold" />
+            <span className="text-brand-gold text-[9px] font-black tracking-[0.45em] uppercase">
+              {eyebrow}
+            </span>
+          </div>
+          {breadcrumb && breadcrumb.length > 0 ? (
+            <div className="hidden sm:flex items-center gap-2 text-[10px] tracking-widest uppercase text-brand-cream/70">
+              {breadcrumb.map((crumb, i) => (
+                <span key={crumb.label} className="flex items-center gap-2">
+                  {i > 0 ? <i className="ri-arrow-right-s-line text-brand-gold/80 text-xs" /> : null}
+                  {crumb.href ? (
+                    <Link href={crumb.href} className="hover:text-brand-ivory transition-colors">
+                      {crumb.label}
+                    </Link>
+                  ) : (
+                    <span className="text-brand-ivory">{crumb.label}</span>
+                  )}
+                </span>
+              ))}
+            </div>
+          ) : null}
+        </div>
+
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-12">
+          <div className="max-w-xl">
+            <div className="font-serif text-white leading-[1.08] tracking-tight">{title}</div>
+            {description ? (
+              <p className="text-brand-cream/95 text-sm md:text-base font-normal leading-relaxed mt-4 max-w-md drop-shadow-sm">
+                {description}
+              </p>
+            ) : null}
+            {children}
+          </div>
+
+          {stats && stats.length > 0 ? (
+            <div className="hidden sm:flex items-center gap-6 lg:gap-8 lg:pb-1">
+              {stats.map((s, i) => (
+                <div key={s.label} className="flex items-center gap-6 lg:gap-8">
+                  <div>
+                    <div className="text-2xl font-bold text-brand-ivory tracking-tight font-serif">{s.value}</div>
+                    <div className="text-[9px] font-bold tracking-[0.3em] uppercase text-brand-gold mt-0.5">
+                      {s.label}
+                    </div>
+                  </div>
+                  {i < stats.length - 1 ? (
+                    <div className="w-px h-8 bg-brand-ivory/20 hidden sm:block" />
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </div>
+      </div>
+
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent" />
+    </section>
+  );
 }
