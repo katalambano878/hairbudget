@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import PageHero from '@/components/PageHero';
 import CartCountdown from '@/components/CartCountdown';
