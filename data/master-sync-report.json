@@ -1,0 +1,1568 @@
+{
+  "dry_run": false,
+  "total_active": 300,
+  "updated": 190,
+  "skipped": 1,
+  "not_found_in_db": 8,
+  "not_found_slugs": [
+    "non-woven-nail-wipes",
+    "ebin-adhesive-big",
+    "ebin-adhesive-small",
+    "ebin-adhesive-sports-small",
+    "ebin-adhesive-sports-medium",
+    "ebin-adhesive-sports-big",
+    "ors-mayonnaise-big",
+    "ors-mayonnaise-small"
+  ],
+  "after_no_price": 65,
+  "after_no_sale": 85,
+  "after_no_stock": 71,
+  "after_low_stock": 23,
+  "no_price_list": [
+    " ()",
+    "cuticle-removers-and-trimmers ( cuticle removers and trimmers)",
+    "ibd-hard-gel-led-uv-builder-gel-2 ( IBD Hard Gel LED/UV Builder Gel )",
+    "keratin-melting-spray ( Keratin melting spray)",
+    "kura-avocado-batana-blend-moisturizing-and-detangling-leave ( Kura Avocado & Batana Blend moisturizing and detangling leave)",
+    "kuura-cool-feel-anti-itch-spray ( Kuura Cool Feel Anti-Itch Spray.)",
+    "luxury-protein-morocco-plant-oil ( Luxury Protein Morocco Plant Oil Shampoo)",
+    "misscheering-brand-gel-nail-polish ( Misscheering brand gel nail polish )",
+    "nail-art-practice-finger ( nail art practice finger )",
+    "onyx-professional-100-pure-acetone-nail-polish-remover ( Onyx Professional 100% Pure Acetone nail polish remover)",
+    "pink-and-stainless-steel-manicure-hand-rest-pillow ( pink and stainless steel manicure hand rest pillow)",
+    "3-in-1-tripod (3 in 1 Tripod)",
+    "45000-rpm-electric-nail-drill-machine (45000 RPM electric nail drill machine)",
+    "600pcs-ultra-short-tips (600pcs Ultra Short Tips)",
+    "blue-acrylic-brush (Blue Acrylic Brush)",
+    "bonding-glue (Bonding Glue)",
+    "bottle-of-keratin-lace-tint-mousse (Bottle of Keratin Lace Tint Mousse )",
+    "braiding-rack (Braiding Rack)",
+    "butterfly-clips (Butterfly Clips)",
+    "diamond-gel (Diamond Gel)",
+    "disposable-frontal-wrap (Disposable Frontal Wrap)",
+    "dodo-curler (Dodo Curler)",
+    "dual-sided-barber-styling-sponge (Dreadlock Foam)",
+    "dryer-stand (Dryer Stand)",
+    "e (ebin adhesive spray)",
+    "lace-bond-adhesive-spray (Ebin Adhesive Spray Sports)",
+    "ebin-new-york-wonder-lace-bond-lace-melt-spray-3 (Ebin Lace Melt Spray)",
+    "edge-melt (Edge Melt)",
+    "evobond-debonder-ad-1-a-10ml-liquid-adhesive-remover (Evobond Debonder AD-1, a 10ml liquid adhesive remover)",
+    "ezflow-nail-systems (EzFlow Nail Systems)",
+    "ezflow-nail-systems-a-polymer-acrylic-powder (EzFlow Nail Systems A Polymer Acrylic Powder)",
+    "ezflow-q-monomer-acrylic-nail-liquid (EzFlow Q Monomer Acrylic Nail Liquid,)",
+    "f (frede)",
+    "generic-ay-83-led-pocket-rgb-video-light (generic AY-83 LED pocket RGB video light )",
+    "h (hair1)",
+    "hair21 (hair21)",
+    "hair3 (hair3)",
+    "hair4 (hair4)",
+    "hair5 (hair5)",
+    "keratin-nutrition-moisturizing (Keratin Nutrition Moisturizing Shampoo)",
+    "kuura-conditioner-long (Kuura Conditioner Long)",
+    "kuura-beauty-moisture-seal-conditioner (Kuura honey and papaya Conditioner )",
+    "j (Kuura honey and papaya shampoo)",
+    "magk-branded-uv-gel-nail-polish (MAGK branded UV gel nail polish)",
+    "mannequin-head (Mannequin Head)",
+    "mesh-dome-cap (Mesh Dome Cap)",
+    "muscheering-brush-cleaner (Muscheering Brush Cleaner)",
+    "wrefn-b-lace-tint-spray-in-the-espresso-shade (NAB lace tint spray)",
+    "nail-art-3-piece-mini-powder-liquid-set (Nail Art 3-Piece Mini Powder & Liquid Set)",
+    "ombre-brush (Ombre Brush)",
+    "ors-olive-oil-nourishing-sheen-spray-2 (Original ORS Olive Oil Nourishing Sheen Spray)",
+    "packaging-net (Packaging Net)",
+    "packaging-net-xl (Packaging Net XL)",
+    "pink-liner-brush (Pink Liner Brush)",
+    "pinkee-s-pro-acrylic-liquid-3 (Pinkee's Pro Acrylic Liquid)",
+    "q-monomer-acrylic-nail-liquid (Q Monomer acrylic nail liquid)",
+    "refill-nails (Refill Nails)",
+    "generic-purple-plastic-soak-off-nail-polish-remover (Reusable keeper )",
+    "rosalind-base-coat-nail-polish (Rosalind Base Coat nail polish)",
+    "sabalon (Sabalon)",
+    "avanti-silicon-mix-hydrating-shampoo (Silicon Mix Hydrating Shampoo)",
+    "transparent-plastic-storage-container (transparent plastic storage container )",
+    "trolley (Trolley)",
+    "wide-tooth-rake-comb (wide-tooth rake comb )",
+    "wrefn-toshn-combl (Wrefn Toshn CombL)"
+  ],
+  "no_stock_list": [
+    " () qty=0",
+    "5-piece-professional-hair-brush-and-comb ( 5-piece  brush and comb set ) qty=0",
+    "cuticle-removers-and-trimmers ( cuticle removers and trimmers) qty=0",
+    "ibd-hard-gel-led-uv-builder-gel-2 ( IBD Hard Gel LED/UV Builder Gel ) qty=0",
+    "kura-avocado-batana-blend-moisturizing-and-detangling-leave ( Kura Avocado & Batana Blend moisturizing and detangling leave) qty=0",
+    "kuura-cool-feel-anti-itch-spray ( Kuura Cool Feel Anti-Itch Spray.) qty=0",
+    "misscheering-brand-gel-nail-polish ( Misscheering brand gel nail polish ) qty=0",
+    "onyx-professional-100-pure-acetone-nail-polish-remover ( Onyx Professional 100% Pure Acetone nail polish remover) qty=0",
+    "pink-and-stainless-steel-manicure-hand-rest-pillow ( pink and stainless steel manicure hand rest pillow) qty=0",
+    "guangzhou-lanqinuo-cosmetics (30pcs Cateye Gel) qty=0",
+    "ealicere-5-pcs-dual-tipped-silicone-nail-tool-set (3D Silicon brush set) qty=0",
+    "45000-rpm-electric-nail-drill-machine (45000 RPM electric nail drill machine) qty=0",
+    "very-good-nail (60pcs Very Good Nail Gel-Purple) qty=0",
+    "acetone (Acetone) qty=0",
+    "acrylic-powder-nude (Acrylic Powder Nude) qty=0",
+    "bonding-glue (Bonding Glue) qty=0",
+    "born-pretty-15ml-watercolor-nail-gel (BORN PRETTY Blooming Gel) qty=0",
+    "rainbow-colored-striped-glass-candy-jar (colorful dappen dish) qty=0",
+    "jiangll (Developer-40%) qty=0",
+    "disposable-nitrile-protective-gloves (Disposable Protective Gloves) qty=0",
+    "5-double-ended-nail-art-dotting-tools (Dotting pen set ) qty=0",
+    "dual-sided-barber-styling-sponge (Dreadlock Foam) qty=0",
+    "electric-steam-cap (Electric Steam Cap) qty=0",
+    "envy-gel (Envy Gel) qty=0",
+    "evobond-debonder-ad-1-a-10ml-liquid-adhesive-remover (Evobond Debonder AD-1, a 10ml liquid adhesive remover) qty=0",
+    "eyelash-mannequin (Eyelash Mannequin) qty=0",
+    "ezflow-nail-systems (EzFlow Nail Systems) qty=0",
+    "ezflow-nail-systems-a-polymer-acrylic-powder (EzFlow Nail Systems A Polymer Acrylic Powder) qty=0",
+    "ezflow-q-monomer-acrylic-nail-liquid (EzFlow Q Monomer Acrylic Nail Liquid,) qty=0",
+    "f (frede) qty=0",
+    "french-bamboo-coffin-nail (French/Bamboo Coffin Nail) qty=0",
+    "generic-ay-83-led-pocket-rgb-video-light (generic AY-83 LED pocket RGB video light ) qty=0",
+    "hair-bow (Hair Bow) qty=0",
+    "h (hair1) qty=0",
+    "hair21 (hair21) qty=0",
+    "hair3 (hair3) qty=0",
+    "hair4 (hair4) qty=0",
+    "hair5 (hair5) qty=0",
+    "hausess-straightener (Hausess Straightener) qty=0",
+    "home-services-bag (Home Services Bag) qty=0",
+    "keratin-nutrition-moisturizing (Keratin Nutrition Moisturizing Shampoo) qty=0",
+    "kuura-beauty-moisture-seal-conditioner (Kuura honey and papaya Conditioner ) qty=0",
+    "magk-branded-uv-gel-nail-polish (MAGK branded UV gel nail polish) qty=0",
+    "mannequin-bowl-big (Mannequin Bowl Big) qty=0",
+    "misscheering-acrylic-kit (Misscheering Acrylic Kit) qty=0",
+    "nail-art-3-piece-mini-powder-liquid-set (Nail Art 3-Piece Mini Powder & Liquid Set) qty=0",
+    "nail-salon-hand-rest-cushion (nail manicure hand rest cushion -short leg) qty=0",
+    "ors-olive-oil (Olive Oil sheen spray) qty=0",
+    "packaging-net (Packaging Net) qty=0",
+    "pearl-stand (Pearl Stand) qty=0",
+    "self-adhesive-black-rubber-bumper-pads (Phone Grip) qty=0",
+    "pinkee-s-liquid (Pinkee S Liquid) qty=0",
+    "pinkee-s-pro-acrylic-liquid-3 (Pinkee's Pro Acrylic Liquid) qty=0",
+    "pinky-shares (Pinky Shares) qty=0",
+    "push-bottle-dispenser (Push Bottle Dispenser) qty=0",
+    "q-monomer-acrylic-nail-liquid (Q Monomer acrylic nail liquid) qty=0",
+    "relaxer-set (Relaxer Set) qty=0",
+    "rosalind-base-coat-nail-polish (Rosalind Base Coat nail polish) qty=0",
+    "rosalind-nail-dehydrator-and-nail-primer-set (Rosalind Nail Dehydrator and Nail Primer set) qty=0",
+    "silicon-mix-shampoo (Silicon Mix Shampoo) qty=0",
+    "soft-gel-tips (Soft Gel Tips) qty=0",
+    "stylist-bag (Stylist Bag) qty=0",
+    "transparent-plastic-storage-container (transparent plastic storage container ) qty=0",
+    "tresseme-shampoo (Tresseme Shampoo) qty=0",
+    "u-clips (U-Clips) qty=0",
+    "velcro-rollers (Velcro Rollers) qty=0",
+    "very-good-gel (Very Good Gel) qty=0",
+    "wide-knife-comb (Wide Knife Comb) qty=0",
+    "wig-clips (Wig Clips) qty=0",
+    "wig-combs (Wig Combs) qty=0",
+    "wig-fix-stick (Wig Fix Stick) qty=0"
+  ],
+  "low_stock_list": [
+    "30pcs-cat-eye-gel (30pcs Cat Eye Gel) qty=2",
+    "uomi-brand-professional-makeup-palette (48 pcs UOMI gel polish) qty=4",
+    "48pcs-uom-gel (48pcs UOM Gel) qty=4",
+    "600pcs-ultra-short-tips (600pcs Ultra Short Tips) qty=5",
+    "600pcs-ultrabond (600pcs Ultrabond) qty=5",
+    "acetone-big (Acetone Big) qty=3",
+    "argan-mask (Argan Mask) qty=5",
+    "bottle-of-keratin-lace-tint-mousse (Bottle of Keratin Lace Tint Mousse ) qty=5",
+    "buffer-single (Buffer Single) qty=1",
+    "chest-band (Chest Band) qty=4",
+    "cloud-9-straightener (Cloud 9 Straightener) qty=1",
+    "debonder (Debonder) qty=5",
+    "detangling-brush (Detangling Brush) qty=4",
+    "dodo-curler (Dodo Curler) qty=3",
+    "edge-melt (Edge Melt) qty=5",
+    "ghost-bond (Ghost Bond) qty=3",
+    "j (Kuura honey and papaya shampoo) qty=1",
+    "nutrition-olive-oil-hair-bleaching-powder (Olive Oil bleaching powder) qty=5",
+    "ombre-brush (Ombre Brush) qty=2",
+    "generic-purple-plastic-soak-off-nail-polish-remover (Reusable keeper ) qty=2",
+    "rubbing-alcohol (Rubbing Alcohol) qty=5",
+    "tresemm-rich-moisture-conditioner (TRESemmé Rich Moisture Conditioner) qty=1",
+    "trolley (Trolley) qty=5"
+  ],
+  "changes": [
+    {
+      "slug": "kuuqa-anti-itch",
+      "name": "Kuuqa Anti Itch",
+      "price": 35,
+      "sale_price": 30,
+      "quantity": 56
+    },
+    {
+      "slug": "leodais-serum",
+      "name": "Leodais Serum",
+      "price": 25,
+      "sale_price": 20,
+      "quantity": 39
+    },
+    {
+      "slug": "nbi-wax-gel",
+      "name": "IKT Wax Stick",
+      "price": 25,
+      "sale_price": 20,
+      "quantity": 41
+    },
+    {
+      "slug": "foaming-wax",
+      "name": "Foaming Wax",
+      "price": 28,
+      "sale_price": 22,
+      "quantity": 82
+    },
+    {
+      "slug": "stainless-steel-pinking",
+      "name": "pinking shears",
+      "price": 50,
+      "sale_price": 45,
+      "quantity": 80
+    },
+    {
+      "slug": "head-band-wig-cap",
+      "name": "Head Band Wig Cap",
+      "price": 25,
+      "sale_price": 20,
+      "quantity": 128
+    },
+    {
+      "slug": "glue-gun",
+      "name": "Glue Gun",
+      "price": 35,
+      "sale_price": 30,
+      "quantity": 68
+    },
+    {
+      "slug": "glue-sticks",
+      "name": "Glue Sticks",
+      "price": 6,
+      "sale_price": 6,
+      "quantity": 212
+    },
+    {
+      "slug": "drawstring-ponytail",
+      "name": "Drawstring Ponytail",
+      "price": 7,
+      "sale_price": 6,
+      "quantity": 476
+    },
+    {
+      "slug": "ponytail-wrap",
+      "name": "Ponytail Wrap",
+      "price": 6,
+      "sale_price": 5,
+      "quantity": 275
+    },
+    {
+      "slug": "ear-protective-frontal-band",
+      "name": "Ear Protective Frontal Band",
+      "price": 20,
+      "sale_price": 18,
+      "quantity": 96
+    },
+    {
+      "slug": "ghost-bond",
+      "name": "Ghost Bond",
+      "price": 25,
+      "sale_price": 20,
+      "quantity": 3
+    },
+    {
+      "slug": "glue-remover",
+      "name": "Glue Remover",
+      "price": 20,
+      "sale_price": 17,
+      "quantity": 11
+    },
+    {
+      "slug": "apple-curl-keeper",
+      "name": "Apple Curl Keeper",
+      "price": 18,
+      "sale_price": 15,
+      "quantity": 185
+    },
+    {
+      "slug": "olive-sheen",
+      "name": "Olive Sheen",
+      "price": 25,
+      "sale_price": 20,
+      "quantity": 37
+    },
+    {
+      "slug": "ikt-brand-hair-styling-wax",
+      "name": " IKT gel",
+      "price": 25,
+      "sale_price": 20,
+      "quantity": 107
+    },
+    {
+      "slug": "got2b-glue",
+      "name": "Got2b Glue",
+      "price": 90,
+      "sale_price": 85,
+      "quantity": 32
+    },
+    {
+      "slug": "kuura-beauty-avocado-batana-blend-moisturizing-conditioner",
+      "name": "Kuura Beauty Avocado & Batana Blend moisturizing conditioner ",
+      "price": 95,
+      "sale_price": 89,
+      "quantity": 7
+    },
+    {
+      "slug": "kuura-beauty-avocado-batana-blend-moisturizing-detangling-shampoo",
+      "name": " Kuura Beauty Avocado & Batana Blend Moisturizing & Detangling Shampoo",
+      "price": 95,
+      "sale_price": 89,
+      "quantity": 11
+    },
+    {
+      "slug": "elastic-band",
+      "name": "Elastic Band",
+      "price": 55,
+      "sale_price": 45,
+      "quantity": 65
+    },
+    {
+      "slug": "argan-mask",
+      "name": "Argan Mask",
+      "price": 55,
+      "sale_price": 45,
+      "quantity": 5
+    },
+    {
+      "slug": "keratin-mask",
+      "name": "Keratin Mask",
+      "price": 55,
+      "sale_price": 45,
+      "quantity": 17
+    },
+    {
+      "slug": "keratin-shampoo",
+      "name": "Keratin Shampoo",
+      "price": 60,
+      "sale_price": 50,
+      "quantity": 64
+    },
+    {
+      "slug": "keratin-conditioner",
+      "name": "Keratin Conditioner",
+      "price": 60,
+      "sale_price": 50,
+      "quantity": 58
+    },
+    {
+      "slug": "magnetic-band",
+      "name": "Magnetic Band",
+      "price": 35,
+      "sale_price": 29,
+      "quantity": 46
+    },
+    {
+      "slug": "spiral-rods",
+      "name": "Spiral Rods",
+      "price": 22,
+      "sale_price": 18,
+      "quantity": 92
+    },
+    {
+      "slug": "titanium-straightener",
+      "name": "Titanium Straightener ",
+      "price": 250,
+      "sale_price": 220,
+      "quantity": 191
+    },
+    {
+      "slug": "cloud-9-straightener",
+      "name": "Cloud 9 Straightener",
+      "price": 160,
+      "sale_price": 130,
+      "quantity": 1
+    },
+    {
+      "slug": "bbl-professional-hot-pressing-comb",
+      "name": " BBL professional hot pressing comb",
+      "price": 350,
+      "sale_price": 350,
+      "quantity": 10
+    },
+    {
+      "slug": "electric-hair-straightening-hot-comb",
+      "name": " Hot Comb",
+      "price": 140,
+      "sale_price": 115,
+      "quantity": 181
+    },
+    {
+      "slug": "baroel-32mm-ceramic-curling-tong",
+      "name": "Barrel 32mm Ceramic Curling Tong",
+      "price": 170,
+      "sale_price": 130,
+      "quantity": 25
+    },
+    {
+      "slug": "hot-air-brush",
+      "name": "Hot air brush ",
+      "price": 130,
+      "sale_price": 99,
+      "quantity": 16
+    },
+    {
+      "slug": "perfume-gift-set",
+      "name": "Perfume Set",
+      "price": 130,
+      "sale_price": 110,
+      "quantity": 30
+    },
+    {
+      "slug": "silicon-heat-mat",
+      "name": "Silicon Heat Mat",
+      "price": 35,
+      "sale_price": 25,
+      "quantity": 17
+    },
+    {
+      "slug": "oucheless-band",
+      "name": "Oucheless band",
+      "price": 15,
+      "sale_price": 15,
+      "quantity": 24
+    },
+    {
+      "slug": "nova-hand-dryer",
+      "name": "Nova hand dryer ",
+      "price": 180,
+      "sale_price": 110,
+      "quantity": 112
+    },
+    {
+      "slug": "canvas-block-head-mannequin",
+      "name": "canvas block head mannequin",
+      "price": 180,
+      "sale_price": 115,
+      "quantity": 49
+    },
+    {
+      "slug": "derma-roller",
+      "name": "Derma Roller ",
+      "price": 40,
+      "sale_price": 35,
+      "quantity": 84
+    },
+    {
+      "slug": "electric-steam-bag",
+      "name": "Electric Steam Bag",
+      "price": 120,
+      "sale_price": 99,
+      "quantity": 86
+    },
+    {
+      "slug": "10-pieces-comb-set",
+      "name": "10 pieces comb set",
+      "price": 25,
+      "sale_price": 19,
+      "quantity": 65
+    },
+    {
+      "slug": "detangling-brush",
+      "name": "Detangling Brush",
+      "price": 20,
+      "sale_price": 15,
+      "quantity": 4
+    },
+    {
+      "slug": "akendy-brand-lace-tint-mousse",
+      "name": "Akendy brand Lace Tint Mousse",
+      "price": 30,
+      "sale_price": 25,
+      "quantity": 215
+    },
+    {
+      "slug": "polymer-wig-block-mannequin-head-designed",
+      "name": "Polymer wig block mannequin head designed",
+      "price": 200,
+      "sale_price": 170,
+      "quantity": 38
+    },
+    {
+      "slug": "hangers",
+      "name": "Hangers",
+      "price": 18,
+      "sale_price": 15,
+      "quantity": 71
+    },
+    {
+      "slug": "sharpie-marker-set",
+      "name": "Sharpie  Marker set",
+      "price": 18,
+      "sale_price": 15,
+      "quantity": 1704
+    },
+    {
+      "slug": "applicator-bottle",
+      "name": "Applicator bottle",
+      "price": 15,
+      "sale_price": 10,
+      "quantity": 131
+    },
+    {
+      "slug": "extreme-sewing-machine",
+      "name": "Extreme Sewing Machine",
+      "price": 1250,
+      "sale_price": 1150,
+      "quantity": 17
+    },
+    {
+      "slug": "dryer-stand",
+      "name": "Dryer Stand",
+      "quantity": 31
+    },
+    {
+      "slug": "42pcs-very-good-gel",
+      "variant_of": "very-good-gel",
+      "size": "42pcs",
+      "price": 600,
+      "sale_price": 550,
+      "quantity": 22
+    },
+    {
+      "slug": "44pcs-very-good-gel",
+      "variant_of": "very-good-gel",
+      "size": "44pcs",
+      "price": 650,
+      "sale_price": 599,
+      "quantity": 1
+    },
+    {
+      "slug": "6pcs-very-good-gel-polish",
+      "name": "6pcs Very Good Gel Polish",
+      "price": 750,
+      "sale_price": 700,
+      "quantity": 19
+    },
+    {
+      "slug": "60pcs-very-good-gel-professional",
+      "name": "60pcs Very Good Gel Professional",
+      "price": 650,
+      "sale_price": 600,
+      "quantity": 10
+    },
+    {
+      "slug": "60pcs-very-good-purple",
+      "name": "60pcs Very Good Purple",
+      "price": 750,
+      "sale_price": 700,
+      "quantity": 24
+    },
+    {
+      "slug": "48pcs-uom-gel",
+      "name": "48pcs UOM Gel",
+      "price": 899,
+      "sale_price": 850,
+      "quantity": 4
+    },
+    {
+      "slug": "30pcs-cat-eye-gel",
+      "name": "30pcs Cat Eye Gel",
+      "price": 580,
+      "sale_price": 540,
+      "quantity": 2
+    },
+    {
+      "slug": "6pcs-modeling-gel",
+      "name": "6pcs Modeling Gel",
+      "price": 100,
+      "sale_price": 80,
+      "quantity": 28
+    },
+    {
+      "slug": "300g-beginners-set",
+      "name": "Beginners Set With Case",
+      "price": 350,
+      "sale_price": 330,
+      "quantity": 105
+    },
+    {
+      "slug": "beginners-set-with-case",
+      "name": "Beginners Set With Case",
+      "price": 350,
+      "sale_price": 310,
+      "quantity": 43
+    },
+    {
+      "slug": "beginners-set-with-gel-polish",
+      "name": "Beginners Set With Gel Polish",
+      "price": 399,
+      "sale_price": 350,
+      "quantity": 17
+    },
+    {
+      "slug": "2-in-1-uv-lamp",
+      "name": "2 in 1 UV Lamp",
+      "price": 220,
+      "sale_price": 180,
+      "quantity": 6
+    },
+    {
+      "slug": "single-hand-uv-lamp",
+      "name": "Single Hand UV Lamp",
+      "price": 130,
+      "sale_price": 99,
+      "quantity": 9
+    },
+    {
+      "slug": "rechargeable-drill-1",
+      "name": "Rechargeable Drill 1",
+      "price": 320,
+      "sale_price": 280,
+      "quantity": 17
+    },
+    {
+      "slug": "rechargeable-drill-2",
+      "name": "Rechargeable Drill 2",
+      "price": 350,
+      "sale_price": 320,
+      "quantity": 20
+    },
+    {
+      "slug": "rechargeable-drill-3",
+      "name": "Rechargeable Drill 3",
+      "price": 390,
+      "sale_price": 350,
+      "quantity": 11
+    },
+    {
+      "slug": "portable-electric-drill",
+      "name": "Portable Electric Drill",
+      "price": 300,
+      "sale_price": 270,
+      "quantity": 48
+    },
+    {
+      "slug": "mannequin-hand",
+      "name": "Mannequin Hand",
+      "price": 60,
+      "sale_price": 50,
+      "quantity": 34
+    },
+    {
+      "slug": "silicone-mannequin-foot",
+      "name": "Practice foot",
+      "price": 60,
+      "sale_price": 50,
+      "quantity": 47
+    },
+    {
+      "slug": "acrylic-nail-art",
+      "name": "Acrylic Nail Art",
+      "price": 99,
+      "sale_price": 89,
+      "quantity": 28
+    },
+    {
+      "slug": "dust-brush",
+      "name": "Dust Brush",
+      "price": 25,
+      "sale_price": 20,
+      "quantity": 177
+    },
+    {
+      "slug": "acrylic-powder",
+      "name": "Acrylic Powder",
+      "price": 55,
+      "sale_price": 48,
+      "quantity": 167
+    },
+    {
+      "slug": "acrylic-powder-nude-big",
+      "name": "Acrylic Powder Nude Big",
+      "price": 75,
+      "sale_price": 69,
+      "quantity": 21
+    },
+    {
+      "slug": "acrylic-powder-nude-small",
+      "variant_of": "acrylic-powder-nude",
+      "size": "Small",
+      "price": 45,
+      "sale_price": 40,
+      "quantity": 24
+    },
+    {
+      "slug": "acrylic-brush-set",
+      "name": "Acrylic Brush Set",
+      "price": 95,
+      "sale_price": 80,
+      "quantity": 29
+    },
+    {
+      "slug": "misscheering-dipping-powder-kit",
+      "name": "Misscheering Dipping Powder Kit",
+      "price": 95,
+      "sale_price": 95,
+      "quantity": 13
+    },
+    {
+      "slug": "dxebiz-brand-professional-acrylic-system-kit",
+      "name": "acrylic system art set",
+      "quantity": 28
+    },
+    {
+      "slug": "rubbing-alcohol",
+      "name": "Rubbing Alcohol",
+      "price": 45,
+      "sale_price": 39,
+      "quantity": 5
+    },
+    {
+      "slug": "organ-needles",
+      "name": "Organ needles",
+      "price": 20,
+      "sale_price": 15,
+      "quantity": 184
+    },
+    {
+      "slug": "thread-clippers",
+      "name": "Thread clippers",
+      "price": 7,
+      "sale_price": 7,
+      "quantity": 47
+    },
+    {
+      "slug": "control-clips",
+      "name": "Control clips ",
+      "price": 20,
+      "sale_price": 17,
+      "quantity": 222
+    },
+    {
+      "slug": "metallic-bobbin",
+      "name": "metallic bobbin ",
+      "price": 48,
+      "sale_price": 39,
+      "quantity": 68
+    },
+    {
+      "slug": "plastic-bobbins",
+      "name": "plastic bobbins",
+      "price": 45,
+      "sale_price": 35,
+      "quantity": 19
+    },
+    {
+      "slug": "razor-comb",
+      "name": "Razor comb",
+      "price": 7,
+      "sale_price": 5,
+      "quantity": 209
+    },
+    {
+      "slug": "long-neck-mannequin",
+      "name": "long neck mannequin ",
+      "price": 180,
+      "sale_price": 110,
+      "quantity": 13
+    },
+    {
+      "slug": "kelo-rollers",
+      "name": "Kelo Rollers",
+      "price": 55,
+      "sale_price": 45,
+      "quantity": 29
+    },
+    {
+      "slug": "snap-on-rollers",
+      "name": "Snap on Rollers",
+      "price": 18,
+      "sale_price": 15,
+      "quantity": 125
+    },
+    {
+      "slug": "envy-gel-big",
+      "variant_of": "envy-gel",
+      "size": "Big",
+      "price": 75,
+      "sale_price": 65,
+      "quantity": 37
+    },
+    {
+      "slug": "envy-gel-small",
+      "variant_of": "envy-gel",
+      "size": "Small",
+      "price": 40,
+      "sale_price": 35,
+      "quantity": 83
+    },
+    {
+      "slug": "kuura-mousse",
+      "name": "Kuura  Mousse ",
+      "price": 55,
+      "sale_price": 50,
+      "quantity": 82
+    },
+    {
+      "slug": "kuura-fro-shampoo",
+      "name": " Kuura Beauty Avocado & Batana Blend Moisturizing & Detangling Shampoo",
+      "price": 65,
+      "sale_price": 60,
+      "quantity": 28
+    },
+    {
+      "slug": "kuura-fro-conditioner",
+      "name": "Kuura Beauty Avocado & Batana Blend moisturizing conditioner ",
+      "quantity": 26
+    },
+    {
+      "slug": "kuura-honey-papaya-no-breakage-hair",
+      "name": "Kuura Honey & Papaya treatment cream",
+      "price": 70,
+      "sale_price": 65,
+      "quantity": 17
+    },
+    {
+      "slug": "silicone-hair-scalp-massager-and-shampoo-brush",
+      "name": " silicone hair scalp massager ",
+      "price": 15,
+      "sale_price": 10,
+      "quantity": 24
+    },
+    {
+      "slug": "minkin-avocado-hair-styling-gel",
+      "name": "Avocado Hair Styling Gel",
+      "price": 40,
+      "sale_price": 35,
+      "quantity": 132
+    },
+    {
+      "slug": "oligei-heat-resistant-gloves",
+      "name": "heat-resistant gloves",
+      "price": 20,
+      "sale_price": 20,
+      "quantity": 52
+    },
+    {
+      "slug": "vitale-olive-oil-hair-polisher-2",
+      "name": " Vitale Olive Oil Hair Polisher",
+      "price": 25,
+      "sale_price": 20,
+      "quantity": 58
+    },
+    {
+      "slug": "hair-bonnet",
+      "name": "Hair Bonnet",
+      "price": 25,
+      "sale_price": 20,
+      "quantity": 21
+    },
+    {
+      "slug": "flexi-rods",
+      "name": "Flexi Rods",
+      "price": 20,
+      "sale_price": 15,
+      "quantity": 124
+    },
+    {
+      "slug": "kuura-supergro-hair-oil",
+      "name": " Kuura SuperGro hair oil",
+      "price": 50,
+      "sale_price": 45,
+      "quantity": 85
+    },
+    {
+      "slug": "home-services-bag-big",
+      "name": "Home Services Bag Big",
+      "price": 350,
+      "sale_price": 299,
+      "quantity": 20
+    },
+    {
+      "slug": "jaon-quality-nail-hand-pillow",
+      "name": "U-Shaped arm rest",
+      "price": 250,
+      "sale_price": 220
+    },
+    {
+      "slug": "mannequin-brush-small",
+      "name": "Mannequin Brush Small",
+      "price": 5,
+      "sale_price": 5,
+      "quantity": 64
+    },
+    {
+      "slug": "manicure-brush-big",
+      "name": "Manicure Brush Big",
+      "price": 7,
+      "sale_price": 7,
+      "quantity": 78
+    },
+    {
+      "slug": "desk-lamp",
+      "name": "Desk Lamp",
+      "price": 150,
+      "sale_price": 130
+    },
+    {
+      "slug": "home-services-bag-small",
+      "variant_of": "home-services-bag",
+      "size": "Small",
+      "price": 150,
+      "sale_price": 130
+    },
+    {
+      "slug": "pedicure-knife",
+      "name": "Pedicure Knife",
+      "price": 35,
+      "sale_price": 30,
+      "quantity": 36
+    },
+    {
+      "slug": "600pcs-ultrabond",
+      "name": "600pcs Ultrabond",
+      "price": 65,
+      "sale_price": 55,
+      "quantity": 5
+    },
+    {
+      "slug": "240pcs-soft-gel-tips",
+      "variant_of": "soft-gel-tips",
+      "size": "240pcs",
+      "price": 45,
+      "sale_price": 39,
+      "quantity": 13
+    },
+    {
+      "slug": "normal-nail",
+      "name": "Normal Nail",
+      "price": 45,
+      "sale_price": 39,
+      "quantity": 71
+    },
+    {
+      "slug": "polygel-set",
+      "name": "Polygel Set",
+      "price": 220,
+      "sale_price": 199,
+      "quantity": 24
+    },
+    {
+      "slug": "polygel-single",
+      "name": "Polygel Single",
+      "price": 35,
+      "sale_price": 30,
+      "quantity": 172
+    },
+    {
+      "slug": "acetone-big",
+      "name": "Acetone Big",
+      "price": 95,
+      "sale_price": 85
+    },
+    {
+      "slug": "acetone-small",
+      "variant_of": "acetone",
+      "size": "Small",
+      "price": 60,
+      "sale_price": 50
+    },
+    {
+      "slug": "magic-primer",
+      "name": "Magic Primer",
+      "price": 20,
+      "sale_price": 20
+    },
+    {
+      "slug": "magic-top-coat",
+      "name": "Magic Top Coat",
+      "price": 20,
+      "sale_price": 20
+    },
+    {
+      "slug": "magic-base-coat",
+      "name": "Magic Base Coat",
+      "price": 20,
+      "sale_price": 20
+    },
+    {
+      "slug": "muscheering-top-coat-and-base-coat-uv-gel",
+      "name": "Muscheering Top Coat and Base Coat UV Gel ",
+      "price": 35,
+      "sale_price": 30,
+      "quantity": 101
+    },
+    {
+      "slug": "ibd-builder-gel",
+      "name": "IBD Builder Gel",
+      "price": 60,
+      "sale_price": 50,
+      "quantity": 20
+    },
+    {
+      "slug": "buffer-set",
+      "name": "Buffer Set",
+      "price": 40,
+      "sale_price": 35
+    },
+    {
+      "slug": "buffer-single",
+      "name": "Buffer Single",
+      "price": 15,
+      "sale_price": 15
+    },
+    {
+      "slug": "rosaline-base-coat",
+      "name": "Rosaline Base Coat",
+      "price": 35,
+      "sale_price": 35,
+      "quantity": 19
+    },
+    {
+      "slug": "flowers-charms",
+      "name": "Flowers Charms",
+      "price": 18,
+      "sale_price": 15,
+      "quantity": 43
+    },
+    {
+      "slug": "nails-stones",
+      "name": "Nails Stones",
+      "price": 45,
+      "sale_price": 40,
+      "quantity": 84
+    },
+    {
+      "slug": "nails-charms",
+      "name": "Nails Charms",
+      "price": 35,
+      "sale_price": 30,
+      "quantity": 165
+    },
+    {
+      "slug": "chrome",
+      "name": "Chrome",
+      "price": 20,
+      "sale_price": 20,
+      "quantity": 60
+    },
+    {
+      "slug": "nail-glue",
+      "name": "Nail Glue",
+      "price": 10,
+      "sale_price": 10,
+      "quantity": 346
+    },
+    {
+      "slug": "rhinestone-glue",
+      "name": "Rhinestone Glue",
+      "price": 40,
+      "sale_price": 35,
+      "quantity": 175
+    },
+    {
+      "slug": "spider-gel",
+      "name": "Spider Gel",
+      "price": 25,
+      "sale_price": 25,
+      "quantity": 34
+    },
+    {
+      "slug": "debonder",
+      "name": "Debonder",
+      "price": 20,
+      "sale_price": 20,
+      "quantity": 5
+    },
+    {
+      "slug": "nails-finger-spas",
+      "name": "Nails Finger Spas",
+      "price": 40,
+      "sale_price": 40,
+      "quantity": 14
+    },
+    {
+      "slug": "cutters",
+      "name": "Cutters",
+      "price": 25,
+      "sale_price": 20,
+      "quantity": 25
+    },
+    {
+      "slug": "nippers",
+      "name": "Nippers",
+      "price": 45,
+      "sale_price": 40,
+      "quantity": 85
+    },
+    {
+      "slug": "dissolving-finger-bowl",
+      "name": "Dissolving Finger Bowl",
+      "price": 10,
+      "sale_price": 10,
+      "quantity": 17
+    },
+    {
+      "slug": "foldable-arm-rest",
+      "name": "Foldable Arm Rest",
+      "price": 150,
+      "sale_price": 125,
+      "quantity": 16
+    },
+    {
+      "slug": "btc-cuticle-softner",
+      "name": "BTC Cuticle Softner",
+      "price": 20,
+      "sale_price": 20,
+      "quantity": 30
+    },
+    {
+      "slug": "3pcs-liner-brush",
+      "name": "3pcs Liner Brush",
+      "price": 15,
+      "sale_price": 15,
+      "quantity": 24
+    },
+    {
+      "slug": "6pcs-blue-brush-set",
+      "name": "6pcs Blue Brush Set",
+      "price": 38,
+      "sale_price": 30,
+      "quantity": 40
+    },
+    {
+      "slug": "15pcs-brush-set",
+      "name": "15pcs Brush Set",
+      "price": 25,
+      "sale_price": 20,
+      "quantity": 85
+    },
+    {
+      "slug": "3d-silicon-brush",
+      "name": "3D Silicon Brush",
+      "price": 25,
+      "sale_price": 20,
+      "quantity": 76
+    },
+    {
+      "slug": "rainbow-brush-set",
+      "name": "Rainbow Brush Set",
+      "price": 40,
+      "sale_price": 35,
+      "quantity": 58
+    },
+    {
+      "slug": "dotting-pen",
+      "name": "Dotting Pen",
+      "price": 30,
+      "sale_price": 25,
+      "quantity": 85
+    },
+    {
+      "slug": "rhinestone-picker",
+      "name": "Rhinestone Picker",
+      "price": 60,
+      "sale_price": 10,
+      "quantity": 111
+    },
+    {
+      "slug": "dissolving-bowl",
+      "name": "Dissolving Bowl",
+      "price": 18,
+      "sale_price": 15
+    },
+    {
+      "slug": "high-quality-dust-brush",
+      "name": "High Quality Dust Brush",
+      "price": 38,
+      "sale_price": 35,
+      "quantity": 48
+    },
+    {
+      "slug": "gndg-branded-magnetic-nail",
+      "name": "Press on stand",
+      "price": 25,
+      "sale_price": 20,
+      "quantity": 60
+    },
+    {
+      "slug": "cat-eye-magnet",
+      "name": "Cat Eye Magnet",
+      "price": 45,
+      "sale_price": 40,
+      "quantity": 78
+    },
+    {
+      "slug": "rosaline-dehydrator-primer",
+      "name": "Rosaline Dehydrator Primer",
+      "price": 70,
+      "sale_price": 60,
+      "quantity": 36
+    },
+    {
+      "slug": "stainless-steel-pallet",
+      "name": "Stainless Steel Pallet",
+      "price": 30,
+      "sale_price": 25
+    },
+    {
+      "slug": "resin-pallet",
+      "name": "Resin Pallet",
+      "price": 25,
+      "sale_price": 20,
+      "quantity": 59
+    },
+    {
+      "slug": "trimmer-set",
+      "name": "Trimmer Set",
+      "price": 15,
+      "sale_price": 15,
+      "quantity": 176
+    },
+    {
+      "slug": "cuticle-remover",
+      "name": "Cuticle Remover",
+      "price": 50,
+      "sale_price": 40,
+      "quantity": 24
+    },
+    {
+      "slug": "blooming-gel",
+      "name": "Blooming Gel",
+      "price": 40,
+      "sale_price": 35,
+      "quantity": 33
+    },
+    {
+      "slug": "born-pretty-nail-prep-dehydrator",
+      "name": "BORN PRETTY primer and  dehydrator ",
+      "price": 70,
+      "sale_price": 60,
+      "quantity": 41
+    },
+    {
+      "slug": "stainless-dappen-dish",
+      "name": "Stainless Dappen Dish",
+      "price": 100,
+      "sale_price": 80,
+      "quantity": 38
+    },
+    {
+      "slug": "gloves",
+      "name": "Gloves",
+      "price": 75,
+      "sale_price": 65,
+      "quantity": 20
+    },
+    {
+      "slug": "nail-practice-hand",
+      "name": "Nail Practice Hand",
+      "price": 140,
+      "sale_price": 115,
+      "quantity": 75
+    },
+    {
+      "slug": "dust-collector",
+      "name": "Dust Collector",
+      "price": 250,
+      "sale_price": 220,
+      "quantity": 15
+    },
+    {
+      "slug": "wooden-arm-rest-short",
+      "name": "Wooden Arm Rest Short",
+      "price": 150,
+      "sale_price": 120,
+      "quantity": 15
+    },
+    {
+      "slug": "wooden-arm-rest-long",
+      "name": "Wooden Arm Rest Long",
+      "price": 180,
+      "sale_price": 140,
+      "quantity": 51
+    },
+    {
+      "slug": "blue-acrylic-brush",
+      "name": "Blue Acrylic Brush",
+      "quantity": 39
+    },
+    {
+      "slug": "pink-liner-brush",
+      "name": "Pink Liner Brush",
+      "quantity": 25
+    },
+    {
+      "slug": "magik-branded-soak-off-uv-gel-polish-kit",
+      "name": "Magik gel polish set",
+      "quantity": 6
+    },
+    {
+      "slug": "muscheering-brush-cleaner",
+      "name": "Muscheering Brush Cleaner",
+      "quantity": 14
+    },
+    {
+      "slug": "born-pretty-functional-gel-polish",
+      "name": "Born Pretty base coat",
+      "quantity": 16
+    },
+    {
+      "slug": "nail-art-practice-finger",
+      "name": " nail art practice finger ",
+      "quantity": 66
+    },
+    {
+      "slug": "ombre-brush",
+      "name": "Ombre Brush",
+      "quantity": 2
+    },
+    {
+      "slug": "synthetic-bristle-gel-sculpting-brush",
+      "name": "gold finger acrylic brush",
+      "quantity": 25
+    },
+    {
+      "slug": "diamond-gel",
+      "name": "Diamond Gel",
+      "quantity": 12
+    },
+    {
+      "slug": "generic-purple-plastic-soak-off-nail-polish-remover",
+      "name": "Reusable keeper ",
+      "quantity": 2
+    },
+    {
+      "slug": "trolley",
+      "name": "Trolley",
+      "quantity": 5
+    },
+    {
+      "slug": "braiding-rack",
+      "name": "Braiding Rack",
+      "quantity": 84
+    },
+    {
+      "slug": "ebin-new-york-wonder-lace-bond-lace-melt-spray-3",
+      "name": "Ebin Lace Melt Spray",
+      "quantity": 106
+    },
+    {
+      "slug": "ebin-melting-spray-sport",
+      "name": "ebin melting spray sport",
+      "quantity": 94
+    },
+    {
+      "slug": "ebin-melting-spray-colored",
+      "name": "ebin melting spray colored",
+      "quantity": 22
+    },
+    {
+      "slug": "kuura-conditioner-long",
+      "name": "Kuura Conditioner Long",
+      "quantity": 6
+    },
+    {
+      "slug": "adore-dye",
+      "name": "Adore Dye",
+      "quantity": 229
+    },
+    {
+      "slug": "10pcs-relaxer-set",
+      "variant_of": "relaxer-set",
+      "size": "10pcs",
+      "quantity": 9
+    },
+    {
+      "slug": "15pcs-relaxer-set",
+      "variant_of": "relaxer-set",
+      "size": "15pcs",
+      "quantity": 6
+    },
+    {
+      "slug": "6pcs-relaxer-set",
+      "variant_of": "relaxer-set",
+      "size": "6pcs",
+      "quantity": 14
+    },
+    {
+      "slug": "olive-oil-shampoo",
+      "name": "ORS neutralizing Oil Shampoo",
+      "quantity": 40
+    },
+    {
+      "slug": "ors-mousse-wrap",
+      "name": "ORS Mousse Wrap",
+      "quantity": 40
+    },
+    {
+      "slug": "ors-olive-sheen-big",
+      "name": "Olive Sheen spray",
+      "quantity": 41
+    },
+    {
+      "slug": "ors-twist-gel",
+      "name": "ORS lock and Twist Gel",
+      "quantity": 50
+    },
+    {
+      "slug": "dread-foam",
+      "name": "Dread Foam",
+      "quantity": 57
+    },
+    {
+      "slug": "keratin-melting-spray",
+      "name": " Keratin melting spray",
+      "quantity": 76
+    },
+    {
+      "slug": "bonding-glue-big",
+      "variant_of": "bonding-glue",
+      "size": "Big",
+      "quantity": 84
+    },
+    {
+      "slug": "bonding-glue-small",
+      "variant_of": "bonding-glue",
+      "size": "Small",
+      "quantity": 4
+    },
+    {
+      "slug": "sabalon",
+      "name": "Sabalon",
+      "quantity": 17
+    },
+    {
+      "slug": "wide-tooth-rake-comb",
+      "name": "wide-tooth rake comb ",
+      "quantity": 198
+    },
+    {
+      "slug": "olive-oil-edge-control",
+      "name": "Olive Oil Edge Control",
+      "quantity": 601
+    },
+    {
+      "slug": "disposable-frontal-wrap",
+      "name": "Disposable Frontal Wrap",
+      "quantity": 93
+    },
+    {
+      "slug": "luxury-protein-morocco-plant-oil",
+      "name": " Luxury Protein Morocco Plant Oil Shampoo",
+      "quantity": 47
+    },
+    {
+      "slug": "blend-moikuura-avocado-sturizing-detangling-conditioner",
+      "name": "Kuura fro Conditioner ",
+      "quantity": 167
+    },
+    {
+      "slug": "packaging-net-medium",
+      "variant_of": "packaging-net",
+      "size": "Medium",
+      "quantity": 70
+    },
+    {
+      "slug": "packaging-net-large",
+      "variant_of": "packaging-net",
+      "size": "Large",
+      "quantity": 62
+    },
+    {
+      "slug": "mannequin-head",
+      "name": "Mannequin Head",
+      "quantity": 10
+    },
+    {
+      "slug": "tripod-stand-mini",
+      "name": "Tripod Stand Mini",
+      "quantity": 10
+    },
+    {
+      "slug": "xhc-argan-oil-hydrating-hair-mask",
+      "name": " Argan Oil Hair Mask small",
+      "quantity": 14
+    },
+    {
+      "slug": "professional-argan-oil-nourishing-hair-mask",
+      "name": "Professional Argan Oil Nourishing Hair Mask",
+      "quantity": 17
+    },
+    {
+      "slug": "parting-ring",
+      "name": "Parting Ring",
+      "quantity": 39
+    },
+    {
+      "slug": "butterfly-clips",
+      "name": "Butterfly Clips",
+      "quantity": 20
+    },
+    {
+      "slug": "3-in-1-tripod",
+      "name": "3 in 1 Tripod",
+      "quantity": 91
+    },
+    {
+      "slug": "tripod-stand",
+      "name": "Tripod Stand",
+      "quantity": 91
+    },
+    {
+      "slug": "tresseme-shampoo-small",
+      "variant_of": "tresseme-shampoo",
+      "size": "Small",
+      "quantity": 26
+    },
+    {
+      "slug": "tresseme-conditioner-small",
+      "name": "Tresseme Conditioner Small",
+      "quantity": 30
+    },
+    {
+      "slug": "tresseme-shampoo-big",
+      "variant_of": "tresseme-shampoo",
+      "size": "Big",
+      "quantity": 3
+    },
+    {
+      "slug": "kuura-honey-and-papaya-leave-in-conditioner",
+      "name": " Kuura Honey and Papaya Leave-In Conditioner ",
+      "quantity": 34
+    },
+    {
+      "slug": "eyelash-mannequin-big",
+      "variant_of": "eyelash-mannequin",
+      "size": "Big",
+      "quantity": 13
+    },
+    {
+      "slug": "pinkee-s-liquid-big",
+      "variant_of": "pinkee-s-liquid",
+      "size": "Big",
+      "price": 150,
+      "sale_price": 120,
+      "quantity": 55
+    },
+    {
+      "slug": "pinkee-s-liquid-medium",
+      "variant_of": "pinkee-s-liquid",
+      "size": "Medium",
+      "price": 95,
+      "sale_price": 80,
+      "quantity": 57
+    },
+    {
+      "slug": "pinkee-s-liquid-small",
+      "variant_of": "pinkee-s-liquid",
+      "size": "Small",
+      "price": 60,
+      "sale_price": 50,
+      "quantity": 39
+    },
+    {
+      "slug": "dodo-curler",
+      "name": "Dodo Curler",
+      "quantity": 3
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 220" role="img" aria-label="HairBudget">
+  <rect width="720" height="220" fill="#0C4534"/>
+  <text x="360" y="118" text-anchor="middle" fill="#FFF2CB" font-family="Georgia, 'Times New Roman', serif" font-size="52" letter-spacing="10">HAIRBUDGET</text>
+  <line x1="190" y1="142" x2="530" y2="142" stroke="#DACCA9" stroke-width="2"/>
+  <text x="360" y="178" text-anchor="middle" fill="#DACCA9" font-family="Georgia, serif" font-style="italic" font-size="16" letter-spacing="4">CONFIDENCE IN EVERY STRAND</text>
+</svg>

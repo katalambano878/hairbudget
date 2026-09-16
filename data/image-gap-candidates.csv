@@ -1,0 +1,12 @@
+target_id,target_name,target_slug,target_price,candidate1_name,candidate1_slug,candidate1_score,candidate1_image,candidate2_name,candidate2_slug,candidate2_score,candidate2_image,candidate3_name,candidate3_slug,candidate3_score,candidate3_image
+3227dcb5-aed1-4fbc-b93b-c2ca6b8a1ef5,Glue Sticks,glue-sticks,6,,,,,,,,,,,,
+02073f4f-7967-4c68-a900-bd6d2c0025eb,Eunera Conditioner Big,eunera-conditioner-big,95,,,,,,,,,,,,
+18e5ec2d-3eb7-4a69-a337-dfa0389a94eb,Tresseme Shampoo Big,tresseme-shampoo-big,120,Tresseme Shampoo Small,tresseme-shampoo-small,0.647,https://YOUR_SUPABASE_PROJECT_REF.supabase.co/storage/v1/object/public/products/0.06841009863428993.png,,,,,,,,
+beb524c5-12cd-4ec4-8124-02485cab9890,Wig Fix Stick,wig-fix-stick,25,,,,,,,,,,,,
+a30bf4b2-607c-47f0-99a8-a7b77cb85df1,Ponytail Wrap,ponytail-wrap,6,Drawstring Ponytail,drawstring-ponytail,0.587,https://YOUR_SUPABASE_PROJECT_REF.supabase.co/storage/v1/object/public/products/0.9526580167377378.png,,,,,,,,
+63379118-e4e8-4656-9434-dbbd6f76abdd,Magnetic Band,magnetic-band,35,,,,,,,,,,,,
+54089122-9180-4a15-b025-201215a17b0a,Spiral Rods,spiral-rods,22,,,,,,,,,,,,
+b241f464-cb0e-4e05-92f3-dda82284d881,Tripod Stand Mini,tripod-stand-mini,60,,,,,,,,,,,,
+83b4b535-11c6-4b13-8bba-7e84d4c58e25,Tripod Stand,tripod-stand,160,,,,,,,,,,,,
+cd8dc281-02fe-425b-8d25-99cc18efd60e,Extreme Sewing Machine,extreme-sewing-machine,1250, industrial sewing machine presser foot,industrial-sewing-machine-presser-foot,0.613,https://YOUR_SUPABASE_PROJECT_REF.supabase.co/storage/v1/object/public/products/0.6208423269054798.png,,,,,,,,
+67d96ce1-85d2-4814-8e94-c7378ca4b46d,Eunera Shampoo Big,eunera-shampoo-big,95,,,,,,,,,,,,

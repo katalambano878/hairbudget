@@ -1,0 +1,41 @@
+{
+  "dry_run": false,
+  "merged_groups": 3,
+  "merged_products_archived": 3,
+  "keeper_field_patches": 0,
+  "copied_images": 2,
+  "moved_variants": 0,
+  "archived_duplicates": 3,
+  "groups": [
+    {
+      "group_key": "exact:nail glue",
+      "keeper_slug": "nail-glue",
+      "keeper_name": "Nail Glue",
+      "duplicates_archived": 1,
+      "field_patch": "{}",
+      "copied_images": 1,
+      "moved_variants": 0,
+      "duplicate_slugs": "mxbon-pro-s-choice-brush"
+    },
+    {
+      "group_key": "exact:ear protective frontal band",
+      "keeper_slug": "ear-protective-frontal-band",
+      "keeper_name": "Ear Protective Frontal Band",
+      "duplicates_archived": 1,
+      "field_patch": "{}",
+      "copied_images": 1,
+      "moved_variants": 0,
+      "duplicate_slugs": "leopard-print-headband"
+    },
+    {
+      "group_key": "exact:glue gun",
+      "keeper_slug": "glue-gun",
+      "keeper_name": "Glue Gun",
+      "duplicates_archived": 1,
+      "field_patch": "{}",
+      "copied_images": 0,
+      "moved_variants": 0,
+      "duplicate_slugs": "hot-melt-glue-gun"
+    }
+  ]
+}

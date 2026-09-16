@@ -1,0 +1,692 @@
+{
+  "apply": true,
+  "families_found": 17,
+  "actions_planned": 17,
+  "actions": [
+    {
+      "base": "relaxer set",
+      "category_id": "e1d78137-2a86-4163-8928-8c953dd83860",
+      "parent_name": "Relaxer Set",
+      "parent_slug": "relaxer-set",
+      "parent_existing_id": null,
+      "primary_id": "87266655-9538-44ab-8b86-2a30b4b09eca",
+      "members": [
+        {
+          "id": "87266655-9538-44ab-8b86-2a30b4b09eca",
+          "name": "10pcs Relaxer Set",
+          "slug": "10pcs-relaxer-set",
+          "size": "10PCS",
+          "price": 165,
+          "sale_price": 135,
+          "quantity": 9
+        },
+        {
+          "id": "c25648ef-fbff-4f1a-8531-4ef64f383c06",
+          "name": "15pcs Relaxer Set",
+          "slug": "15pcs-relaxer-set",
+          "size": "15PCS",
+          "price": 175,
+          "sale_price": 165,
+          "quantity": 6
+        },
+        {
+          "id": "e1c4c345-7b6e-4fb3-9956-2d0144738570",
+          "name": "6pcs Relaxer Set",
+          "slug": "6pcs-relaxer-set",
+          "size": "6PCS",
+          "price": 140,
+          "sale_price": 130,
+          "quantity": 14
+        }
+      ],
+      "computed_parent_price": 140,
+      "computed_parent_sale_price": 130
+    },
+    {
+      "base": "soft gel tips",
+      "category_id": "ed8be606-dbe4-4616-9db1-dc749b755bc3",
+      "parent_name": "Soft Gel Tips",
+      "parent_slug": "soft-gel-tips",
+      "parent_existing_id": null,
+      "primary_id": "844391cc-d8ab-4371-9671-4edd155d2858",
+      "members": [
+        {
+          "id": "844391cc-d8ab-4371-9671-4edd155d2858",
+          "name": "240pcs Soft Gel Tips",
+          "slug": "240pcs-soft-gel-tips",
+          "size": "240PCS",
+          "price": 45,
+          "sale_price": 39,
+          "quantity": 13
+        },
+        {
+          "id": "e1b54221-8c7c-4c96-8b37-c9e224071f3e",
+          "name": "60pcs Soft Gel Tips",
+          "slug": "60pcs-soft-gel-tips",
+          "size": "60PCS",
+          "price": 45,
+          "sale_price": 39,
+          "quantity": 0
+        }
+      ],
+      "computed_parent_price": 45,
+      "computed_parent_sale_price": 39
+    },
+    {
+      "base": "very good gel",
+      "category_id": "ed8be606-dbe4-4616-9db1-dc749b755bc3",
+      "parent_name": "Very Good Gel",
+      "parent_slug": "very-good-gel",
+      "parent_existing_id": null,
+      "primary_id": "a3e6ce69-3ecf-4401-9f81-f516e0090031",
+      "members": [
+        {
+          "id": "a3e6ce69-3ecf-4401-9f81-f516e0090031",
+          "name": "42pcs Very Good Gel",
+          "slug": "42pcs-very-good-gel",
+          "size": "42PCS",
+          "price": 600,
+          "sale_price": 550,
+          "quantity": 20
+        },
+        {
+          "id": "d1537c01-e81a-4982-be64-ecc6d028687f",
+          "name": "44pcs Very Good Gel",
+          "slug": "44pcs-very-good-gel",
+          "size": "44PCS",
+          "price": 650,
+          "sale_price": 599,
+          "quantity": 1
+        }
+      ],
+      "computed_parent_price": 600,
+      "computed_parent_sale_price": 550
+    },
+    {
+      "base": "acetone",
+      "category_id": "ed8be606-dbe4-4616-9db1-dc749b755bc3",
+      "parent_name": "Acetone",
+      "parent_slug": "acetone",
+      "parent_existing_id": null,
+      "primary_id": "28c27a43-6f28-4b00-a0ef-911d1042e791",
+      "members": [
+        {
+          "id": "28c27a43-6f28-4b00-a0ef-911d1042e791",
+          "name": "Acetone Big",
+          "slug": "acetone-big",
+          "size": "Big",
+          "price": 95,
+          "sale_price": 85,
+          "quantity": 3
+        },
+        {
+          "id": "6bea02c0-d29c-4f26-9d47-52b68727df0b",
+          "name": "Acetone Small",
+          "slug": "acetone-small",
+          "size": "Small",
+          "price": 60,
+          "sale_price": 50,
+          "quantity": 186
+        }
+      ],
+      "computed_parent_price": 60,
+      "computed_parent_sale_price": 50
+    },
+    {
+      "base": "acrylic powder nude",
+      "category_id": "ed8be606-dbe4-4616-9db1-dc749b755bc3",
+      "parent_name": "Acrylic Powder Nude",
+      "parent_slug": "acrylic-powder-nude",
+      "parent_existing_id": null,
+      "primary_id": "17561dfc-7cdf-41ce-9f83-48565a279fc9",
+      "members": [
+        {
+          "id": "17561dfc-7cdf-41ce-9f83-48565a279fc9",
+          "name": "Acrylic Powder Nude Big",
+          "slug": "acrylic-powder-nude-big",
+          "size": "Big",
+          "price": 75,
+          "sale_price": 69,
+          "quantity": 24
+        },
+        {
+          "id": "22b22d15-0f9c-46b1-8203-5c97a782e692",
+          "name": "Acrylic Powder Nude Small",
+          "slug": "acrylic-powder-nude-small",
+          "size": "Small",
+          "price": 45,
+          "sale_price": 40,
+          "quantity": 0
+        }
+      ],
+      "computed_parent_price": 45,
+      "computed_parent_sale_price": 40
+    },
+    {
+      "base": "bonding glue",
+      "category_id": "e1d78137-2a86-4163-8928-8c953dd83860",
+      "parent_name": "Bonding Glue",
+      "parent_slug": "bonding-glue",
+      "parent_existing_id": null,
+      "primary_id": "261a4eb8-2edd-4e83-821b-231c74a8b54d",
+      "members": [
+        {
+          "id": "261a4eb8-2edd-4e83-821b-231c74a8b54d",
+          "name": "Bonding Glue Big",
+          "slug": "bonding-glue-big",
+          "size": "Big",
+          "price": 0,
+          "sale_price": null,
+          "quantity": 84
+        },
+        {
+          "id": "df581fc1-922f-4473-a5b7-51ef4738430c",
+          "name": "Bonding Glue Small",
+          "slug": "bonding-glue-small",
+          "size": "Small",
+          "price": 0,
+          "sale_price": null,
+          "quantity": 7
+        }
+      ],
+      "computed_parent_price": 0,
+      "computed_parent_sale_price": null
+    },
+    {
+      "base": "ebin adhesive",
+      "category_id": "e1d78137-2a86-4163-8928-8c953dd83860",
+      "parent_name": "Ebin Adhesive",
+      "parent_slug": "ebin-adhesive",
+      "parent_existing_id": null,
+      "primary_id": "9ba28b71-2a33-47a2-b99e-9600e574a48f",
+      "members": [
+        {
+          "id": "9ba28b71-2a33-47a2-b99e-9600e574a48f",
+          "name": "Ebin Adhesive Big",
+          "slug": "ebin-adhesive-big",
+          "size": "Big",
+          "price": 0,
+          "sale_price": null,
+          "quantity": 59
+        },
+        {
+          "id": "24e5ac70-7e8e-4a99-9a7a-538a09e49640",
+          "name": "Ebin Adhesive Small",
+          "slug": "ebin-adhesive-small",
+          "size": "Small",
+          "price": 0,
+          "sale_price": null,
+          "quantity": 39
+        }
+      ],
+      "computed_parent_price": 0,
+      "computed_parent_sale_price": null
+    },
+    {
+      "base": "ebin adhesive sports",
+      "category_id": "e1d78137-2a86-4163-8928-8c953dd83860",
+      "parent_name": "Ebin Adhesive Sports",
+      "parent_slug": "ebin-adhesive-sports",
+      "parent_existing_id": null,
+      "primary_id": "b9a8907c-6269-4173-a741-4b041b297863",
+      "members": [
+        {
+          "id": "b9a8907c-6269-4173-a741-4b041b297863",
+          "name": "Ebin Adhesive Sports Big",
+          "slug": "ebin-adhesive-sports-big",
+          "size": "Big",
+          "price": 0,
+          "sale_price": null,
+          "quantity": 1
+        },
+        {
+          "id": "84164246-47d4-4059-9278-e751ccda3208",
+          "name": "Ebin Adhesive Sports Medium",
+          "slug": "ebin-adhesive-sports-medium",
+          "size": "Medium",
+          "price": 0,
+          "sale_price": null,
+          "quantity": 31
+        },
+        {
+          "id": "8085bf50-cd8e-4f47-8c06-1ef16001289d",
+          "name": "Ebin Adhesive Sports Small",
+          "slug": "ebin-adhesive-sports-small",
+          "size": "Small",
+          "price": 0,
+          "sale_price": null,
+          "quantity": 12
+        }
+      ],
+      "computed_parent_price": 0,
+      "computed_parent_sale_price": null
+    },
+    {
+      "base": "envy gel",
+      "category_id": "e1d78137-2a86-4163-8928-8c953dd83860",
+      "parent_name": "Envy Gel",
+      "parent_slug": "envy-gel",
+      "parent_existing_id": null,
+      "primary_id": "b1f1002d-2dad-4eff-8979-84e67cb9f084",
+      "members": [
+        {
+          "id": "b1f1002d-2dad-4eff-8979-84e67cb9f084",
+          "name": "Envy gel big",
+          "slug": "envy-gel-big",
+          "size": "Big",
+          "price": 75,
+          "sale_price": 69,
+          "quantity": 37
+        },
+        {
+          "id": "ba48a08f-4d5e-4813-b353-6dc82dac9e98",
+          "name": "Envy gel small ",
+          "slug": "envy-gel-small",
+          "size": "Small",
+          "price": 40,
+          "sale_price": 35,
+          "quantity": 83
+        }
+      ],
+      "computed_parent_price": 40,
+      "computed_parent_sale_price": 35
+    },
+    {
+      "base": "eyelash mannequin",
+      "category_id": "ed8be606-dbe4-4616-9db1-dc749b755bc3",
+      "parent_name": "Eyelash Mannequin",
+      "parent_slug": "eyelash-mannequin",
+      "parent_existing_id": null,
+      "primary_id": "7603b572-a7ac-49e0-9f25-54ae985902c3",
+      "members": [
+        {
+          "id": "7603b572-a7ac-49e0-9f25-54ae985902c3",
+          "name": "Eyelash Mannequin Big",
+          "slug": "eyelash-mannequin-big",
+          "size": "Big",
+          "price": 200,
+          "sale_price": 170,
+          "quantity": 53
+        },
+        {
+          "id": "4962753c-e944-4ddd-a1aa-f11d10cb090f",
+          "name": "Eyelash Mannequin Medium",
+          "slug": "eyelash-mannequin-medium",
+          "size": "Medium",
+          "price": 120,
+          "sale_price": 99,
+          "quantity": 186
+        },
+        {
+          "id": "495ff10b-89cc-4fa4-9963-011e6841a6fb",
+          "name": "Eyelash Mannequin Small",
+          "slug": "eyelash-mannequin-small",
+          "size": "Small",
+          "price": 40,
+          "sale_price": 35,
+          "quantity": 6
+        }
+      ],
+      "computed_parent_price": 40,
+      "computed_parent_sale_price": 35
+    },
+    {
+      "base": "home services bag",
+      "category_id": "ed8be606-dbe4-4616-9db1-dc749b755bc3",
+      "parent_name": "Home Services Bag",
+      "parent_slug": "home-services-bag",
+      "parent_existing_id": null,
+      "primary_id": "7ac3081c-5e12-47b7-894c-ea284d9a7ceb",
+      "members": [
+        {
+          "id": "7ac3081c-5e12-47b7-894c-ea284d9a7ceb",
+          "name": "Home Services Bag Big",
+          "slug": "home-services-bag-big",
+          "size": "Big",
+          "price": 350,
+          "sale_price": 299,
+          "quantity": 47
+        },
+        {
+          "id": "d3796faf-d37f-45eb-8213-a092407d1120",
+          "name": "Home Services Bag Small",
+          "slug": "home-services-bag-small",
+          "size": "Small",
+          "price": 150,
+          "sale_price": 130,
+          "quantity": 0
+        }
+      ],
+      "computed_parent_price": 150,
+      "computed_parent_sale_price": 130
+    },
+    {
+      "base": "ors mayonnaise",
+      "category_id": "e1d78137-2a86-4163-8928-8c953dd83860",
+      "parent_name": "Ors Mayonnaise",
+      "parent_slug": "ors-mayonnaise",
+      "parent_existing_id": null,
+      "primary_id": "b09f140e-80ab-4142-8a0d-8ae3d1c61acb",
+      "members": [
+        {
+          "id": "b09f140e-80ab-4142-8a0d-8ae3d1c61acb",
+          "name": "ORS Mayonnaise ",
+          "slug": "ors-mayonnaise-big",
+          "size": "Big",
+          "price": 150,
+          "sale_price": 130,
+          "quantity": 45
+        },
+        {
+          "id": "d2506024-391e-4cd0-b091-67cb20f20b72",
+          "name": "ORS Mayonnaise Small",
+          "slug": "ors-mayonnaise-small",
+          "size": "Small",
+          "price": 130,
+          "sale_price": 110,
+          "quantity": 54
+        }
+      ],
+      "computed_parent_price": 130,
+      "computed_parent_sale_price": 110
+    },
+    {
+      "base": "ors olive sheen",
+      "category_id": "5de9360a-6518-4873-bb65-69cb9b471b3c",
+      "parent_name": "Ors Olive Sheen",
+      "parent_slug": "ors-olive-sheen",
+      "parent_existing_id": null,
+      "primary_id": "9ce1a39f-fbab-4070-a1ec-7569b5ef6491",
+      "members": [
+        {
+          "id": "9ce1a39f-fbab-4070-a1ec-7569b5ef6491",
+          "name": "ORS Olive Sheen Big",
+          "slug": "ors-olive-sheen-big",
+          "size": "Big",
+          "price": 78,
+          "sale_price": 68,
+          "quantity": 41
+        },
+        {
+          "id": "963097ec-909d-4ea3-83db-01c2aa088c1f",
+          "name": "ORS Olive Sheen Small",
+          "slug": "ors-olive-sheen-small",
+          "size": "Small",
+          "price": 38,
+          "sale_price": 25,
+          "quantity": 0
+        }
+      ],
+      "computed_parent_price": 38,
+      "computed_parent_sale_price": 25
+    },
+    {
+      "base": "packaging net",
+      "category_id": "e41c0c14-492f-44e7-99c1-144eeb62203b",
+      "parent_name": "Packaging Net",
+      "parent_slug": "packaging-net",
+      "parent_existing_id": null,
+      "primary_id": "80ce52ce-d5de-479e-beb5-01186bf3662b",
+      "members": [
+        {
+          "id": "80ce52ce-d5de-479e-beb5-01186bf3662b",
+          "name": "Packaging Net Large",
+          "slug": "packaging-net-large",
+          "size": "Large",
+          "price": 0,
+          "sale_price": null,
+          "quantity": 62
+        },
+        {
+          "id": "59ed61a3-acc9-4b71-85d8-1fbae76f19dc",
+          "name": "Packaging Net Medium",
+          "slug": "packaging-net-medium",
+          "size": "Medium",
+          "price": 0,
+          "sale_price": null,
+          "quantity": 70
+        },
+        {
+          "id": "325dc30b-d3ff-431d-ba81-a06ab15475aa",
+          "name": "Packaging Net Small",
+          "slug": "packaging-net-small",
+          "size": "Small",
+          "price": 0,
+          "sale_price": null,
+          "quantity": 0
+        }
+      ],
+      "computed_parent_price": 0,
+      "computed_parent_sale_price": null
+    },
+    {
+      "base": "pinkee s liquid",
+      "category_id": "ed8be606-dbe4-4616-9db1-dc749b755bc3",
+      "parent_name": "Pinkee S Liquid",
+      "parent_slug": "pinkee-s-liquid",
+      "parent_existing_id": null,
+      "primary_id": "23379ed2-839f-4807-9f9b-4f2a6ce1a930",
+      "members": [
+        {
+          "id": "23379ed2-839f-4807-9f9b-4f2a6ce1a930",
+          "name": "Pinkee's Liquid Big",
+          "slug": "pinkee-s-liquid-big",
+          "size": "Big",
+          "price": 200,
+          "sale_price": 170,
+          "quantity": 55
+        },
+        {
+          "id": "db20758e-d525-4b98-805a-f170133a26c2",
+          "name": "Pinkee's Liquid Medium",
+          "slug": "pinkee-s-liquid-medium",
+          "size": "Medium",
+          "price": 120,
+          "sale_price": 99,
+          "quantity": 57
+        },
+        {
+          "id": "995a3db6-22da-4375-9dcd-851bc9afd5b6",
+          "name": "Pinkee's Liquid Small",
+          "slug": "pinkee-s-liquid-small",
+          "size": "Small",
+          "price": 40,
+          "sale_price": 35,
+          "quantity": 39
+        }
+      ],
+      "computed_parent_price": 40,
+      "computed_parent_sale_price": 35
+    },
+    {
+      "base": "silicon mix shampoo",
+      "category_id": "e1d78137-2a86-4163-8928-8c953dd83860",
+      "parent_name": "Silicon Mix Shampoo",
+      "parent_slug": "silicon-mix-shampoo",
+      "parent_existing_id": null,
+      "primary_id": "be7d8702-0d42-4ad0-938c-57679ea74099",
+      "members": [
+        {
+          "id": "be7d8702-0d42-4ad0-938c-57679ea74099",
+          "name": "Silicon Mix Shampoo Big",
+          "slug": "silicon-mix-shampoo-big",
+          "size": "Big",
+          "price": 195,
+          "sale_price": 170,
+          "quantity": 0
+        },
+        {
+          "id": "75b77455-c5cb-422b-9001-607a0a926e9f",
+          "name": "Silicon Mix Shampoo Medium",
+          "slug": "silicon-mix-shampoo-medium",
+          "size": "Medium",
+          "price": 120,
+          "sale_price": 100,
+          "quantity": 0
+        },
+        {
+          "id": "c3c9869e-2a53-47d4-a862-203c23fb3df6",
+          "name": "Silicon Mix Shampoo Small",
+          "slug": "silicon-mix-shampoo-small",
+          "size": "Small",
+          "price": 85,
+          "sale_price": 75,
+          "quantity": 0
+        }
+      ],
+      "computed_parent_price": 85,
+      "computed_parent_sale_price": 75
+    },
+    {
+      "base": "tresseme shampoo",
+      "category_id": "e1d78137-2a86-4163-8928-8c953dd83860",
+      "parent_name": "Tresseme Shampoo",
+      "parent_slug": "tresseme-shampoo",
+      "parent_existing_id": null,
+      "primary_id": "18e5ec2d-3eb7-4a69-a337-dfa0389a94eb",
+      "members": [
+        {
+          "id": "18e5ec2d-3eb7-4a69-a337-dfa0389a94eb",
+          "name": "Tresseme Shampoo Big",
+          "slug": "tresseme-shampoo-big",
+          "size": "Big",
+          "price": 120,
+          "sale_price": 110,
+          "quantity": 3
+        },
+        {
+          "id": "6d65ff1d-4285-465a-87be-3b89dca62e1e",
+          "name": "Tresseme Shampoo Small",
+          "slug": "tresseme-shampoo-small",
+          "size": "Small",
+          "price": 95,
+          "sale_price": 80,
+          "quantity": 26
+        }
+      ],
+      "computed_parent_price": 95,
+      "computed_parent_sale_price": 80
+    }
+  ],
+  "applied": [
+    {
+      "parent_id": "4cd5c612-435e-45fa-a954-ec3f19d096a0",
+      "parent_slug": "relaxer-set",
+      "inserted_variants": 3,
+      "inserted_images": 3,
+      "archived_members": 3
+    },
+    {
+      "parent_id": "c58beddf-434d-4908-94e5-ff4192d7746d",
+      "parent_slug": "soft-gel-tips",
+      "inserted_variants": 2,
+      "inserted_images": 1,
+      "archived_members": 2
+    },
+    {
+      "parent_id": "c7e52814-6362-4c72-acd0-61f40b68212c",
+      "parent_slug": "very-good-gel",
+      "inserted_variants": 2,
+      "inserted_images": 1,
+      "archived_members": 2
+    },
+    {
+      "parent_id": "5b62824e-ce59-43ab-999b-2e7ead651155",
+      "parent_slug": "acetone",
+      "inserted_variants": 2,
+      "inserted_images": 1,
+      "archived_members": 2
+    },
+    {
+      "parent_id": "dd396fa3-a566-483a-ba8c-67a209272473",
+      "parent_slug": "acrylic-powder-nude",
+      "inserted_variants": 2,
+      "inserted_images": 1,
+      "archived_members": 2
+    },
+    {
+      "parent_id": "beddb3ec-16fc-44cb-990d-f97327f96200",
+      "parent_slug": "bonding-glue",
+      "inserted_variants": 2,
+      "inserted_images": 0,
+      "archived_members": 2
+    },
+    {
+      "parent_id": "76749f9b-57e6-4dc8-a620-b57a1c9b40e7",
+      "parent_slug": "ebin-adhesive",
+      "inserted_variants": 2,
+      "inserted_images": 0,
+      "archived_members": 2
+    },
+    {
+      "parent_id": "63fe21df-cbf4-48a7-bd97-6d95cc0aba75",
+      "parent_slug": "ebin-adhesive-sports",
+      "inserted_variants": 3,
+      "inserted_images": 0,
+      "archived_members": 3
+    },
+    {
+      "parent_id": "526c23a7-3476-4130-9764-c4003b79dbde",
+      "parent_slug": "envy-gel",
+      "inserted_variants": 2,
+      "inserted_images": 2,
+      "archived_members": 2
+    },
+    {
+      "parent_id": "27378a03-a20e-4708-b447-51acc734d103",
+      "parent_slug": "eyelash-mannequin",
+      "inserted_variants": 3,
+      "inserted_images": 1,
+      "archived_members": 3
+    },
+    {
+      "parent_id": "2664492f-805c-4c79-8a11-c4f76ab8d733",
+      "parent_slug": "home-services-bag",
+      "inserted_variants": 2,
+      "inserted_images": 3,
+      "archived_members": 2
+    },
+    {
+      "parent_id": "0a9acfc9-2f86-43cc-8665-b86d04cb7336",
+      "parent_slug": "ors-mayonnaise",
+      "inserted_variants": 2,
+      "inserted_images": 2,
+      "archived_members": 2
+    },
+    {
+      "parent_id": "7ddf42a0-41f8-4660-a7a2-1b1ced7296bb",
+      "parent_slug": "ors-olive-sheen",
+      "inserted_variants": 2,
+      "inserted_images": 1,
+      "archived_members": 2
+    },
+    {
+      "parent_id": "db1a8713-60cc-4bf7-9545-213d08101eef",
+      "parent_slug": "packaging-net",
+      "inserted_variants": 3,
+      "inserted_images": 0,
+      "archived_members": 3
+    },
+    {
+      "parent_id": "5bad4f5a-b338-4e49-afb9-4ee3ff068339",
+      "parent_slug": "pinkee-s-liquid",
+      "inserted_variants": 3,
+      "inserted_images": 1,
+      "archived_members": 3
+    },
+    {
+      "parent_id": "c3850c8f-bd16-4177-9fe4-b58116725609",
+      "parent_slug": "silicon-mix-shampoo",
+      "inserted_variants": 3,
+      "inserted_images": 0,
+      "archived_members": 3
+    },
+    {
+      "parent_id": "45157af7-1e12-43dc-8db3-f73795e92ff2",
+      "parent_slug": "tresseme-shampoo",
+      "inserted_variants": 2,
+      "inserted_images": 2,
+      "archived_members": 2
+    }
+  ]
+}

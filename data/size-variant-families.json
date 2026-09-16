@@ -1,0 +1,101 @@
+{
+  "count": 3,
+  "families": [
+    {
+      "base_name": "buffer buffer",
+      "category_slug": "nail-essentials",
+      "category_name": "Nail Essentials",
+      "count": 2,
+      "products": [
+        {
+          "id": "b757fd54-716a-4b3c-9086-7460d8481694",
+          "name": "Buffer Set",
+          "slug": "buffer-set",
+          "tags": [
+            "set"
+          ],
+          "price": 40,
+          "sale_price": 35,
+          "quantity": 1,
+          "image_count": 1
+        },
+        {
+          "id": "5b731db4-96cb-4bd6-b40f-76d07105c16a",
+          "name": "Buffer Single",
+          "slug": "buffer-single",
+          "tags": [
+            "single"
+          ],
+          "price": 15,
+          "sale_price": 15,
+          "quantity": 1,
+          "image_count": 1
+        }
+      ]
+    },
+    {
+      "base_name": "polygel polygel",
+      "category_slug": "nail-essentials",
+      "category_name": "Nail Essentials",
+      "count": 2,
+      "products": [
+        {
+          "id": "5fda3bfd-a2d1-479e-9b66-9d57558f616c",
+          "name": "Polygel Set",
+          "slug": "polygel-set",
+          "tags": [
+            "set"
+          ],
+          "price": 220,
+          "sale_price": 199,
+          "quantity": 24,
+          "image_count": 1
+        },
+        {
+          "id": "dbc964d0-12c7-41ba-937f-60e91e9320c3",
+          "name": "Polygel Single",
+          "slug": "polygel-single",
+          "tags": [
+            "single"
+          ],
+          "price": 35,
+          "sale_price": 30,
+          "quantity": 172,
+          "image_count": 1
+        }
+      ]
+    },
+    {
+      "base_name": "wooden arm rest wooden arm rest",
+      "category_slug": "hair-and-salon-tools",
+      "category_name": "Hair and salon tools",
+      "count": 2,
+      "products": [
+        {
+          "id": "2958741e-aba5-476c-b3e5-bde8111a97d7",
+          "name": "Wooden Arm Rest Long",
+          "slug": "wooden-arm-rest-long",
+          "tags": [
+            "long"
+          ],
+          "price": 180,
+          "sale_price": 140,
+          "quantity": 57,
+          "image_count": 1
+        },
+        {
+          "id": "548c4a69-b9e3-483b-8e44-cedb09830ac0",
+          "name": "Wooden Arm Rest Short",
+          "slug": "wooden-arm-rest-short",
+          "tags": [
+            "short"
+          ],
+          "price": 150,
+          "sale_price": 120,
+          "quantity": 15,
+          "image_count": 1
+        }
+      ]
+    }
+  ]
+}

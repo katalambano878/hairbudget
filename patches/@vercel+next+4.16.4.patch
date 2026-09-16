@@ -1,0 +1,13 @@
+diff --git a/node_modules/@vercel/next/dist/index.js b/node_modules/@vercel/next/dist/index.js
+index 391aaaa..8c8e881 100644
+--- a/node_modules/@vercel/next/dist/index.js
++++ b/node_modules/@vercel/next/dist/index.js
+@@ -15258,7 +15258,7 @@ ${JSON.stringify(
+       }
+       const lambda = await createLambdaFromPseudoLayers(options);
+       for (const pageFilename of group.pages) {
+-        const pageName = pageFilename.replace(/\.js$/, "");
++        const pageName = pageFilename.replace(/\.js$/, "").replace(/\\/g, "/");
+         const pagePathname = normalizePage(pageName);
+         let isPrerender = prerenderRoutes.has(pagePathname);
+         const isRoutePPREnabled = experimentalPPRRoutes.has(pagePathname);
