@@ -50,7 +50,7 @@ export default function CustomerInsightsPage() {
       if (orderError) throw orderError;
 
       // 3. Aggregate Data
-      const aggregated = profiles.map((profile: any) => {
+      const aggregated = (profiles ?? []).map((profile: any) => {
         const userOrders = orders?.filter(o => o.user_id === profile.id) || [];
         const totalSpent = userOrders.reduce((sum, o) => sum + (o.total || 0), 0);
         const orderCount = userOrders.length;

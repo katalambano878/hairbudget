@@ -34,6 +34,30 @@ export async function signToken(claims: TokenClaims, ttlSeconds: number): Promis
         .sign(key());
 }
 
+export async function signStorageUploadToken(bucket: string, path: string, ttlSeconds = 60 * 15): Promise<string> {
+    return new SignJWT({ type: 'storage-upload', bucket, path })
+        .setProtectedHeader({ alg: 'HS256' })
+        .setSubject(`storage:${bucket}/${path}`)
+        .setIssuedAt()
+        .setExpirationTime(Math.floor(Date.now() / 1000) + ttlSeconds)
+        .sign(key());
+}
+
+export async function verifyStorageUploadToken(
+    token: string
+): Promise<{ bucket: string; path: string } | null> {
+    try {
+        const { payload } = await jwtVerify(token, key());
+        if (payload.type !== 'storage-upload') return null;
+        const bucket = typeof payload.bucket === 'string' ? payload.bucket : '';
+        const path = typeof payload.path === 'string' ? payload.path : '';
+        if (!bucket || !path) return null;
+        return { bucket, path };
+    } catch {
+        return null;
+    }
+}
+
 export async function verifyToken(token: string): Promise<(TokenClaims & { exp?: number }) | null> {
     try {
         const { payload } = await jwtVerify(token, key());

@@ -13,6 +13,7 @@ import 'server-only';
 
 import { executeQuery, executeRpc } from './db/engine';
 import { getUserFromToken, adminCreateUser } from './db/auth-server';
+import { signStorageUploadToken } from './db/jwt';
 import { pool } from './db/pool';
 import type { DbResult, Filter, FilterOp, OrderSpec, QueryDescriptor } from './db/types';
 
@@ -203,6 +204,24 @@ class AdminStorageBucket {
 
     getPublicUrl(path: string): { data: { publicUrl: string } } {
         return { data: { publicUrl: `/api/storage/${this.bucket}/${path}` } };
+    }
+
+    async createSignedUploadUrl(
+        path: string
+    ): Promise<{ data: { path: string; token: string; signedUrl: string } | null; error: any }> {
+        try {
+            const token = await signStorageUploadToken(this.bucket, path);
+            return {
+                data: {
+                    path,
+                    token,
+                    signedUrl: `/api/storage/${this.bucket}/${path}?token=${encodeURIComponent(token)}`,
+                },
+                error: null,
+            };
+        } catch (err: any) {
+            return { data: null, error: { message: err?.message || 'Could not create upload URL' } };
+        }
     }
 }
 

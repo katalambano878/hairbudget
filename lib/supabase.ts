@@ -468,6 +468,31 @@ class StorageBucket {
     getPublicUrl(path: string): { data: { publicUrl: string } } {
         return { data: { publicUrl: `/api/storage/${this.bucket}/${path}` } };
     }
+
+    async uploadToSignedUrl(
+        path: string,
+        token: string,
+        file: File | Blob,
+        options?: { contentType?: string; upsert?: boolean }
+    ): Promise<{ data: { path: string } | null; error: any }> {
+        try {
+            const url = `/api/storage/${this.bucket}/${path}?token=${encodeURIComponent(token)}`;
+            const res = await fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': options?.contentType || (file as File).type || 'application/octet-stream',
+                },
+                body: file,
+            });
+            const body = await res.json().catch(() => ({}));
+            if (!res.ok || body.error) {
+                return { data: null, error: body.error || { message: 'Upload failed' } };
+            }
+            return { data: { path: body.data?.path || path }, error: null };
+        } catch (err: any) {
+            return { data: null, error: { message: err?.message || 'Upload failed' } };
+        }
+    }
 }
 
 class StorageClient {
