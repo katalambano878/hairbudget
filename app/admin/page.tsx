@@ -124,8 +124,8 @@ export default function AdminDashboard() {
   if (loading) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center gap-3">
-        <div className="w-8 h-8 border-2 border-slate-200 border-t-blue-500 rounded-full animate-spin" />
-        <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-400">Loading Dashboard</p>
+        <div className="w-8 h-8 border-2 border-ui-200 border-t-brand-forest rounded-full animate-spin" />
+        <p className="text-[9px] font-black tracking-[0.5em] uppercase text-ui-500">Loading Dashboard</p>
       </div>
     );
   }
@@ -134,18 +134,18 @@ export default function AdminDashboard() {
     <div className="space-y-6">
 
       {/* ── WELCOME BANNER ───────────────────────────────── */}
-      <div className="bg-slate-950 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative overflow-hidden">
+      <div className="bg-brand-deep rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative overflow-hidden">
         <div aria-hidden className="absolute right-0 top-0 font-serif italic text-white/[0.03] leading-none pointer-events-none select-none" style={{ fontSize: '10rem' }}>D</div>
         <div className="relative z-10">
-          <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-500 mb-1">{dateStr}</p>
-          <h1 className="font-serif text-2xl sm:text-3xl italic text-white">{greeting} 👋</h1>
-          <p className="text-slate-500 text-sm mt-1">Here&apos;s what&apos;s happening in your store today.</p>
+          <p className="text-[9px] font-black tracking-[0.5em] uppercase text-brand-cream/60 mb-1">{dateStr}</p>
+          <h1 className="font-serif text-2xl sm:text-3xl italic text-brand-ivory">{greeting} 👋</h1>
+          <p className="text-brand-cream/75 text-sm mt-1">Here&apos;s what&apos;s happening in your store today.</p>
         </div>
         <div className="flex items-center gap-3 relative z-10 flex-shrink-0">
-          <Link href="/admin/products/new" className="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-400 text-slate-950 px-4 py-2.5 rounded-xl font-black text-xs tracking-[0.2em] uppercase transition-colors">
+          <Link href="/admin/products/new" className="inline-flex items-center gap-2 bg-brand-gold hover:bg-brand-champagne text-brand-deep px-4 py-2.5 rounded-xl font-black text-xs tracking-[0.2em] uppercase transition-colors">
             <i className="ri-add-line" /> New Product
           </Link>
-          <Link href="/admin/pos" className="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2.5 rounded-xl font-black text-xs tracking-[0.2em] uppercase transition-colors">
+          <Link href="/admin/pos" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 text-brand-ivory border border-white/20 px-4 py-2.5 rounded-xl font-black text-xs tracking-[0.2em] uppercase transition-colors">
             <i className="ri-store-3-line" /> Open POS
           </Link>
         </div>
@@ -154,7 +154,7 @@ export default function AdminDashboard() {
       {/* ── STAT CARDS ───────────────────────────────────── */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((stat) => (
-          <div key={stat.title} className="bg-white rounded-2xl p-5 border border-slate-100 hover:border-slate-200 hover:shadow-sm transition-all group">
+          <div key={stat.title} className="bg-white rounded-2xl p-5 border border-ui-100 hover:border-ui-200 hover:shadow-sm transition-all group">
             <div className="flex items-start justify-between mb-4">
               <div className={`w-9 h-9 rounded-xl ${stat.accent} bg-opacity-10 flex items-center justify-center`}>
                 <i className={`${stat.icon} text-base ${stat.accent.replace('bg-', 'text-')}`} />
@@ -163,8 +163,8 @@ export default function AdminDashboard() {
                 {stat.change}
               </span>
             </div>
-            <p className="text-2xl font-black text-slate-900 leading-none mb-1.5">{stat.value}</p>
-            <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400">{stat.title}</p>
+            <p className="text-2xl font-black text-ui-900 leading-none mb-1.5">{stat.value}</p>
+            <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-ui-500">{stat.title}</p>
           </div>
         ))}
       </div>
@@ -173,14 +173,14 @@ export default function AdminDashboard() {
       <div className="grid lg:grid-cols-3 gap-4">
 
         {/* Chart */}
-        <div className="lg:col-span-2 bg-white rounded-2xl p-6 border border-slate-100">
+        <div className="lg:col-span-2 bg-white rounded-2xl p-6 border border-ui-100">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <p className="text-[9px] font-black tracking-[0.4em] uppercase text-slate-400 mb-1">Performance</p>
-              <h2 className="font-serif text-xl italic text-slate-900">Revenue Trend</h2>
+              <p className="text-[9px] font-black tracking-[0.4em] uppercase text-ui-500 mb-1">Performance</p>
+              <h2 className="font-serif text-xl italic text-ui-900">Revenue Trend</h2>
             </div>
             <select
-              className="text-xs font-bold text-slate-600 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus:outline-none cursor-pointer"
+              className="text-xs font-bold text-ui-600 bg-ui-50 border border-ui-200 rounded-xl px-3 py-2 focus:outline-none cursor-pointer"
               value={dateRange}
               onChange={(e) => setDateRange(e.target.value)}
             >
@@ -215,27 +215,27 @@ export default function AdminDashboard() {
         </div>
 
         {/* Quick Actions */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-100">
-          <p className="text-[9px] font-black tracking-[0.4em] uppercase text-slate-400 mb-1">Shortcuts</p>
-          <h2 className="font-serif text-xl italic text-slate-900 mb-5">Quick Actions</h2>
+        <div className="bg-white rounded-2xl p-6 border border-ui-100">
+          <p className="text-[9px] font-black tracking-[0.4em] uppercase text-ui-500 mb-1">Shortcuts</p>
+          <h2 className="font-serif text-xl italic text-ui-900 mb-5">Quick Actions</h2>
           <div className="space-y-2">
             {[
-              { label: 'Add New Product',  icon: 'ri-add-circle-line',  href: '/admin/products/new', accent: 'text-blue-500'  },
-              { label: 'Open POS System',  icon: 'ri-computer-line',    href: '/admin/pos',          accent: 'text-blue-500'   },
-              { label: 'Manage Orders',    icon: 'ri-file-list-line',   href: '/admin/orders',       accent: 'text-violet-500' },
-              { label: 'View Analytics',   icon: 'ri-bar-chart-line',   href: '/admin/analytics',    accent: 'text-emerald-500'},
-              { label: 'Store-wide Sale',  icon: 'ri-price-tag-2-line', href: '/admin/sales',        accent: 'text-rose-500'   },
+              { label: 'Add New Product',  icon: 'ri-add-circle-line',  href: '/admin/products/new', accent: 'text-brand-forest'  },
+              { label: 'Open POS System',  icon: 'ri-computer-line',    href: '/admin/pos',          accent: 'text-brand-forest'   },
+              { label: 'Manage Orders',    icon: 'ri-file-list-line',   href: '/admin/orders',       accent: 'text-brand-mid' },
+              { label: 'View Analytics',   icon: 'ri-bar-chart-line',   href: '/admin/analytics',    accent: 'text-brand-forest'},
+              { label: 'Store-wide Sale',  icon: 'ri-price-tag-2-line', href: '/admin/sales',        accent: 'text-red-600'   },
             ].map(action => (
               <Link
                 key={action.href}
                 href={action.href}
-                className="flex items-center justify-between px-4 py-3 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 transition-all group"
+                className="flex items-center justify-between px-4 py-3 rounded-xl bg-ui-50 hover:bg-ui-100 text-ui-800 transition-all group"
               >
                 <div className="flex items-center gap-3">
                   <i className={`${action.icon} text-base ${action.accent}`} />
                   <span className="text-sm font-semibold">{action.label}</span>
                 </div>
-                <i className="ri-arrow-right-line text-slate-300 group-hover:text-slate-600 group-hover:translate-x-0.5 transition-all text-sm" />
+                <i className="ri-arrow-right-line text-ui-300 group-hover:text-ui-600 group-hover:translate-x-0.5 transition-all text-sm" />
               </Link>
             ))}
           </div>

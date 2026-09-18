@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
     localPatterns: [
       { pathname: '/**', search: '' },
       { pathname: '/**', search: `?v=${PUBLIC_ASSET_VERSION}` },
+      { pathname: '/products/**', search: '' },
+      { pathname: '/products/**', search: `?v=${PUBLIC_ASSET_VERSION}` },
     ],
     remotePatterns: [
       {

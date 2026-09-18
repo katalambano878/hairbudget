@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import Image from 'next/image';
+import { productImageUnoptimized, resolveProductImageUrl } from '@/lib/product-image';
 
 const VIDEO_EXTENSIONS = ['.mov', '.mp4', '.webm', '.avi', '.m4v', '.ogg'];
 
@@ -60,7 +61,9 @@ export default function LazyImage({
     onLoad?.();
   }, [onLoad]);
 
-  const isVideo = src ? isVideoUrl(src) : false;
+  const resolvedSrc = useMemo(() => resolveProductImageUrl(src), [src]);
+  const unoptimized = useMemo(() => productImageUnoptimized(src), [src]);
+  const isVideo = resolvedSrc ? isVideoUrl(resolvedSrc) : false;
 
   // Lazy-mount the <video> only when it enters the viewport (with 200px lead).
   useEffect(() => {
@@ -100,7 +103,7 @@ export default function LazyImage({
       video.addEventListener('canplay', tryPlay, { once: true });
       return () => video.removeEventListener('canplay', tryPlay);
     }
-  }, [isVisible, src, autoPlay]);
+  }, [isVisible, resolvedSrc, autoPlay]);
 
   const handleTapPlay = useCallback(() => {
     const video = videoRef.current;
@@ -108,7 +111,7 @@ export default function LazyImage({
     video.play().then(() => setAutoplayFailed(false)).catch(() => {});
   }, []);
 
-  if (!src || (hasError && !isVideo)) {
+  if (!resolvedSrc || (hasError && !isVideo)) {
     return (
       <div
         className={`relative overflow-hidden bg-gray-200 flex items-center justify-center ${className}`}
@@ -144,7 +147,7 @@ export default function LazyImage({
         {isVisible && (
           <video
             ref={videoRef}
-            src={src}
+            src={resolvedSrc}
             muted
             autoPlay={autoPlay}
             loop
@@ -179,10 +182,11 @@ export default function LazyImage({
         <div className="absolute inset-0 bg-gray-200 animate-pulse z-10"></div>
       )}
       <Image
-        src={src}
+        src={resolvedSrc}
         alt={alt}
         fill
         sizes={sizes}
+        unoptimized={unoptimized}
         className={`object-cover transition-opacity duration-300 ${
           isLoaded ? 'opacity-100' : 'opacity-0'
         }`}

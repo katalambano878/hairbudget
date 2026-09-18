@@ -110,9 +110,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-slate-950 gap-3">
-        <div className="w-8 h-8 border-2 border-slate-700 border-t-blue-400 rounded-full animate-spin" />
-        <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-600">Loading Admin</p>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-brand-deep gap-3">
+        <div className="w-8 h-8 border-2 border-brand-cream/20 border-t-brand-gold rounded-full animate-spin" />
+        <p className="text-[9px] font-black tracking-[0.5em] uppercase text-brand-cream/60">Loading Admin</p>
       </div>
     );
   }
@@ -164,19 +164,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (pathname === '/admin/login') return <>{children}</>;
 
   return (
-    <div className="min-h-screen bg-[#f5f5f4]">
+    <div className="min-h-screen bg-ui-100">
 
       {/* Mobile overlay */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-30 lg:hidden"
+          className="fixed inset-0 bg-ui-950/60 backdrop-blur-sm z-30 lg:hidden"
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
 
       {/* ── SIDEBAR ──────────────────────────────────────── */}
       <aside className={`
-        fixed top-0 left-0 z-40 h-screen bg-slate-950 flex flex-col
+        fixed top-0 left-0 z-40 h-screen bg-brand-deep flex flex-col
         transition-all duration-300 w-64
         ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
         ${isSidebarOpen ? 'lg:w-64' : 'lg:w-0 lg:overflow-hidden'}
@@ -184,7 +184,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       `}>
 
         {/* Brand */}
-        <div className="flex items-center gap-3 px-5 py-5 border-b border-slate-800/60 flex-shrink-0">
+        <div className="flex items-center gap-3 px-5 py-5 border-b border-white/10 flex-shrink-0">
           <Link href="/admin" className="flex items-center gap-3 w-full min-w-0">
             <img
               src="/logo-light.png"
@@ -199,7 +199,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-5">
           {filteredSections.map((section) => (
             <div key={section.label}>
-              <p className="text-[8px] font-black tracking-[0.5em] uppercase text-slate-600 px-3 mb-2">
+              <p className="text-[8px] font-black tracking-[0.5em] uppercase text-brand-cream/45 px-3 mb-2">
                 {section.label}
               </p>
               <div className="space-y-0.5">
@@ -212,11 +212,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                       onClick={() => window.innerWidth < 1024 && setIsSidebarOpen(false)}
                       className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 cursor-pointer group ${
                         isActive
-                          ? 'bg-slate-800 text-white'
-                          : 'text-slate-500 hover:bg-slate-900 hover:text-slate-200'
+                          ? 'bg-white/12 text-brand-ivory'
+                          : 'text-brand-cream/75 hover:bg-white/8 hover:text-brand-ivory'
                       }`}
                     >
-                      <div className={`w-1 h-5 rounded-full flex-shrink-0 transition-all ${isActive ? 'bg-blue-400' : 'bg-transparent group-hover:bg-slate-700'}`} />
+                      <div className={`w-1 h-5 rounded-full flex-shrink-0 transition-all ${isActive ? 'bg-brand-gold' : 'bg-transparent group-hover:bg-brand-cream/30'}`} />
                       <i className={`${item.icon} text-base flex-shrink-0`} />
                       <span className="text-[13px] font-medium">{item.title}</span>
                     </Link>
@@ -228,12 +228,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </nav>
 
         {/* Bottom */}
-        <div className="flex-shrink-0 border-t border-slate-800/60 p-3 space-y-1">
+        <div className="flex-shrink-0 border-t border-white/10 p-3 space-y-1">
           <Link
             href="/"
             target="_blank"
             onClick={() => window.innerWidth < 1024 && setIsSidebarOpen(false)}
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-500 hover:bg-slate-900 hover:text-slate-200 transition-all cursor-pointer"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-brand-cream/75 hover:bg-white/8 hover:text-brand-ivory transition-all cursor-pointer"
           >
             <div className="w-1 h-5 rounded-full flex-shrink-0" />
             <i className="ri-external-link-line text-base flex-shrink-0" />
@@ -242,17 +242,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
           {/* User card */}
           <div className="flex items-center gap-3 px-3 py-2.5">
-            <div className="w-7 h-7 rounded-lg bg-blue-500 flex items-center justify-center flex-shrink-0 text-slate-950 font-black text-xs">
+            <div className="w-7 h-7 rounded-lg bg-brand-gold flex items-center justify-center flex-shrink-0 text-brand-deep font-black text-xs">
               {user?.email?.charAt(0).toUpperCase() || 'A'}
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-[11px] font-bold text-slate-300 capitalize">{userRole || 'Admin'}</p>
-              <p className="text-[10px] text-slate-600 truncate">{user?.email}</p>
+              <p className="text-[11px] font-bold text-brand-ivory capitalize">{userRole || 'Admin'}</p>
+              <p className="text-[10px] text-brand-cream/55 truncate">{user?.email}</p>
             </div>
             <button
               onClick={handleLogout}
               title="Logout"
-              className="text-slate-600 hover:text-red-400 transition-colors flex-shrink-0 cursor-pointer"
+              className="text-brand-cream/50 hover:text-red-300 transition-colors flex-shrink-0 cursor-pointer"
             >
               <i className="ri-logout-box-line text-base" />
             </button>
@@ -264,13 +264,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <div className={`transition-all duration-300 ml-0 ${isSidebarOpen ? 'lg:ml-64' : 'lg:ml-0'}`}>
 
         {/* Header */}
-        <header className="bg-white border-b border-slate-200 sticky top-0 z-30">
+        <header className="bg-white border-b border-ui-200 sticky top-0 z-30">
           <div className="px-4 lg:px-6 py-3 flex items-center justify-between">
 
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                className="w-9 h-9 flex items-center justify-center rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all cursor-pointer"
+                className="w-9 h-9 flex items-center justify-center rounded-xl text-ui-500 hover:text-ui-900 hover:bg-ui-100 transition-all cursor-pointer"
               >
                 <i className={`${isSidebarOpen ? 'ri-menu-fold-line' : 'ri-menu-unfold-line'} text-lg`} />
               </button>
@@ -279,8 +279,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 href="/admin/sales"
                 className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold tracking-wide border transition-all ${
                   pathname === '/admin/sales'
-                    ? 'bg-blue-500 text-slate-950 border-blue-500'
-                    : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
+                    ? 'bg-brand-forest text-brand-ivory border-brand-forest'
+                    : 'bg-white text-ui-700 border-ui-200 hover:bg-ui-50'
                 }`}
                 title="Store-wide sale pricing"
               >
@@ -291,31 +291,31 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </div>
 
             <div className="flex items-center gap-2">
-              <button className="relative w-9 h-9 flex items-center justify-center rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all cursor-pointer">
+              <button className="relative w-9 h-9 flex items-center justify-center rounded-xl text-ui-500 hover:text-ui-900 hover:bg-ui-100 transition-all cursor-pointer">
                 <i className="ri-notification-3-line text-lg" />
-                <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-blue-500 rounded-full" />
+                <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-brand-gold rounded-full" />
               </button>
 
               <div className="relative user-menu-container">
                 <button
                   onClick={() => setShowUserMenu(!showUserMenu)}
-                  className="flex items-center gap-2 px-2 py-1.5 hover:bg-slate-100 rounded-xl transition-all cursor-pointer"
+                  className="flex items-center gap-2 px-2 py-1.5 hover:bg-ui-100 rounded-xl transition-all cursor-pointer"
                 >
-                  <div className="w-7 h-7 rounded-lg bg-slate-950 text-blue-400 flex items-center justify-center font-black text-xs flex-shrink-0">
+                  <div className="w-7 h-7 rounded-lg bg-brand-deep text-brand-gold flex items-center justify-center font-black text-xs flex-shrink-0">
                     {user?.email?.charAt(0).toUpperCase() || 'A'}
                   </div>
                   <div className="hidden md:block text-left">
-                    <p className="text-xs font-bold text-slate-900 capitalize">{userRole || 'Admin'}</p>
-                    <p className="text-[10px] text-slate-400 max-w-[90px] truncate">{user?.email}</p>
+                    <p className="text-xs font-bold text-ui-900 capitalize">{userRole || 'Admin'}</p>
+                    <p className="text-[10px] text-ui-500 max-w-[90px] truncate">{user?.email}</p>
                   </div>
-                  <i className="ri-arrow-down-s-line text-slate-400 text-sm" />
+                  <i className="ri-arrow-down-s-line text-ui-400 text-sm" />
                 </button>
 
                 {showUserMenu && (
-                  <div className="absolute right-0 mt-2 w-52 bg-white border border-slate-200 rounded-2xl shadow-xl overflow-hidden z-20">
-                    <div className="px-4 py-3 border-b border-slate-100">
-                      <p className="text-xs font-bold text-slate-900">{user?.email}</p>
-                      <p className="text-[10px] text-slate-400 capitalize mt-0.5">{userRole}</p>
+                  <div className="absolute right-0 mt-2 w-52 bg-white border border-ui-200 rounded-2xl shadow-xl overflow-hidden z-20">
+                    <div className="px-4 py-3 border-b border-ui-100">
+                      <p className="text-xs font-bold text-ui-900">{user?.email}</p>
+                      <p className="text-[10px] text-ui-500 capitalize mt-0.5">{userRole}</p>
                     </div>
                     <button
                       onClick={handleLogout}

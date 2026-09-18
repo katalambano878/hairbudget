@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { isVideoUrl } from '@/components/LazyImage';
+import { productImageUnoptimized, resolveProductImageUrl } from '@/lib/product-image';
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { cachedQuery } from '@/lib/query-cache';
@@ -99,7 +100,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
 
         const transformedProduct = {
           ...productData,
-          images: productData.product_images?.sort((a: any, b: any) => a.position - b.position).map((img: any) => img.url) || [],
+          images: productData.product_images?.sort((a: any, b: any) => a.position - b.position).map((img: any) => resolveProductImageUrl(img.url)) || [],
           category: productData.categories?.name || 'Shop',
           rating: productData.rating_avg || 0,
           reviewCount: 0,
@@ -361,6 +362,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
                       src={product.images[selectedImage]}
                       alt={product.name}
                       fill
+                      unoptimized={productImageUnoptimized(product.images[selectedImage])}
                       className="object-cover object-center transition-transform duration-[1500ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.04]"
                       sizes="(max-width: 1024px) 100vw, 55vw"
                       priority
@@ -429,6 +431,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
                               src={image}
                               alt={`${product.name} view ${index + 1}`}
                               fill
+                              unoptimized={productImageUnoptimized(image)}
                               className="object-cover object-center"
                               sizes="(max-width: 1024px) 20vw, 10vw"
                               quality={60}

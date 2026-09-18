@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { productImageUnoptimized, resolveProductImageUrl } from '@/lib/product-image';
 import { useState } from 'react';
 import PageHero from '@/components/PageHero';
 import CartCountdown from '@/components/CartCountdown';
@@ -127,9 +128,10 @@ export default function CartPage() {
                       className="relative w-full sm:w-28 h-40 sm:h-28 flex-shrink-0 bg-slate-50 overflow-hidden rounded-xl"
                     >
                       <Image
-                        src={item.image}
+                        src={resolveProductImageUrl(item.image)}
                         alt={item.name}
                         fill
+                        unoptimized={productImageUnoptimized(item.image)}
                         className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                         sizes="(max-width: 640px) 100vw, 112px"
                         quality={70}
@@ -214,7 +216,7 @@ export default function CartPage() {
                     {savedItems.map((item) => (
                       <div key={item.id} className="flex gap-4 py-5">
                         <div className="relative w-16 h-16 flex-shrink-0 bg-slate-50 rounded-xl overflow-hidden">
-                          <Image src={item.image} alt={item.name} fill className="object-cover object-top" sizes="64px" quality={60} />
+                          <Image src={resolveProductImageUrl(item.image)} alt={item.name} fill unoptimized={productImageUnoptimized(item.image)} className="object-cover object-top" sizes="64px" quality={60} />
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="font-semibold text-slate-900 text-sm line-clamp-1">{item.name}</p>
