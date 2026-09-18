@@ -132,8 +132,10 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       success: true,
-      status: 'processing',
-      payment_status: 'paid',
+      status: orderJson?.status ?? 'processing',
+      payment_status: orderJson?.payment_status ?? 'paid',
+      amount_paid: orderJson?.amount_paid ?? null,
+      balance_due: orderJson?.balance_due ?? null,
       message: 'Payment verified and order updated',
     });
   } catch (error: unknown) {

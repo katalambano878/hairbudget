@@ -13,6 +13,12 @@ import {
   parseStorePricingValue,
   resolveCartLineUnitPrice,
 } from '@/lib/pricing';
+import {
+  amountDueAtCheckout,
+  formatGhs,
+  roundMoney,
+  type PaymentPlan,
+} from '@/lib/payments';
 
 // Comprehensive Ghana regions → major cities / towns.
 // "Other (not listed)" lets shoppers type a town that isn't in the list.
@@ -132,6 +138,7 @@ export default function CheckoutPage() {
 
   const [deliveryMethod, setDeliveryMethod] = useState('pickup');
   const [paymentMethod, setPaymentMethod] = useState('moolre');
+  const [paymentPlan, setPaymentPlan] = useState<PaymentPlan>('full');
   const [errors, setErrors] = useState<any>({});
 
 
@@ -168,6 +175,8 @@ export default function CheckoutPage() {
   const shippingCost = 0; // Delivery options temporarily disabled
   const tax = 0; // No Tax
   const total = subtotal + shippingCost + tax;
+  const dueNow = amountDueAtCheckout(total, paymentPlan);
+  const balanceAfterDeposit = roundMoney(total - dueNow);
 
   const validateShipping = () => {
     const newErrors: any = {};
@@ -297,6 +306,9 @@ export default function CheckoutPage() {
 
       const checkoutSubtotal = computedSubtotal;
       const checkoutTotal = checkoutSubtotal + shippingCost + tax;
+      // Charged for this attempt. The payment routes verify against
+      // metadata.payable_now, so the deposit must be recorded there.
+      const checkoutPayableNow = amountDueAtCheckout(checkoutTotal, paymentPlan);
 
       // 1. Create Order (totals from DB-resolved prices)
       const { data: order, error: orderError } = await supabase
@@ -317,6 +329,7 @@ export default function CheckoutPage() {
             total: checkoutTotal,
             shipping_method: deliveryMethod,
             payment_method: paymentMethod,
+            payment_plan: paymentPlan,
             shipping_address: shippingAddressForOrder,
             billing_address: shippingAddressForOrder,
             metadata: {
@@ -324,6 +337,7 @@ export default function CheckoutPage() {
               first_name: shippingData.firstName,
               last_name: shippingData.lastName,
               tracking_number: trackingNumber,
+              payable_now: checkoutPayableNow,
             },
           },
         ])
@@ -367,7 +381,7 @@ export default function CheckoutPage() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               orderId: orderNumber,
-              amount: checkoutTotal,
+              amount: checkoutPayableNow,
               customerEmail: shippingData.email
             })
           });
@@ -760,6 +774,72 @@ export default function CheckoutPage() {
                   </div>
 
                   <div className="mt-8">
+                    <h3 className="text-lg font-bold text-gray-900 mb-1">How much to pay now</h3>
+                    <p className="text-sm text-gray-600 mb-4">
+                      Pay the whole order today, or half now and the rest when you get your hair.
+                    </p>
+                    <div className="space-y-3">
+                      <label
+                        className={`flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition-colors ${
+                          paymentPlan === 'full' ? 'border-brand-forest bg-brand-cream/40' : 'border-gray-300 hover:border-gray-400'
+                        }`}
+                      >
+                        <div className="flex items-center space-x-4">
+                          <input
+                            type="radio"
+                            name="paymentPlan"
+                            value="full"
+                            checked={paymentPlan === 'full'}
+                            onChange={() => setPaymentPlan('full')}
+                            className="w-5 h-5 text-brand-forest"
+                          />
+                          <div>
+                            <p className="font-semibold text-gray-900">Pay in full</p>
+                            <p className="text-sm text-gray-600">Settle the whole order now — nothing left to pay.</p>
+                          </div>
+                        </div>
+                        <p className="font-bold text-gray-900 whitespace-nowrap">{formatGhs(total)}</p>
+                      </label>
+
+                      <label
+                        className={`flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition-colors ${
+                          paymentPlan === 'half' ? 'border-brand-forest bg-brand-cream/40' : 'border-gray-300 hover:border-gray-400'
+                        }`}
+                      >
+                        <div className="flex items-center space-x-4">
+                          <input
+                            type="radio"
+                            name="paymentPlan"
+                            value="half"
+                            checked={paymentPlan === 'half'}
+                            onChange={() => setPaymentPlan('half')}
+                            className="w-5 h-5 text-brand-forest"
+                          />
+                          <div>
+                            <p className="font-semibold text-gray-900">Pay half now</p>
+                            <p className="text-sm text-gray-600">
+                              Balance of {formatGhs(balanceAfterDeposit)} on delivery, or online any time.
+                            </p>
+                          </div>
+                        </div>
+                        <p className="font-bold text-gray-900 whitespace-nowrap">{formatGhs(amountDueAtCheckout(total, 'half'))}</p>
+                      </label>
+                    </div>
+
+                    {paymentPlan === 'half' && (
+                      <div className="mt-3 flex items-start gap-3 rounded-lg border border-brand-gold/50 bg-brand-ivory/60 p-4">
+                        <i className="ri-information-line text-brand-forest text-lg mt-0.5" />
+                        <p className="text-sm text-brand-ink/80">
+                          You&apos;ll pay <span className="font-bold">{formatGhs(dueNow)}</span> today and your items are
+                          reserved straight away. The remaining{' '}
+                          <span className="font-bold">{formatGhs(balanceAfterDeposit)}</span> can be paid on delivery, or
+                          any time from the <span className="font-semibold">Pay Balance</span> page using your order number.
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="mt-8">
                     <h3 className="text-lg font-bold text-gray-900 mb-4">Payment method</h3>
                     <div className="space-y-3">
                       <label
@@ -830,9 +910,9 @@ export default function CheckoutPage() {
                           Processing...
                         </>
                       ) : paymentMethod === 'paystack' ? (
-                        'Pay with Card'
+                        `Pay ${formatGhs(dueNow)} with Card`
                       ) : (
-                        'Pay with Mobile Money'
+                        `Pay ${formatGhs(dueNow)} with Mobile Money`
                       )}
                     </button>
                   </div>
@@ -858,6 +938,8 @@ export default function CheckoutPage() {
                   ? `GH₵ ${total.toFixed(2)} + delivery`
                   : undefined
               }
+              dueNow={dueNow}
+              balanceDue={balanceAfterDeposit}
             />
           </div>
         </div>

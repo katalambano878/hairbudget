@@ -4,12 +4,17 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import ProductSalesStats from './ProductSalesStats';
+import { isConfirmedPayment } from '@/lib/payments';
 
 interface Order {
   id: string;
   order_number: string;
   email: string;
   total: number;
+  amount_paid?: number;
+  /** Generated column: total - amount_paid, never negative. */
+  balance_due?: number;
+  payment_plan?: 'full' | 'half';
   status: string;
   payment_status: string;
   payment_method: string;
@@ -74,6 +79,9 @@ export default function AdminOrdersPage() {
           order_number,
           email,
           total,
+          amount_paid,
+          balance_due,
+          payment_plan,
           status,
           payment_status,
           payment_method,
@@ -102,9 +110,10 @@ export default function AdminOrdersPage() {
       });
       setAvailableProducts(Array.from(productNames).sort());
 
-      // Separate confirmed (paid) from abandoned (pending payment)
-      const confirmedOrders = ordersData?.filter(o => o.payment_status === 'paid') || [];
-      const abandonedOrders = ordersData?.filter(o => o.payment_status !== 'paid') || [];
+      // A deposit is a real, fulfillable order: it reserved stock and only the
+      // balance is outstanding, so it belongs with confirmed rather than abandoned.
+      const confirmedOrders = ordersData?.filter(o => isConfirmedPayment(o.payment_status)) || [];
+      const abandonedOrders = ordersData?.filter(o => !isConfirmedPayment(o.payment_status)) || [];
       
       setConfirmedCount(confirmedOrders.length);
       setAbandonedCount(abandonedOrders.length);
@@ -312,7 +321,7 @@ export default function AdminOrdersPage() {
     const orderId = (order.order_number || order.id).toLowerCase();
 
     // First filter by view tab (confirmed vs abandoned)
-    const isConfirmed = order.payment_status === 'paid';
+    const isConfirmed = isConfirmedPayment(order.payment_status);
     const matchesViewTab = orderViewTab === 'confirmed' ? isConfirmed : !isConfirmed;
 
     const matchesSearch = orderId.includes(searchQuery.toLowerCase()) ||
@@ -579,10 +588,20 @@ export default function AdminOrdersPage() {
                     </td>
                     <td className="py-4 px-4 text-gray-700 text-sm whitespace-nowrap">{formatDate(order.created_at)}</td>
                     <td className="py-4 px-4 text-gray-700">{getItemCount(order)}</td>
-                    <td className="py-4 px-4 font-semibold text-gray-900 whitespace-nowrap">GH₵ {order.total?.toFixed(2) || '0.00'}</td>
+                    <td className="py-4 px-4 whitespace-nowrap">
+                      <p className="font-semibold text-gray-900">GH₵ {order.total?.toFixed(2) || '0.00'}</p>
+                      {Number(order.balance_due) > 0.005 && order.payment_status === 'partially_paid' && (
+                        <p className="text-xs text-amber-700 mt-0.5">
+                          GH₵ {Number(order.balance_due).toFixed(2)} owing
+                        </p>
+                      )}
+                    </td>
                     <td className="py-4 px-4 text-sm whitespace-nowrap">
                       <div className="flex flex-col">
                         <span className="text-gray-700">{order.payment_method || 'N/A'}</span>
+                        {order.payment_status === 'partially_paid' && (
+                          <span className="text-xs mt-1 font-semibold text-amber-700">Half paid</span>
+                        )}
                         {orderViewTab === 'abandoned' && (
                           <span className={`text-xs mt-1 ${order.payment_status === 'failed' ? 'text-red-600' : 'text-blue-600'}`}>
                             {order.payment_status === 'failed' ? 'Failed' : 'Pending'}

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-admin';
 import { checkRateLimit, getClientIdentifier, RATE_LIMITS } from '@/lib/rate-limit';
+import { resolveChargeAmount } from '@/lib/payments';
 
 /**
  * Initialize Paystack checkout. Amount and reference are derived server-side
@@ -33,7 +34,7 @@ export async function POST(req: Request) {
     const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(orderId);
     const query = supabaseAdmin
       .from('orders')
-      .select('id, order_number, total, email, phone, payment_status, metadata, payment_method');
+      .select('id, order_number, total, amount_paid, email, phone, payment_status, metadata, payment_method');
 
     const { data: order, error: orderError } = isUUID
       ? await query.eq('id', orderId).single()
@@ -55,11 +56,19 @@ export async function POST(req: Request) {
       );
     }
 
-    const payableNow = Number(order.metadata?.payable_now);
-    const amountGhs =
-      Number.isFinite(payableNow) && payableNow > 0 ? payableNow : Number(order.total);
+    // Deposit on the first attempt, outstanding balance on later ones.
+    const amountGhs = resolveChargeAmount(order);
     if (!amountGhs || amountGhs <= 0) {
       return NextResponse.json({ success: false, message: 'Invalid order amount' }, { status: 400 });
+    }
+
+    // The callback, webhook and verify routes all check the amount Paystack
+    // reports against metadata.payable_now, so it has to describe this attempt.
+    if (Number(order.metadata?.payable_now) !== amountGhs) {
+      await supabaseAdmin
+        .from('orders')
+        .update({ metadata: { ...(order.metadata || {}), payable_now: amountGhs } })
+        .eq('id', order.id);
     }
 
     const orderRef = order.order_number || orderId;

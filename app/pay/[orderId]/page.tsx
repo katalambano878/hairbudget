@@ -5,6 +5,8 @@ import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { usePageTitle } from '@/hooks/usePageTitle';
+import { BRAND } from '@/lib/brand';
+import { formatGhs, outstandingBalance } from '@/lib/payments';
 
 export default function PaymentPage() {
   usePageTitle('Complete Payment');
@@ -63,12 +65,14 @@ export default function PaymentPage() {
     setError(null);
 
     try {
-      const paymentRes = await fetch('/api/payment/moolre', {
+      // The amount is resolved server-side from the order ledger so a
+      // part-paid order is charged its balance, not the full total again.
+      const endpoint = order.payment_method === 'paystack' ? '/api/payment/paystack' : '/api/payment/moolre';
+      const paymentRes = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           orderId: order.order_number,
-          amount: order.total,
           customerEmail: order.email
         })
       });
@@ -79,7 +83,6 @@ export default function PaymentPage() {
         throw new Error(paymentResult.message || 'Payment initialization failed');
       }
 
-      // Redirect to Moolre payment page
       window.location.href = paymentResult.url;
 
     } catch (err: any) {
@@ -123,6 +126,8 @@ export default function PaymentPage() {
 
   const shippingAddress = order?.shipping_address || {};
   const customerName = order?.metadata?.first_name || shippingAddress.firstName || 'Customer';
+  const amountPaid = Number(order?.amount_paid) || 0;
+  const balanceDue = order ? outstandingBalance(order) : 0;
 
   return (
     <main className="min-h-screen bg-white py-12 px-4">
@@ -130,7 +135,7 @@ export default function PaymentPage() {
         {/* Header */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-block mb-6">
-            <span className="text-2xl font-['Pacifico'] text-blue-700">MultiMey</span>
+            <span className="font-serif text-2xl text-brand-forest">{BRAND.name}</span>
           </Link>
           <h1 className="text-2xl font-bold text-gray-900">Complete Your Payment</h1>
           <p className="text-gray-600 mt-2">Hi {customerName}, your order is waiting for payment.</p>
@@ -161,8 +166,22 @@ export default function PaymentPage() {
           </div>
 
           <div className="flex justify-between items-center pt-4 border-t border-gray-200">
-            <span className="text-lg font-semibold text-gray-900">Total</span>
-            <span className="text-2xl font-bold text-blue-700">GH₵ {order?.total?.toFixed(2)}</span>
+            <span className="text-gray-700">Order total</span>
+            <span className="font-semibold text-gray-900">{formatGhs(Number(order?.total) || 0)}</span>
+          </div>
+
+          {amountPaid > 0.005 && (
+            <div className="flex justify-between items-center mt-2">
+              <span className="text-gray-700">Already paid</span>
+              <span className="font-semibold text-brand-forest">{formatGhs(amountPaid)}</span>
+            </div>
+          )}
+
+          <div className="flex justify-between items-center mt-3 pt-3 border-t border-gray-200">
+            <span className="text-lg font-semibold text-gray-900">
+              {amountPaid > 0.005 ? 'Balance due' : 'Amount due'}
+            </span>
+            <span className="text-2xl font-bold text-brand-forest">{formatGhs(balanceDue)}</span>
           </div>
         </div>
 
@@ -205,7 +224,7 @@ export default function PaymentPage() {
         <button
           onClick={handlePayNow}
           disabled={processing}
-          className="w-full bg-blue-700 hover:bg-blue-800 text-white py-4 rounded-xl font-semibold text-lg transition-colors disabled:opacity-70 flex items-center justify-center cursor-pointer"
+          className="w-full bg-brand-forest hover:bg-brand-deep text-brand-ivory py-4 rounded-xl font-semibold text-lg transition-colors disabled:opacity-70 flex items-center justify-center cursor-pointer"
         >
           {processing ? (
             <>
@@ -218,7 +237,7 @@ export default function PaymentPage() {
           ) : (
             <>
               <i className="ri-secure-payment-line mr-2"></i>
-              Pay GH₵ {order?.total?.toFixed(2)} with Mobile Money
+              Pay {formatGhs(balanceDue)}
             </>
           )}
         </button>
@@ -227,7 +246,7 @@ export default function PaymentPage() {
         <div className="mt-6 text-center">
           <p className="text-xs text-gray-500 flex items-center justify-center">
             <i className="ri-lock-line mr-1"></i>
-            Secure payment powered by Moolre
+            Secure payment powered by {order?.payment_method === 'paystack' ? 'Paystack' : 'Moolre'}
           </p>
         </div>
 

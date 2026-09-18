@@ -22,6 +22,9 @@ interface OrderSummaryProps {
   shippingLabel?: string;
   /** Optional override for the total cell — e.g. when shipping is TBD. */
   totalLabel?: string;
+  /** Set when the shopper opted to pay a deposit rather than the full total. */
+  dueNow?: number;
+  balanceDue?: number;
 }
 
 export default function OrderSummary({
@@ -32,7 +35,10 @@ export default function OrderSummary({
   total,
   shippingLabel,
   totalLabel,
+  dueNow,
+  balanceDue,
 }: OrderSummaryProps) {
+  const showDeposit = typeof dueNow === 'number' && typeof balanceDue === 'number' && balanceDue > 0.005;
   return (
     <div className="bg-white rounded-xl shadow-sm p-6 sticky top-4">
       <h2 className="text-xl font-bold text-gray-900 mb-6">Order Summary</h2>
@@ -90,6 +96,19 @@ export default function OrderSummary({
           </p>
         )}
       </div>
+
+      {showDeposit && (
+        <div className="border-t border-gray-200 mt-4 pt-4 space-y-2">
+          <div className="flex justify-between items-center">
+            <span className="text-sm font-bold text-gray-900">Paying now</span>
+            <span className="text-lg font-bold text-brand-forest">GH₵ {dueNow!.toFixed(2)}</span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-sm text-gray-600">Balance later</span>
+            <span className="font-semibold text-gray-700">GH₵ {balanceDue!.toFixed(2)}</span>
+          </div>
+        </div>
+      )}
 
       <div className="mt-6 p-4 bg-slate-50 border border-slate-200 rounded-lg">
         <div className="flex items-center space-x-2 text-slate-800">

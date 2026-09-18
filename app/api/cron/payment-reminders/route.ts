@@ -22,10 +22,13 @@ export async function GET(request: Request) {
     // 3. Haven't had a reminder sent yet
     const fifteenMinutesAgo = new Date(Date.now() - 15 * 60 * 1000).toISOString();
 
+    // Only genuinely unpaid checkouts. An order on the half-payment plan has
+    // already paid its deposit and agreed to settle the rest later, so chasing
+    // it 15 minutes in would be wrong.
     const { data: pendingOrders, error } = await supabase
       .from('orders')
-      .select('id, order_number, email, phone, total, shipping_address, metadata')
-      .neq('payment_status', 'paid')
+      .select('id, order_number, email, phone, total, amount_paid, shipping_address, metadata')
+      .in('payment_status', ['pending', 'failed'])
       .eq('payment_reminder_sent', false)
       .lt('created_at', fifteenMinutesAgo)
       .order('created_at', { ascending: true })

@@ -37,6 +37,7 @@ export default function Footer() {
       links: [
         { href: '/contact', label: 'Contact' },
         { href: '/order-tracking', label: 'Track Order' },
+        { href: '/pay', label: 'Pay Balance' },
         { href: '/shipping', label: 'Shipping' },
         { href: '/returns', label: 'Returns' },
       ],

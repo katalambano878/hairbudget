@@ -88,6 +88,7 @@ export async function POST(req: Request) {
 
         let moolreApiVerified = false;
         let paidAmountFromApi: number | null = null;
+        let moolreTxRef: string | null = null;
 
         try {
             const checkResponse = await fetch('https://api.moolre.com/embed/status', {
@@ -111,6 +112,12 @@ export async function POST(req: Request) {
                     statusStr === 'successful' ||
                     statusStr === 'completed' ||
                     statusStr === 'paid');
+
+            moolreTxRef =
+                checkResult.data?.txref ||
+                checkResult.data?.reference ||
+                checkResult.data?.transactionid ||
+                null;
 
             if (moolreApiVerified && checkResult.data?.amount) {
                 paidAmountFromApi = parseFloat(checkResult.data.amount);
@@ -145,9 +152,12 @@ export async function POST(req: Request) {
 
         console.log('[Verify] Marking order paid via moolre-api for:', orderNumber);
 
+        // The reference must identify this transaction: mark_order_paid credits
+        // each reference once, so a fixed string would silently swallow the
+        // balance payment on a half-paid order.
         const { data: orderJson, error: updateError } = await supabaseAdmin.rpc('mark_order_paid', {
             order_ref: orderNumber,
-            moolre_ref: 'moolre-api-verify',
+            moolre_ref: String(moolreTxRef || normalizedExternalRef || `moolre-api-verify-${Date.now()}`),
         });
 
         if (updateError) {
@@ -168,8 +178,10 @@ export async function POST(req: Request) {
 
         return NextResponse.json({
             success: true,
-            status: 'processing',
-            payment_status: 'paid',
+            status: orderJson?.status ?? 'processing',
+            payment_status: orderJson?.payment_status ?? 'paid',
+            amount_paid: orderJson?.amount_paid ?? null,
+            balance_due: orderJson?.balance_due ?? null,
             message: 'Payment verified and order updated',
         });
     } catch (error: any) {

@@ -176,6 +176,7 @@ const RULES: Record<string, TableRule> = {
 const RPC_RULES: Record<string, CallerRole[]> = {
     upsert_customer_from_order: ['anon', 'user', 'staff'],
     mark_order_paid: ['staff'],
+    record_manual_payment: ['staff'],
     get_all_customer_emails: ['staff'],
     get_all_customer_phones: ['staff'],
     reduce_stock_on_order: ['staff'],

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/lib/supabase';
 import FraudDetectionAlert from '@/components/FraudDetectionAlert';
+import { outstandingBalance } from '@/lib/payments';
 
 interface OrderDetailClientProps {
   orderId: string;
@@ -24,6 +25,13 @@ export default function OrderDetailClient({ orderId }: OrderDetailClientProps) {
   const [trackingNumber, setTrackingNumber] = useState('');
   const [adminNotes, setAdminNotes] = useState('');
   const [statusUpdating, setStatusUpdating] = useState(false);
+  const [manualAmount, setManualAmount] = useState('');
+  const [recordingPayment, setRecordingPayment] = useState(false);
+
+  const amountPaid = Number(order?.amount_paid) || 0;
+  const balanceDue = order ? outstandingBalance(order) : 0;
+  const paymentLedger: { amount: number; reference?: string; method?: string; note?: string; at?: string }[] =
+    Array.isArray(order?.metadata?.payments) ? order.metadata.payments : [];
 
   const handlePrint = () => {
     window.print();
@@ -219,6 +227,11 @@ export default function OrderDetailClient({ orderId }: OrderDetailClientProps) {
 
       if (payload.success && payload.payment_status === 'paid') {
         alert(`Verified with ${isPaystack ? 'Paystack' : 'Moolre'} — order marked as paid.`);
+      } else if (payload.success && payload.payment_status === 'partially_paid') {
+        alert(
+          `Verified with ${isPaystack ? 'Paystack' : 'Moolre'} — deposit received. ` +
+          `Balance outstanding: GH₵ ${Number(payload.balance_due ?? 0).toFixed(2)}.`
+        );
       } else {
         alert(payload.message || 'Could not verify payment yet. Try again in a moment.');
       }
@@ -228,6 +241,40 @@ export default function OrderDetailClient({ orderId }: OrderDetailClientProps) {
       alert(err instanceof Error ? err.message : 'Reconcile failed');
     } finally {
       setReconciling(false);
+    }
+  };
+
+  const handleRecordPayment = async () => {
+    if (!order) return;
+
+    const typed = manualAmount.trim();
+    const amount = typed === '' ? balanceDue : Number(typed);
+
+    if (!Number.isFinite(amount) || amount <= 0) {
+      alert('Enter a payment amount greater than zero.');
+      return;
+    }
+    if (amount > balanceDue + 0.005) {
+      alert(`That is more than the outstanding balance of GH₵ ${balanceDue.toFixed(2)}.`);
+      return;
+    }
+    if (!confirm(`Record GH₵ ${amount.toFixed(2)} as received for ${order.order_number}?`)) return;
+
+    try {
+      setRecordingPayment(true);
+      const { error: rpcError } = await supabase.rpc('record_manual_payment', {
+        order_ref: order.order_number,
+        amount,
+        note: 'Collected by staff',
+      });
+      if (rpcError) throw rpcError;
+
+      setManualAmount('');
+      await fetchOrderDetails();
+    } catch (err: unknown) {
+      alert(err instanceof Error ? err.message : 'Could not record the payment.');
+    } finally {
+      setRecordingPayment(false);
     }
   };
 
@@ -303,7 +350,13 @@ export default function OrderDetailClient({ orderId }: OrderDetailClientProps) {
   // Derive timeline from status (simplified logic as we don't have full history table joined here yet)
   const timeline = [
     { status: 'Order Placed', date: new Date(order.created_at).toLocaleString(), completed: true },
-    { status: 'Payment', date: order.payment_status, completed: order.payment_status === 'paid' },
+    {
+      status: 'Payment',
+      date: order.payment_status === 'partially_paid'
+        ? `half paid — GH₵ ${balanceDue.toFixed(2)} due`
+        : order.payment_status,
+      completed: order.payment_status === 'paid' || order.payment_status === 'partially_paid',
+    },
     { status: 'Processing', date: '', completed: ['processing', 'shipped', 'delivered'].includes(order.status) },
     { status: 'Packaged', date: '', completed: ['shipped', 'delivered'].includes(order.status) },
     { status: 'Delivered', date: '', completed: order.status === 'delivered' }
@@ -478,6 +531,20 @@ export default function OrderDetailClient({ orderId }: OrderDetailClientProps) {
                   <span>Total</span>
                   <span>GH₵ {order.total?.toFixed(2)}</span>
                 </div>
+
+                {amountPaid > 0.005 && (
+                  <div className="flex justify-between text-gray-700">
+                    <span>Paid so far{order.payment_plan === 'half' ? ' (half payment)' : ''}</span>
+                    <span className="font-semibold text-emerald-700">GH₵ {amountPaid.toFixed(2)}</span>
+                  </div>
+                )}
+
+                {balanceDue > 0.005 && (
+                  <div className="flex justify-between text-lg font-bold text-amber-700">
+                    <span>Balance due</span>
+                    <span>GH₵ {balanceDue.toFixed(2)}</span>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -607,7 +674,65 @@ export default function OrderDetailClient({ orderId }: OrderDetailClientProps) {
                     {order.metadata?.moolre_reference || order.payment_transaction_id || 'N/A'}
                   </span>
                 </div>
+
+                {balanceDue > 0.005 && (
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Balance due</span>
+                    <span className="font-bold text-amber-700">GH₵ {balanceDue.toFixed(2)}</span>
+                  </div>
+                )}
               </div>
+
+              {paymentLedger.length > 0 && (
+                <div className="mt-4 pt-4 border-t border-gray-100">
+                  <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Payments received</p>
+                  <ul className="space-y-2">
+                    {paymentLedger.map((entry, i) => (
+                      <li key={i} className="flex items-start justify-between gap-3 text-sm">
+                        <div className="min-w-0">
+                          <p className="font-semibold text-gray-900">GH₵ {Number(entry.amount).toFixed(2)}</p>
+                          <p className="text-xs text-gray-500 truncate">
+                            {entry.method === 'manual' ? entry.note || 'Collected manually' : entry.reference}
+                          </p>
+                        </div>
+                        <span className="text-xs text-gray-400 whitespace-nowrap">
+                          {entry.at ? new Date(entry.at).toLocaleDateString() : ''}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {balanceDue > 0.005 && order.payment_status !== 'refunded' && (
+                <div className="mt-4 pt-4 border-t border-gray-100">
+                  <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">
+                    Record a payment you collected
+                  </p>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="number"
+                      min="0.01"
+                      step="0.01"
+                      value={manualAmount}
+                      onChange={(e) => setManualAmount(e.target.value)}
+                      placeholder={balanceDue.toFixed(2)}
+                      className="flex-1 min-w-0 px-3 py-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-gray-900"
+                    />
+                    <button
+                      onClick={handleRecordPayment}
+                      disabled={recordingPayment}
+                      className="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold transition-colors disabled:opacity-50 whitespace-nowrap cursor-pointer"
+                    >
+                      {recordingPayment ? 'Saving…' : 'Record'}
+                    </button>
+                  </div>
+                  <p className="mt-2 text-xs text-gray-500 leading-relaxed">
+                    Use this for cash or mobile money taken on delivery. Leave the amount blank to record
+                    the full balance of GH₵ {balanceDue.toFixed(2)}.
+                  </p>
+                </div>
+              )}
 
               {['moolre', 'paystack'].includes(String(order.payment_method)) &&
                 order.payment_status !== 'paid' &&

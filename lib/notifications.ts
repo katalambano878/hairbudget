@@ -187,6 +187,14 @@ export async function sendOrderConfirmation(order: any) {
 
     const baseUrl = (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000').replace(/\/+$/, '');
 
+    // Half-payment orders: tell the customer what they paid and what is left,
+    // otherwise "Order Confirmed" reads as if nothing more is owed.
+    const orderTotal = Number(total) || 0;
+    const amountPaid = Number(order.amount_paid) || 0;
+    const balanceDue = Math.max(orderTotal - amountPaid, 0);
+    const hasBalance = balanceDue > 0.005;
+    const balanceUrl = `${baseUrl}/pay`;
+
     // Build customer name from available sources
     const getName = () => {
         // Try shipping_address first
@@ -250,12 +258,28 @@ export async function sendOrderConfirmation(order: any) {
   ${emailInfoRow('Order Number', `#${order_number || id}`)}
   ${emailInfoRow('Order Date', new Date(created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }))}
   ${trackingNumber ? emailInfoRow('Tracking', trackingNumber) : ''}
-  ${emailInfoRow('Total', `GH₵${Number(total).toFixed(2)}`)}
+  ${emailInfoRow('Total', `GH₵${orderTotal.toFixed(2)}`)}
+  ${hasBalance ? emailInfoRow('Paid now', `GH₵${amountPaid.toFixed(2)}`) : ''}
+  ${hasBalance ? emailInfoRow('Balance due', `<span style="color:#b45309;font-weight:700;">GH₵${balanceDue.toFixed(2)}</span>`) : ''}
 </table>
 
 ${emailShippingNotes(shippingNotes)}
 
+${hasBalance ? `
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#fffbeb;border:1px solid #fde68a;border-radius:12px;margin:20px 0;">
+  <tr><td style="padding:16px 18px;">
+    <p style="margin:0 0 6px;color:#92400e;font-size:14px;font-weight:700;">Balance of GH₵${balanceDue.toFixed(2)} outstanding</p>
+    <p style="margin:0;color:#78350f;font-size:13px;line-height:1.6;">
+      Your items are reserved. You can pay the balance in cash when your order is delivered, or online
+      any time using your order number on our Pay Balance page.
+    </p>
+  </td></tr>
+</table>
+` : ''}
+
 <p style="color:#374151;font-size:14px;line-height:1.6;margin:16px 0;">We're getting your order ready. You'll receive updates as it's processed and packaged.</p>
+
+${hasBalance ? emailButton(`Pay Balance — GH₵${balanceDue.toFixed(2)}`, balanceUrl, '#b45309') : ''}
 
 ${emailButton('Track Your Order', trackingUrl)}
 
@@ -276,7 +300,9 @@ ${emailButton('Track Your Order', trackingUrl)}
   ${emailInfoRow('Order', `#${order_number || id}`)}
   ${emailInfoRow('Customer', `${name}`)}
   ${emailInfoRow('Email', email)}
-  ${emailInfoRow('Total', `GH₵${Number(total).toFixed(2)}`)}
+  ${emailInfoRow('Total', `GH₵${orderTotal.toFixed(2)}`)}
+  ${hasBalance ? emailInfoRow('Received', `GH₵${amountPaid.toFixed(2)} (half payment)`) : ''}
+  ${hasBalance ? emailInfoRow('To collect', `<span style="color:#b45309;font-weight:700;">GH₵${balanceDue.toFixed(2)}</span>`) : ''}
   ${trackingNumber ? emailInfoRow('Tracking', trackingNumber) : ''}
 </table>
 
@@ -293,9 +319,12 @@ ${emailButton('View Order in Admin', `${baseUrl}/admin/orders/${id}`)}
 
     // 3. SMS to Customer (if phone exists)
     if (phone) {
+        const balanceSms = hasBalance
+            ? ` Balance of GH₵${balanceDue.toFixed(2)} due on delivery or pay online: ${balanceUrl}.`
+            : '';
         const smsMessage = trackingNumber
-            ? `Hi ${name}, your order #${order_number || id} is confirmed! Tracking: ${trackingNumber}. Track here: ${trackingUrl}${shippingNotesSms}`
-            : `Hi ${name}, your order #${order_number || id} at ${BRAND.name} is confirmed! Track here: ${trackingUrl}${shippingNotesSms}`;
+            ? `Hi ${name}, your order #${order_number || id} is confirmed! Tracking: ${trackingNumber}. Track here: ${trackingUrl}${balanceSms}${shippingNotesSms}`
+            : `Hi ${name}, your order #${order_number || id} at ${BRAND.name} is confirmed! Track here: ${trackingUrl}${balanceSms}${shippingNotesSms}`;
 
         await sendSMS({
             to: phone,
@@ -448,6 +477,10 @@ export async function sendPaymentLink(order: any) {
     const baseUrl = (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000').replace(/\/+$/, '');
     const paymentUrl = `${baseUrl}/pay/${id}`;
 
+    // Chase what is actually outstanding — on a half-paid order the total would
+    // overstate it and the customer would think the deposit was lost.
+    const amountDue = Math.max((Number(total) || 0) - (Number(order.amount_paid) || 0), 0);
+
     // Build customer name from available sources
     const getName = () => {
         if (shipping_address?.full_name) return shipping_address.full_name;
@@ -481,12 +514,12 @@ export async function sendPaymentLink(order: any) {
 
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f9fafb;border-radius:12px;overflow:hidden;margin:20px 0;">
   ${emailInfoRow('Order Number', `#${order_number}`)}
-  ${emailInfoRow('Amount Due', `<span style="color:${BRAND.color};font-size:18px;font-weight:700;">GH₵${Number(total).toFixed(2)}</span>`)}
+  ${emailInfoRow('Amount Due', `<span style="color:${BRAND.color};font-size:18px;font-weight:700;">GH₵${amountDue.toFixed(2)}</span>`)}
 </table>
 
 <p style="color:#374151;font-size:14px;line-height:1.6;margin:16px 0;">Click the button below to securely complete your payment. This link will remain active until your order is completed or cancelled.</p>
 
-${emailButton('Pay Now — GH₵' + Number(total).toFixed(2), paymentUrl, '#d97706')}
+${emailButton('Pay Now — GH₵' + amountDue.toFixed(2), paymentUrl, '#d97706')}
 
 <p style="color:#9ca3af;font-size:12px;text-align:center;margin:0;">Or copy this link: <a href="${paymentUrl}" style="color:${BRAND.color};">${paymentUrl}</a></p>
 `, `Complete payment for order #${order_number}`)
@@ -494,7 +527,7 @@ ${emailButton('Pay Now — GH₵' + Number(total).toFixed(2), paymentUrl, '#d977
 
     // SMS with payment link
     if (phone) {
-        const smsMessage = `Hi ${name}, complete your order #${order_number} (GH₵${Number(total).toFixed(2)}) here: ${paymentUrl}`;
+        const smsMessage = `Hi ${name}, complete your order #${order_number} (GH₵${amountDue.toFixed(2)}) here: ${paymentUrl}`;
 
         await sendSMS({
             to: phone,

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-admin';
 import { checkRateLimit, getClientIdentifier, RATE_LIMITS } from '@/lib/rate-limit';
+import { resolveChargeAmount } from '@/lib/payments';
 
 /**
  * Initiate a Moolre payment. This mirrors standardecom's proven shape:
@@ -34,7 +35,7 @@ export async function POST(req: Request) {
         const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(orderId);
         const query = supabaseAdmin
             .from('orders')
-            .select('id, order_number, total, email, payment_status, metadata');
+            .select('id, order_number, total, amount_paid, email, payment_status, metadata');
 
         const { data: order, error: orderError } = isUUID
             ? await query.eq('id', orderId).single()
@@ -49,14 +50,20 @@ export async function POST(req: Request) {
             return NextResponse.json({ success: false, message: 'Order is already paid' }, { status: 400 });
         }
 
-        // Partial-payment aware: if the order was placed with "Pay Item Cost Only",
-        // the checkout stores the amount actually due now in metadata.payable_now.
-        // Fall back to order.total for full-payment orders or legacy records.
-        const payableNow = Number(order.metadata?.payable_now);
-        const amount =
-            Number.isFinite(payableNow) && payableNow > 0 ? payableNow : Number(order.total);
+        // Deposit on the first attempt, outstanding balance on later ones.
+        const amount = resolveChargeAmount(order);
         if (!amount || amount <= 0) {
             return NextResponse.json({ success: false, message: 'Invalid order amount' }, { status: 400 });
+        }
+
+        // The callback, webhook and verify routes all check the amount the
+        // gateway reports against metadata.payable_now, so it has to describe
+        // this attempt before we hand the shopper over.
+        if (Number(order.metadata?.payable_now) !== amount) {
+            await supabaseAdmin
+                .from('orders')
+                .update({ metadata: { ...(order.metadata || {}), payable_now: amount } })
+                .eq('id', order.id);
         }
 
         const orderRef = order.order_number || orderId;
