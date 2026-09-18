@@ -323,7 +323,7 @@ function OrderSuccessContent() {
                         <span>Qty {item.quantity}</span>
                         {item.variant_name && (
                           <>
-                            <span className="text-slate-300">·</span>
+                            <span className="text-slate-400">·</span>
                             <span>{item.variant_name}</span>
                           </>
                         )}

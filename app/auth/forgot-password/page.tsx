@@ -112,10 +112,10 @@ export default function ForgotPasswordPage() {
               <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-6">
                 <i className="ri-mail-send-line text-2xl text-blue-600" />
               </div>
-              <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-300 mb-4">Reset Sent</p>
+              <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-400 mb-4">Reset Sent</p>
               <h1 className="font-serif text-3xl sm:text-4xl text-slate-900 italic mb-2 leading-tight">
                 Check your<br />
-                <span className="text-slate-300 font-light">inbox</span>
+                <span className="text-slate-400 font-light">inbox</span>
               </h1>
               <p className="text-slate-500 text-sm font-light mb-8 leading-relaxed">
                 If an account exists for <span className="font-serif italic text-slate-700">{email}</span>, a
@@ -144,10 +144,10 @@ export default function ForgotPasswordPage() {
             </>
           ) : (
             <>
-              <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-300 mb-4">Forgot Password</p>
+              <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-400 mb-4">Forgot Password</p>
               <h1 className="font-serif text-3xl sm:text-4xl text-slate-900 italic mb-2 leading-tight">
                 Reset<br />
-                <span className="text-slate-300 font-light">Password</span>
+                <span className="text-slate-400 font-light">Password</span>
               </h1>
               <p className="text-slate-400 text-sm font-light mb-10">
                 Enter your email and we&apos;ll send you a secure reset link.
@@ -169,7 +169,7 @@ export default function ForgotPasswordPage() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className={`w-full pb-3 border-b bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-300 ${
+                    className={`w-full pb-3 border-b bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-400 ${
                       error ? 'border-red-400' : 'border-slate-200 focus:border-slate-900'
                     }`}
                     placeholder="you@example.com"
@@ -205,7 +205,7 @@ export default function ForgotPasswordPage() {
           <div className="mt-6 text-center">
             <Link
               href="/"
-              className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-300 hover:text-slate-600 transition-colors"
+              className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400 hover:text-slate-600 transition-colors"
             >
               <i className="ri-arrow-left-line mr-1" />
               Back to Home

@@ -449,7 +449,7 @@ export default function CheckoutPage() {
       <main className="min-h-screen bg-white py-20">
         <div className="max-w-md mx-auto text-center px-4">
           <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
-            <i className="ri-shopping-cart-line text-4xl text-gray-300"></i>
+            <i className="ri-shopping-cart-line text-4xl text-gray-400"></i>
           </div>
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Your cart is empty</h1>
           <p className="text-gray-600 mb-8">Add some items to start the checkout process.</p>

@@ -462,7 +462,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
                       <i
                         key={star}
                         className={`${
-                          star <= Math.round(product.rating) ? 'ri-star-fill text-blue-500' : 'ri-star-line text-slate-300'
+                          star <= Math.round(product.rating) ? 'ri-star-fill text-blue-500' : 'ri-star-line text-slate-400'
                         } text-base`}
                       />
                     ))}
@@ -616,7 +616,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
                                 isSelected
                                   ? 'border-slate-900 bg-slate-50 shadow-sm'
                                   : isOutOfStock
-                                  ? 'border-slate-100 text-slate-300 cursor-not-allowed bg-slate-50/40'
+                                  ? 'border-slate-100 text-slate-400 cursor-not-allowed bg-slate-50/40'
                                   : 'border-slate-200 hover:border-slate-400'
                               }`}
                             >

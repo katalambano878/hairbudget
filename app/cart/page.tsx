@@ -80,7 +80,7 @@ export default function CartPage() {
           /* ── EMPTY STATE ── */
           <div className="min-h-[50vh] flex flex-col items-center justify-center text-center py-24">
             <div className="w-20 h-20 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mb-6">
-              <i className="ri-shopping-cart-line text-3xl text-slate-300" />
+              <i className="ri-shopping-cart-line text-3xl text-slate-400" />
             </div>
             <h2 className="font-serif text-3xl italic text-slate-900 mb-3">Your cart is empty</h2>
             <p className="text-slate-400 text-sm max-w-xs mb-8 leading-relaxed">
@@ -104,9 +104,9 @@ export default function CartPage() {
               {/* Header row */}
               <div className="flex items-center justify-between pb-5 border-b border-slate-100">
                 <div>
-                  <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-300 mb-1">Review</p>
+                  <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-400 mb-1">Review</p>
                   <h2 className="font-serif text-2xl italic text-slate-900">
-                    Cart Items <span className="text-slate-300 font-light">({cartItems.length})</span>
+                    Cart Items <span className="text-slate-400 font-light">({cartItems.length})</span>
                   </h2>
                 </div>
                 {savings > 0 && (
@@ -157,7 +157,7 @@ export default function CartPage() {
                         </div>
                         <button
                           onClick={() => removeFromCart(item.id, item.variant)}
-                          className="flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-lg text-slate-300 hover:text-red-500 hover:bg-red-50 transition-all"
+                          className="flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 transition-all"
                         >
                           <i className="ri-close-line text-base" />
                         </button>
@@ -209,7 +209,7 @@ export default function CartPage() {
               {/* Saved for later */}
               {savedItems.length > 0 && (
                 <div className="pt-6 border-t border-slate-100">
-                  <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-300 mb-5">Saved for Later</p>
+                  <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-400 mb-5">Saved for Later</p>
                   <div className="divide-y divide-slate-100">
                     {savedItems.map((item) => (
                       <div key={item.id} className="flex gap-4 py-5">

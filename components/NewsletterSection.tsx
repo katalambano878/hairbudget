@@ -159,7 +159,7 @@ export default function NewsletterSection() {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="you@example.com"
-                          className="w-full pl-12 pr-4 py-4 bg-slate-900/70 border border-slate-800 rounded-2xl text-white placeholder:text-slate-600 text-sm font-medium focus:outline-none focus:border-blue-400/60 focus:ring-2 focus:ring-blue-400/10 transition-all duration-300"
+                          className="w-full pl-12 pr-4 py-4 bg-slate-900/70 border border-slate-800 rounded-2xl text-white placeholder:text-brand-cream/50 text-sm font-medium focus:outline-none focus:border-blue-400/60 focus:ring-2 focus:ring-blue-400/10 transition-all duration-300"
                         />
                       </div>
 

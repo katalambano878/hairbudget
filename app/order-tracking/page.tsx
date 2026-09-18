@@ -400,7 +400,7 @@ function OrderTrackingContent() {
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <i className="ri-image-line text-2xl text-gray-300"></i>
+                      <i className="ri-image-line text-2xl text-gray-400"></i>
                     </div>
                   )}
                 </div>

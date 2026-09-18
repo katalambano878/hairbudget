@@ -212,7 +212,7 @@ export default function ProductFilters({ onFilterChange }: ProductFiltersProps) 
                         <i
                           key={i}
                           className={`ri-star-${i < rating ? 'fill' : 'line'} text-sm ${
-                            i < rating ? 'text-yellow-400' : 'text-gray-300'
+                            i < rating ? 'text-yellow-400' : 'text-gray-400'
                           }`}
                         ></i>
                       ))}

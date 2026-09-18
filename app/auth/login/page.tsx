@@ -120,10 +120,10 @@ export default function LoginPage() {
 
         <div className="max-w-sm w-full mx-auto lg:mx-0">
 
-          <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-300 mb-4">Sign In</p>
+          <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-400 mb-4">Sign In</p>
           <h1 className="font-serif text-3xl sm:text-4xl text-slate-900 italic mb-2 leading-tight">
             Welcome<br />
-            <span className="text-slate-300 font-light">Back</span>
+            <span className="text-slate-400 font-light">Back</span>
           </h1>
           <p className="text-slate-400 text-sm font-light mb-10">Sign in to your account to continue.</p>
 
@@ -145,7 +145,7 @@ export default function LoginPage() {
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className={`w-full pb-3 border-b bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-300 ${
+                className={`w-full pb-3 border-b bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-400 ${
                   errors.email ? 'border-red-400' : 'border-slate-200 focus:border-slate-900'
                 }`}
                 placeholder="you@example.com"
@@ -171,7 +171,7 @@ export default function LoginPage() {
                   type={showPassword ? 'text' : 'password'}
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className={`w-full pb-3 border-b bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-300 pr-8 ${
+                  className={`w-full pb-3 border-b bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-400 pr-8 ${
                     errors.password ? 'border-red-400' : 'border-slate-200 focus:border-slate-900'
                   }`}
                   placeholder="Enter your password"
@@ -179,7 +179,7 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-0 bottom-3 text-slate-300 hover:text-slate-700 transition-colors"
+                  className="absolute right-0 bottom-3 text-slate-400 hover:text-slate-700 transition-colors"
                 >
                   <i className={`${showPassword ? 'ri-eye-off-line' : 'ri-eye-line'} text-lg`} />
                 </button>
@@ -229,7 +229,7 @@ export default function LoginPage() {
           <div className="mt-6 text-center">
             <Link
               href="/"
-              className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-300 hover:text-slate-600 transition-colors"
+              className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400 hover:text-slate-600 transition-colors"
             >
               <i className="ri-arrow-left-line mr-1" />Back to Home
             </Link>

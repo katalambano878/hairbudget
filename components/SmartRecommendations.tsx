@@ -125,7 +125,7 @@ export default function SmartRecommendations({ productId, type, title }: SmartRe
                     {[...Array(5)].map((_, i) => (
                       <i
                         key={i}
-                        className={`ri-star-${i < Math.floor(product.rating) ? 'fill' : 'line'} text-sm ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300'
+                        className={`ri-star-${i < Math.floor(product.rating) ? 'fill' : 'line'} text-sm ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-400'
                           }`}
                       ></i>
                     ))}

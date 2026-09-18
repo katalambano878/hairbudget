@@ -328,7 +328,7 @@ function ShopContent() {
 
                     {/* ── CATEGORIES ──────────────────── */}
                     <div className="pb-6">
-                      <p className="text-[9px] font-black tracking-[0.4em] uppercase text-slate-300 mb-3">Category</p>
+                      <p className="text-[9px] font-black tracking-[0.4em] uppercase text-slate-400 mb-3">Category</p>
 
                       {/* All */}
                       <button
@@ -340,7 +340,7 @@ function ShopContent() {
                         }`}
                       >
                         <span className="text-sm">All Products</span>
-                        <span className={`text-xs ${selectedCategory === 'all' ? 'text-slate-400' : 'text-slate-300'}`}>
+                        <span className={`text-xs ${selectedCategory === 'all' ? 'text-slate-400' : 'text-slate-400'}`}>
                           {loading ? '' : totalProducts}
                         </span>
                       </button>
@@ -363,7 +363,7 @@ function ShopContent() {
                             >
                               <span className="text-sm">{parent.name}</span>
                               {children.length > 0 && (
-                                <i className={`text-xs transition-transform duration-200 ${isActive || childActive ? 'ri-subtract-line text-slate-400' : 'ri-add-line text-slate-300 group-hover:text-slate-400'}`} />
+                                <i className={`text-xs transition-transform duration-200 ${isActive || childActive ? 'ri-subtract-line text-slate-400' : 'ri-add-line text-slate-400 group-hover:text-slate-400'}`} />
                               )}
                             </button>
 
@@ -392,13 +392,13 @@ function ShopContent() {
 
                     {/* ── PRICE ───────────────────────── */}
                     <div className="py-6">
-                      <p className="text-[9px] font-black tracking-[0.4em] uppercase text-slate-300 mb-4">Price Range</p>
+                      <p className="text-[9px] font-black tracking-[0.4em] uppercase text-slate-400 mb-4">Price Range</p>
 
                       {/* Price display */}
                       <div className="flex items-end justify-between mb-3">
                         <div>
-                          <p className="text-[9px] text-slate-300 uppercase tracking-widest mb-0.5">Max</p>
-                          <p className={`text-2xl font-light leading-none transition-colors ${priceRange[1] < 5000 ? 'text-slate-900' : 'text-slate-300'}`}>
+                          <p className="text-[9px] text-slate-400 uppercase tracking-widest mb-0.5">Max</p>
+                          <p className={`text-2xl font-light leading-none transition-colors ${priceRange[1] < 5000 ? 'text-slate-900' : 'text-slate-400'}`}>
                             GH₵<span className="font-semibold">{priceRange[1] < 5000 ? priceRange[1].toLocaleString() : '5,000'}</span>
                             {priceRange[1] >= 5000 && <span className="text-base">+</span>}
                           </p>
@@ -406,7 +406,7 @@ function ShopContent() {
                         {priceRange[1] < 5000 && (
                           <button
                             onClick={() => { setPriceRange([0, 5000]); setPage(1); }}
-                            className="text-[9px] font-bold tracking-[0.2em] uppercase text-slate-300 hover:text-slate-600 transition-colors"
+                            className="text-[9px] font-bold tracking-[0.2em] uppercase text-slate-400 hover:text-slate-600 transition-colors"
                           >
                             Reset
                           </button>
@@ -425,7 +425,7 @@ function ShopContent() {
                         />
                       </div>
 
-                      <div className="flex justify-between text-[9px] text-slate-300 uppercase tracking-widest mt-2">
+                      <div className="flex justify-between text-[9px] text-slate-400 uppercase tracking-widest mt-2">
                         <span>GH₵0</span>
                         <span>GH₵5,000+</span>
                       </div>
@@ -433,7 +433,7 @@ function ShopContent() {
 
                     {/* ── RATING ──────────────────────── */}
                     <div className="py-6">
-                      <p className="text-[9px] font-black tracking-[0.4em] uppercase text-slate-300 mb-3">Customer Rating</p>
+                      <p className="text-[9px] font-black tracking-[0.4em] uppercase text-slate-400 mb-3">Customer Rating</p>
                       <div className="space-y-1">
                         {[4, 3, 2, 1].map(r => (
                           <button
@@ -457,7 +457,7 @@ function ShopContent() {
                                 />
                               ))}
                             </div>
-                            <span className={`text-xs font-medium ${selectedRating === r ? 'text-slate-300' : 'text-slate-400'}`}>
+                            <span className={`text-xs font-medium ${selectedRating === r ? 'text-slate-400' : 'text-slate-400'}`}>
                               & up
                             </span>
                           </button>
@@ -506,7 +506,7 @@ function ShopContent() {
                   ) : (
                     <p className="text-sm text-slate-500">
                       <span className="font-semibold text-slate-900">{products.length}</span>
-                      <span className="text-slate-300 mx-1.5">/</span>
+                      <span className="text-slate-400 mx-1.5">/</span>
                       <span className="font-semibold text-slate-900">{totalProducts}</span>
                       <span className="ml-1.5">products</span>
                     </p>
@@ -557,7 +557,7 @@ function ShopContent() {
                 <div className="min-h-[420px] flex flex-col items-center justify-center text-center py-20">
                   <div className="relative mb-8">
                     <div className="w-20 h-20 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center">
-                      <i className="ri-search-2-line text-3xl text-slate-300" />
+                      <i className="ri-search-2-line text-3xl text-slate-400" />
                     </div>
                   </div>
                   <h3 className="font-serif text-3xl text-slate-900 mb-3">Nothing found</h3>
@@ -594,7 +594,7 @@ function ShopContent() {
 
                   {paginationRange(page, totalPages).map((p, i) =>
                     p === '…' ? (
-                      <span key={`e${i}`} className="w-9 h-9 flex items-center justify-center text-slate-300 text-sm">…</span>
+                      <span key={`e${i}`} className="w-9 h-9 flex items-center justify-center text-slate-400 text-sm">…</span>
                     ) : (
                       <button
                         key={p}

@@ -1,9 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState } from 'react';
 import PageHero from '@/components/PageHero';
+import FounderSection from '@/components/FounderSection';
 import { useCMS } from '@/context/CMSContext';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import WhatsAppButton from '@/components/WhatsAppButton';
@@ -98,8 +98,8 @@ export default function AboutPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
         {activeTab === 'story' && (
-          <div className="grid md:grid-cols-2 gap-16 lg:gap-24 items-center">
-            <div className="order-2 md:order-1">
+          <div className="max-w-3xl mx-auto">
+            <div>
               <p className="text-[9px] font-black tracking-[0.5em] uppercase text-brand-gold mb-5">Est. 2017</p>
               <h2 className="font-serif text-4xl sm:text-5xl lg:text-[3.5rem] text-brand-ink mb-10 leading-[1.05]">
                 How It All <span className="font-serif italic font-light text-brand-mid">Started</span>
@@ -117,16 +117,6 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="relative order-1 md:order-2 group">
-              <div className="aspect-[3/4] bg-white relative overflow-hidden flex items-center justify-center">
-                <img
-                  src="/pack-label.png"
-                  alt="HairBudget"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000 ease-[cubic-bezier(0.25,0.1,0.25,1)] relative z-10"
-                />
-              </div>
-              <div className="absolute -z-10 -bottom-6 -right-6 w-full h-full bg-brand-gold/40 group-hover:-translate-y-2 group-hover:-translate-x-2 transition-transform duration-700" />
-            </div>
           </div>
         )}
 
@@ -150,6 +140,8 @@ export default function AboutPage() {
           </div>
         )}
       </div>
+
+      <FounderSection />
 
       <div className="bg-white py-24 border-t border-brand-gold/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

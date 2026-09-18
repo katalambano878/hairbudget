@@ -53,9 +53,9 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative mt-16 lg:mt-24 bg-slate-950 text-white overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-400/30 to-transparent" />
-      <div className="absolute -bottom-20 right-[-10%] w-[380px] h-[380px] bg-blue-500/[0.06] rounded-full blur-3xl pointer-events-none" />
+    <footer className="relative mt-16 lg:mt-24 bg-brand-deep text-white overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-gold/40 to-transparent" />
+      <div className="absolute -bottom-20 right-[-10%] w-[380px] h-[380px] bg-brand-gold/[0.06] rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 pt-14 pb-8">
         {/* Top row: brand + link columns */}
@@ -107,14 +107,14 @@ export default function Footer() {
               <h4 className="font-black text-[11px] tracking-[0.3em] uppercase text-white mb-4">
                 {col.title}
               </h4>
-              <ul className="space-y-2.5 text-slate-400 text-sm">
+              <ul className="space-y-2.5 text-brand-cream/80 text-sm">
                 {col.links.map((l) => (
                   <li key={l.href}>
                     <Link
                       href={l.href}
-                      className="group inline-flex items-center gap-2 hover:text-white transition-colors"
+                      className="group inline-flex items-center gap-2 hover:text-brand-ivory transition-colors"
                     >
-                      <span className="w-0 h-px bg-blue-400 group-hover:w-3 transition-all duration-300" />
+                      <span className="w-0 h-px bg-brand-gold group-hover:w-3 transition-all duration-300" />
                       {l.label}
                     </Link>
                   </li>
@@ -125,14 +125,14 @@ export default function Footer() {
         </div>
 
         {/* Bottom strip */}
-        <div className="border-t border-slate-800/70 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <p className="text-slate-500 text-xs">
-            &copy; {year} <span className="text-slate-300 font-semibold">{siteName}</span>. Powered By{' '}
+        <div className="border-t border-brand-gold/20 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <p className="text-brand-cream/70 text-xs">
+            &copy; {year} <span className="text-brand-ivory font-semibold">{siteName}</span>. Powered By{' '}
             <a
               href="https://doctorbarns.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-300 font-semibold hover:text-blue-400 transition-colors underline-offset-2 hover:underline"
+              className="text-brand-gold font-semibold hover:text-brand-ivory transition-colors underline-offset-2 hover:underline"
             >
               Doctor Barns Tech
             </a>
@@ -142,22 +142,22 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <Link
               href="/admin/login"
-              className="group inline-flex items-center gap-1.5 text-[10px] font-bold tracking-[0.25em] uppercase text-slate-500 hover:text-blue-400 transition-colors"
+              className="group inline-flex items-center gap-1.5 text-[10px] font-bold tracking-[0.25em] uppercase text-brand-cream/70 hover:text-brand-gold transition-colors"
             >
               <i className="ri-shield-user-line text-sm" />
               <span>Admin</span>
             </Link>
 
-            <div className="hidden sm:block w-px h-4 bg-slate-800" />
+            <div className="hidden sm:block w-px h-4 bg-brand-gold/25" />
 
             <div className="flex items-center gap-2">
               {['ri-visa-line', 'ri-mastercard-line', 'ri-paypal-line', 'ri-smartphone-line'].map(
                 (icon, i) => (
                   <div
                     key={i}
-                    className="w-9 h-6 rounded-md bg-slate-900/60 border border-slate-800 flex items-center justify-center hover:border-blue-400/40 transition-colors"
+                    className="w-9 h-6 rounded-md bg-brand-forest/60 border border-brand-gold/25 flex items-center justify-center hover:border-brand-gold/60 transition-colors"
                   >
-                    <i className={`${icon} text-slate-400 text-sm`} />
+                    <i className={`${icon} text-brand-cream/80 text-sm`} />
                   </div>
                 )
               )}

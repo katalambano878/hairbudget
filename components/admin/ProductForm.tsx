@@ -806,7 +806,7 @@ export default function ProductForm({ initialData, isEditMode = false }: Product
         setImages(images.filter((_, idx) => idx !== indexToRemove));
     };
 
-    // Variant helpers: option groups + cartesian grid (wig / LuxuryStrand model)
+    // Variant helpers: option groups + cartesian grid
 
     const handleSubmit = async () => {
         try {
@@ -1307,7 +1307,7 @@ export default function ProductForm({ initialData, isEditMode = false }: Product
                                 <p className="text-gray-600 mt-1">
                                     Turn on the options that apply (lace type, length, cap size, density, colour, etc.). Mark
                                     <span className="font-semibold text-slate-800"> Creates variants</span> when each combination
-                                    should have its own price and stock — just like on LuxuryStrand.
+                                    should have its own price and stock.
                                 </p>
                             </div>
 

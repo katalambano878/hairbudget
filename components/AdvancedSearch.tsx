@@ -200,7 +200,7 @@ export default function AdvancedSearch() {
 
           {showEmpty && (
             <div className="p-8 text-center">
-              <i className="ri-search-line text-4xl text-gray-300 mb-2"></i>
+              <i className="ri-search-line text-4xl text-gray-400 mb-2"></i>
               <p className="text-gray-500 font-medium">No products found</p>
               <p className="text-sm text-gray-400 mt-1">Try another letter or press Enter to search the shop</p>
             </div>

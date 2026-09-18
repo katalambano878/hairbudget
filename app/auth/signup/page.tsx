@@ -190,10 +190,10 @@ export default function SignupPage() {
             <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-6">
               <i className="ri-mail-send-line text-2xl text-blue-600" />
             </div>
-            <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-300 mb-4">Verify Email</p>
+            <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-400 mb-4">Verify Email</p>
             <h1 className="font-serif text-3xl sm:text-4xl text-slate-900 italic mb-4 leading-tight">
               Check your<br />
-              <span className="text-slate-300 font-light">inbox</span>
+              <span className="text-slate-400 font-light">inbox</span>
             </h1>
             <p className="text-slate-500 text-sm font-light mb-8 leading-relaxed">
               We&apos;ve sent a confirmation link to{' '}
@@ -281,10 +281,10 @@ export default function SignupPage() {
         </div>
 
         <div className="max-w-md w-full mx-auto lg:mx-0">
-          <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-300 mb-4">Create Account</p>
+          <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-400 mb-4">Create Account</p>
           <h1 className="font-serif text-3xl sm:text-4xl text-slate-900 italic mb-2 leading-tight">
             Start your<br />
-            <span className="text-slate-300 font-light">journey</span>
+            <span className="text-slate-400 font-light">journey</span>
           </h1>
           <p className="text-slate-400 text-sm font-light mb-10">It only takes a minute.</p>
 
@@ -309,7 +309,7 @@ export default function SignupPage() {
                   type="text"
                   value={formData.firstName}
                   onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                  className={`w-full pb-3 border-b bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-300 ${
+                  className={`w-full pb-3 border-b bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-400 ${
                     errors.firstName ? 'border-red-400' : 'border-slate-200 focus:border-slate-900'
                   }`}
                   placeholder="Ama"
@@ -324,7 +324,7 @@ export default function SignupPage() {
                   type="text"
                   value={formData.lastName}
                   onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                  className={`w-full pb-3 border-b bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-300 ${
+                  className={`w-full pb-3 border-b bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-400 ${
                     errors.lastName ? 'border-red-400' : 'border-slate-200 focus:border-slate-900'
                   }`}
                   placeholder="Mensah"
@@ -342,7 +342,7 @@ export default function SignupPage() {
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className={`w-full pb-3 border-b bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-300 ${
+                className={`w-full pb-3 border-b bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-400 ${
                   errors.email ? 'border-red-400' : 'border-slate-200 focus:border-slate-900'
                 }`}
                 placeholder="you@example.com"
@@ -359,7 +359,7 @@ export default function SignupPage() {
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className={`w-full pb-3 border-b bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-300 ${
+                className={`w-full pb-3 border-b bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-400 ${
                   errors.phone ? 'border-red-400' : 'border-slate-200 focus:border-slate-900'
                 }`}
                 placeholder="+233 XX XXX XXXX"
@@ -377,7 +377,7 @@ export default function SignupPage() {
                   type={showPassword ? 'text' : 'password'}
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className={`w-full pb-3 border-b bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-300 pr-8 ${
+                  className={`w-full pb-3 border-b bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-400 pr-8 ${
                     errors.password ? 'border-red-400' : 'border-slate-200 focus:border-slate-900'
                   }`}
                   placeholder="At least 8 characters"
@@ -385,7 +385,7 @@ export default function SignupPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-0 bottom-3 text-slate-300 hover:text-slate-700 transition-colors"
+                  className="absolute right-0 bottom-3 text-slate-400 hover:text-slate-700 transition-colors"
                 >
                   <i className={`${showPassword ? 'ri-eye-off-line' : 'ri-eye-line'} text-lg`} />
                 </button>
@@ -404,7 +404,7 @@ export default function SignupPage() {
                   type={showConfirmPassword ? 'text' : 'password'}
                   value={formData.confirmPassword}
                   onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                  className={`w-full pb-3 border-b bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-300 pr-8 ${
+                  className={`w-full pb-3 border-b bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-400 pr-8 ${
                     errors.confirmPassword ? 'border-red-400' : 'border-slate-200 focus:border-slate-900'
                   }`}
                   placeholder="Re-enter password"
@@ -412,7 +412,7 @@ export default function SignupPage() {
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-0 bottom-3 text-slate-300 hover:text-slate-700 transition-colors"
+                  className="absolute right-0 bottom-3 text-slate-400 hover:text-slate-700 transition-colors"
                 >
                   <i className={`${showConfirmPassword ? 'ri-eye-off-line' : 'ri-eye-line'} text-lg`} />
                 </button>
@@ -513,7 +513,7 @@ export default function SignupPage() {
           <div className="mt-6 text-center">
             <Link
               href="/"
-              className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-300 hover:text-slate-600 transition-colors"
+              className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400 hover:text-slate-600 transition-colors"
             >
               <i className="ri-arrow-left-line mr-1" />
               Back to Home

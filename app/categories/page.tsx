@@ -106,7 +106,7 @@ export default async function CategoriesPage() {
                   <div className="absolute bottom-0 left-0 right-0 p-6">
                     <p className="text-[8px] font-black tracking-[0.5em] uppercase text-brand-gold mb-1.5">Collection</p>
                     <h3 className="font-serif text-2xl italic text-white font-semibold mb-3">{category.name}</h3>
-                    <p className="text-slate-300 text-xs leading-relaxed line-clamp-2 mb-4 max-h-0 group-hover:max-h-12 overflow-hidden transition-all duration-500">
+                    <p className="text-slate-400 text-xs leading-relaxed line-clamp-2 mb-4 max-h-0 group-hover:max-h-12 overflow-hidden transition-all duration-500">
                       {category.description || 'Explore our exclusive collection in this category.'}
                     </p>
                     <div className="flex items-center gap-2 text-white text-[10px] font-bold tracking-[0.25em] uppercase">
@@ -120,7 +120,7 @@ export default async function CategoriesPage() {
           ) : (
             <div className="text-center py-32">
               <div className="w-20 h-20 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mx-auto mb-6">
-                <i className="ri-inbox-line text-3xl text-slate-300" />
+                <i className="ri-inbox-line text-3xl text-slate-400" />
               </div>
               <h3 className="font-serif text-3xl text-slate-900 italic mb-3">Nothing here yet</h3>
               <p className="text-slate-400 text-sm">Categories will appear here once added.</p>

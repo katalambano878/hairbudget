@@ -3,6 +3,7 @@
 import type { ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { publicAsset } from '@/lib/assets';
 
 export type PageHeroStat = { value: string; label: string };
 
@@ -35,7 +36,7 @@ export default function PageHero({
     <section className={`relative overflow-hidden bg-brand-deep ${minHeightClass}`}>
       {image ? (
         <Image
-          src={image}
+          src={publicAsset(image)}
           alt={imageAlt}
           fill
           className="object-cover object-center"

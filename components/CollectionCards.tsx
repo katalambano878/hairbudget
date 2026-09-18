@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { publicAsset } from '@/lib/assets';
 
 const COLLECTIONS = [
   {
@@ -63,7 +64,7 @@ export default function CollectionCards() {
             >
               <div className="relative w-16 h-16 sm:w-[4.5rem] sm:h-[4.5rem] rounded-full overflow-hidden flex-shrink-0 ring-2 ring-brand-cream">
                 <Image
-                  src={item.thumb}
+                  src={publicAsset(item.thumb)}
                   alt=""
                   fill
                   className="object-cover object-top"
@@ -87,7 +88,7 @@ export default function CollectionCards() {
 
               <div className="relative hidden sm:block w-[38%] max-w-[200px] aspect-[4/5] rounded-[22px] overflow-hidden flex-shrink-0">
                 <Image
-                  src={item.photo}
+                  src={publicAsset(item.photo)}
                   alt={item.title}
                   fill
                   className="object-cover object-top group-hover:scale-105 transition-transform duration-700"

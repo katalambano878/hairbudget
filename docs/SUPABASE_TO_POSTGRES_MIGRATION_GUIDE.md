@@ -2,7 +2,7 @@
 
 **Shape:** same as **NAD4U** — keep `supabase.from()` / `supabase.auth` in the UI, but those calls hit local Next.js routes that talk to Postgres (`pg`).
 
-There is **no Coolify app** for HairBudget yet. Only the database was provisioned. Creating `hairbudget-app` / `hairbudget-staging` still needs the Coolify owner.
+**Staging is live** at `https://hairbudget-staging.169-58-8-203.sslip.io` (Coolify app `hairbudget-staging`). A production `hairbudget-app` + `hairbudget.com` DNS still needs the Coolify owner.
 
 ## What changed in the app
 
@@ -71,12 +71,13 @@ SELECT count(*) FROM public.site_settings;
 SELECT key, value->>'site_name' FROM public.site_settings WHERE key = 'site_identity';
 ```
 
-App checks after Coolify exists:
+App checks (2026-09-16 staging):
 
 - `GET /` and `/shop` return 200
-- Admin login sets `sb-access-token` and opens `/admin`
+- `/admin/login` returns 200
+- Admin email: `info@hairbudgetgh.com` (password on VPS in `/data/fleet/secrets/store_hairbudget.env`)
 - No `@supabase/supabase-js` in `app/`, `lib/`, `components/`, `context/`, `middleware.ts`
 
 ## Limits
 
-Cannot create the Coolify app from SSH. After the owner adds `hairbudget-staging` / `hairbudget-app`, set the env trio above and redeploy with `sudo fleet deploy <name>`.
+A production hostname (`hairbudget.com`) still needs the Coolify owner for DNS + a `hairbudget-app` clone. Redeploy staging with `sudo fleet deploy hairbudget-staging`.

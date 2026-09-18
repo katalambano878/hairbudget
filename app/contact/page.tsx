@@ -149,7 +149,7 @@ export default function ContactPage() {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full pb-3 border-b border-slate-200 focus:border-slate-900 bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-300"
+                      className="w-full pb-3 border-b border-slate-200 focus:border-slate-900 bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-400"
                       placeholder="Your full name"
                     />
                   </div>
@@ -164,7 +164,7 @@ export default function ContactPage() {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full pb-3 border-b border-slate-200 focus:border-slate-900 bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-300"
+                      className="w-full pb-3 border-b border-slate-200 focus:border-slate-900 bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-400"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -182,7 +182,7 @@ export default function ContactPage() {
                       name="phone"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full pb-3 border-b border-slate-200 focus:border-slate-900 bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-300"
+                      className="w-full pb-3 border-b border-slate-200 focus:border-slate-900 bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-400"
                       placeholder="+233 XX XXX XXXX"
                     />
                   </div>
@@ -197,7 +197,7 @@ export default function ContactPage() {
                       required
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full pb-3 border-b border-slate-200 focus:border-slate-900 bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-300"
+                      className="w-full pb-3 border-b border-slate-200 focus:border-slate-900 bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-400"
                       placeholder="Order inquiry, product question…"
                     />
                   </div>
@@ -216,11 +216,11 @@ export default function ContactPage() {
                     maxLength={500}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full pb-3 border-b border-slate-200 focus:border-slate-900 bg-transparent text-slate-900 text-sm outline-none transition-colors resize-none placeholder:text-slate-300"
+                    className="w-full pb-3 border-b border-slate-200 focus:border-slate-900 bg-transparent text-slate-900 text-sm outline-none transition-colors resize-none placeholder:text-slate-400"
                     placeholder="Tell us how we can help you…"
                   />
                   <div className="flex justify-end mt-1">
-                    <span className="text-[9px] text-slate-300 font-medium">{formData.message.length}/500</span>
+                    <span className="text-[9px] text-slate-400 font-medium">{formData.message.length}/500</span>
                   </div>
                 </div>
 

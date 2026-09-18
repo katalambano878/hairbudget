@@ -147,7 +147,7 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
                         className={`${
                           i < Math.floor(product.rating)
                             ? 'ri-star-fill text-yellow-400'
-                            : 'ri-star-line text-gray-300'
+                            : 'ri-star-line text-gray-400'
                         }`}
                       ></i>
                     ))}

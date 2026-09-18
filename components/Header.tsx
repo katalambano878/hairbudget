@@ -12,6 +12,7 @@ import { resolveProductPrice } from '@/lib/pricing';
 import { useDebouncedValue } from '@/components/useDebouncedValue';
 import type { StorefrontSearchHit } from '@/lib/storefront-search-types';
 import BrandLogo from '@/components/BrandLogo';
+import { BRAND, whatsappHref } from '@/lib/brand';
 
 const NAV_LINKS = [
   { label: 'Shop', href: '/shop' },
@@ -20,10 +21,18 @@ const NAV_LINKS = [
   { label: 'Contact', href: '/contact' },
 ];
 
+const RAIL_ITEMS = [
+  { icon: 'ri-map-pin-2-line', text: '1 Kwei-Fio St, Adenta' },
+  { icon: 'ri-truck-line', text: 'Pickup & Delivery Nationwide' },
+  { icon: 'ri-store-2-line', text: 'Retail + Wholesale' },
+  { icon: 'ri-award-line', text: 'Trusted Since 2017' },
+];
+
 export default function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [progress, setProgress] = useState(0);
   const lastScrollY = useRef(0);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -39,23 +48,30 @@ export default function Header() {
   const { cartCount, isCartOpen, setIsCartOpen } = useCart();
   const { getSetting } = useCMS();
 
-  const siteName = getSetting('site_name') || 'HairBudget';
+  const siteName = getSetting('site_name') || BRAND.name;
 
-  // Scroll: elevation + auto-hide
+  // Scroll: elevation, auto-hide, read progress
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
-      setScrolled(y > 40);
-      if (y > lastScrollY.current && y > 100) {
-        setHidden(true);
-      } else {
-        setHidden(false);
-      }
+      setScrolled(y > 24);
+      setHidden(y > lastScrollY.current && y > 140);
       lastScrollY.current = y;
+
+      const track = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(track > 0 ? Math.min(1, y / track) : 0);
     };
+    onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  // Lock body scroll while an overlay is open
+  useEffect(() => {
+    const locked = isMobileMenuOpen || isSearchOpen;
+    document.body.style.overflow = locked ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileMenuOpen, isSearchOpen]);
 
   // Wishlist + auth
   useEffect(() => {
@@ -87,6 +103,17 @@ export default function Header() {
     setIsSearchOpen(false); setSearchQuery(''); setSearchHits([]); setSearchLoading(false);
   }, []);
 
+  // Esc closes overlays
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      closeSearch();
+      setIsMobileMenuOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [closeSearch]);
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) window.location.href = `/shop?search=${encodeURIComponent(searchQuery)}`;
@@ -95,139 +122,182 @@ export default function Header() {
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname?.startsWith(href);
 
+  const iconButton =
+    'relative grid place-items-center w-10 h-10 rounded-full border border-brand-forest/12 text-brand-forest bg-white/70 hover:bg-brand-forest hover:text-brand-ivory hover:border-brand-forest transition-all duration-300';
+
+  const badge =
+    'absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 grid place-items-center rounded-full bg-brand-gold text-brand-deep text-[10px] font-black leading-none ring-2 ring-white';
+
   return (
     <>
       {/* ─── HEADER ──────────────────────────────────── */}
       <header
-        className={`sticky top-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
+        className={`sticky top-0 z-50 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
           hidden ? '-translate-y-full' : 'translate-y-0'
-        } ${
-          scrolled
-            ? 'bg-white shadow-[0_1px_0_0_rgba(0,0,0,0.06),0_4px_24px_-4px_rgba(0,0,0,0.08)]'
-            : 'bg-white'
         }`}
       >
-        {/* Brand accent — ultra-thin violet gradient strip */}
-        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-70" />
-
-        <div className="safe-area-top" />
-
-        <nav
-          aria-label="Main navigation"
-          className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-10"
+        {/* ── Tier 1: forest utility rail ── */}
+        <div
+          className={`bg-brand-deep text-brand-cream overflow-hidden transition-all duration-500 ${
+            scrolled ? 'max-h-0 opacity-0' : 'max-h-12 opacity-100'
+          }`}
         >
-          <div className="h-[66px] flex items-center justify-between lg:grid lg:grid-cols-[1fr_auto_1fr]">
+          <div className="safe-area-top" />
+          <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-10">
+            <div className="h-9 flex items-center justify-between gap-6">
 
-            {/* ── LEFT: Logo ── */}
-            <div className="flex items-center">
-              <BrandLogo
-                imgClassName="h-7 md:h-8 w-auto max-w-[160px] sm:max-w-[200px] transition-opacity duration-300 hover:opacity-80"
-                priority
-              />
-            </div>
-
-            {/* ── CENTER: Desktop nav ── */}
-            <div className="hidden lg:flex items-center">
-              {/* thin left rule */}
-              <span className="w-px h-4 bg-slate-200 mr-8" />
-
-              {NAV_LINKS.map(({ label, href }) => {
-                const active = isActive(href);
-                return (
-                  <Link
-                    key={href}
-                    href={href}
-                    className={`group relative px-5 py-2 overflow-hidden text-[11px] font-bold tracking-[0.28em] uppercase transition-colors duration-200 ${
-                      active ? 'text-slate-900' : 'text-slate-400 hover:text-slate-900'
-                    }`}
-                  >
-                    {/* Text flip on hover */}
-                    <span className="relative block overflow-hidden h-[1.1em]">
-                      <span
-                        className="block transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full"
-                        aria-hidden={!active}
-                      >
-                        {label}
-                      </span>
-                      <span
-                        className="absolute inset-0 translate-y-full transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0 text-slate-900 font-black"
-                      >
-                        {label}
-                      </span>
-                    </span>
-
-                    {/* Active dot */}
-                    {active && (
-                      <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-blue-500" />
-                    )}
-                  </Link>
-                );
-              })}
-
-              {/* thin right rule */}
-              <span className="w-px h-4 bg-slate-200 ml-8" />
-            </div>
-
-            {/* ── RIGHT: Icons ── */}
-            <div className="flex items-center justify-end gap-1 sm:gap-0.5">
-
-              {/* Search */}
-              <button
-                onClick={() => setIsSearchOpen(true)}
-                aria-label="Search"
-                className="group p-2.5 rounded-xl text-slate-400 hover:text-slate-900 hover:bg-slate-50 transition-all duration-200"
-              >
-                <i className="ri-search-line text-[17px]" />
-              </button>
-
-              {/* Wishlist */}
-              <Link
-                href="/wishlist"
-                aria-label="Wishlist"
-                className="group relative p-2.5 rounded-xl text-slate-400 hover:text-slate-900 hover:bg-slate-50 transition-all duration-200 hidden sm:flex"
-              >
-                <i className="ri-heart-line text-[17px]" />
-                {wishlistCount > 0 && (
-                  <span className="absolute top-2 right-2 w-1.5 h-1.5 rounded-full bg-blue-500 ring-1 ring-white" />
-                )}
-              </Link>
-
-              {/* Account */}
-              <Link
-                href={user ? '/account' : '/auth/login'}
-                aria-label={user ? 'My Account' : 'Login'}
-                className="group p-2.5 rounded-xl text-slate-400 hover:text-slate-900 hover:bg-slate-50 transition-all duration-200 hidden sm:flex"
-              >
-                <i className={`${user ? 'ri-user-fill text-blue-600' : 'ri-user-line'} text-[17px]`} />
-              </Link>
-
-              {/* Cart */}
-              <div className="relative">
-                <button
-                  onClick={() => setIsCartOpen(!isCartOpen)}
-                  aria-label="Shopping bag"
-                  className="group relative p-2.5 rounded-xl text-slate-400 hover:text-slate-900 hover:bg-slate-50 transition-all duration-200"
-                >
-                  <i className="ri-shopping-bag-line text-[17px]" />
-                  {cartCount > 0 && (
-                    <span className="absolute top-2 right-2 w-1.5 h-1.5 rounded-full bg-blue-500 ring-1 ring-white" />
-                  )}
-                </button>
-                <MiniCart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+              {/* Marquee of trust points */}
+              <div className="flex-1 min-w-0 overflow-hidden">
+                <div className="flex w-max animate-marquee lg:animate-none">
+                  {[0, 1].map(dup => (
+                    <div key={dup} className="flex items-center lg:w-auto" aria-hidden={dup === 1}>
+                      {RAIL_ITEMS.map(({ icon, text }) => (
+                        <span
+                          key={`${dup}-${text}`}
+                          className="flex items-center gap-2 px-5 lg:px-0 lg:pr-7 text-[10px] tracking-[0.22em] uppercase font-semibold whitespace-nowrap"
+                        >
+                          <i className={`${icon} text-brand-gold text-[13px]`} />
+                          {text}
+                        </span>
+                      ))}
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              {/* Mobile burger */}
-              <button
-                onClick={() => setIsMobileMenuOpen(true)}
-                aria-label="Open navigation"
-                className="lg:hidden ml-1 p-2.5 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-all duration-200"
-              >
-                <i className="ri-menu-3-line text-[18px]" />
-              </button>
+              {/* Contact */}
+              <div className="hidden md:flex items-center gap-5 flex-shrink-0">
+                <a
+                  href={`tel:${BRAND.contact.phoneTel}`}
+                  className="flex items-center gap-2 text-[10px] tracking-[0.22em] uppercase font-semibold text-brand-cream/85 hover:text-brand-ivory transition-colors"
+                >
+                  <i className="ri-phone-line text-brand-gold text-[13px]" />
+                  {BRAND.contact.phoneDisplay}
+                </a>
+                <span className="w-px h-3 bg-brand-gold/30" />
+                <a
+                  href={whatsappHref()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-[10px] tracking-[0.22em] uppercase font-semibold text-brand-gold hover:text-brand-ivory transition-colors"
+                >
+                  <i className="ri-whatsapp-line text-[13px]" />
+                  WhatsApp Us
+                </a>
+              </div>
             </div>
-
           </div>
-        </nav>
+        </div>
+
+        {/* ── Tier 2: main bar ── */}
+        <div
+          className={`relative transition-all duration-500 ${
+            scrolled
+              ? 'bg-white/92 backdrop-blur-xl shadow-[0_8px_30px_-12px_rgba(9,60,45,0.18)]'
+              : 'bg-white'
+          }`}
+        >
+          <nav aria-label="Main navigation" className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-10">
+            <div
+              className={`flex items-center justify-between gap-4 transition-all duration-500 lg:grid lg:grid-cols-[1fr_auto_1fr] ${
+                scrolled ? 'h-[62px]' : 'h-[76px]'
+              }`}
+            >
+
+              {/* ── LEFT: logo ── */}
+              <div className="flex items-center min-w-0">
+                <BrandLogo
+                  imgClassName={`w-auto transition-all duration-500 hover:opacity-75 ${
+                    scrolled ? 'h-6 md:h-7' : 'h-7 md:h-9'
+                  } max-w-[150px] sm:max-w-[200px]`}
+                  priority
+                />
+              </div>
+
+              {/* ── CENTER: capsule nav ── */}
+              <div className="hidden lg:flex items-center justify-center">
+                <div className="flex items-center gap-1 rounded-full border border-brand-forest/10 bg-brand-cream/45 p-1.5">
+                  {NAV_LINKS.map(({ label, href }) => {
+                    const active = isActive(href);
+                    return (
+                      <Link
+                        key={href}
+                        href={href}
+                        className={`relative px-5 py-2 rounded-full text-[11px] font-bold tracking-[0.24em] uppercase transition-all duration-300 ${
+                          active
+                            ? 'bg-brand-forest text-brand-ivory shadow-[0_6px_18px_-8px_rgba(12,69,52,0.8)]'
+                            : 'text-brand-forest/65 hover:text-brand-forest hover:bg-white'
+                        }`}
+                      >
+                        {label}
+                        {active && (
+                          <span className="absolute left-1/2 -translate-x-1/2 bottom-1 w-3 h-[2px] rounded-full bg-brand-gold" />
+                        )}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* ── RIGHT: actions ── */}
+              <div className="flex items-center justify-end gap-2">
+
+                {/* WhatsApp CTA */}
+                <a
+                  href={whatsappHref()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hidden xl:inline-flex items-center gap-2 mr-1 pl-4 pr-5 h-10 rounded-full border border-brand-gold bg-brand-gold/12 text-brand-forest text-[10px] font-black tracking-[0.24em] uppercase hover:bg-brand-forest hover:text-brand-ivory hover:border-brand-forest transition-all duration-300"
+                >
+                  <i className="ri-whatsapp-line text-[15px]" />
+                  Order
+                </a>
+
+                <button onClick={() => setIsSearchOpen(true)} aria-label="Search" className={iconButton}>
+                  <i className="ri-search-line text-[17px]" />
+                </button>
+
+                <Link href="/wishlist" aria-label="Wishlist" className={`${iconButton} hidden sm:grid`}>
+                  <i className="ri-heart-line text-[17px]" />
+                  {wishlistCount > 0 && <span className={badge}>{wishlistCount > 9 ? '9+' : wishlistCount}</span>}
+                </Link>
+
+                <Link
+                  href={user ? '/account' : '/auth/login'}
+                  aria-label={user ? 'My Account' : 'Login'}
+                  className={`${iconButton} hidden sm:grid ${user ? 'bg-brand-forest text-brand-ivory border-brand-forest' : ''}`}
+                >
+                  <i className={`${user ? 'ri-user-fill' : 'ri-user-line'} text-[17px]`} />
+                </Link>
+
+                <div className="relative">
+                  <button onClick={() => setIsCartOpen(!isCartOpen)} aria-label="Shopping bag" className={iconButton}>
+                    <i className="ri-shopping-bag-line text-[17px]" />
+                    {cartCount > 0 && <span className={badge}>{cartCount > 9 ? '9+' : cartCount}</span>}
+                  </button>
+                  <MiniCart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+                </div>
+
+                <button
+                  onClick={() => setIsMobileMenuOpen(true)}
+                  aria-label="Open navigation"
+                  className={`${iconButton} lg:hidden`}
+                >
+                  <i className="ri-menu-3-line text-[18px]" />
+                </button>
+              </div>
+
+            </div>
+          </nav>
+
+          {/* Gold hairline + read progress */}
+          <div className="relative h-[2px] bg-brand-cream/70">
+            <div
+              className="absolute inset-y-0 left-0 bg-gradient-to-r from-brand-forest via-brand-gold to-brand-champagne transition-[width] duration-150 ease-out"
+              style={{ width: `${Math.max(progress * 100, 0)}%` }}
+            />
+          </div>
+        </div>
       </header>
 
       {/* ─── FULL-SCREEN SEARCH OVERLAY ─────────────── */}
@@ -236,57 +306,52 @@ export default function Header() {
           className="fixed inset-0 z-[200] flex items-start justify-center pt-28 sm:pt-32 px-4"
           style={{ animation: 'fadeIn 0.25s ease forwards' }}
         >
-          <div
-            className="absolute inset-0 bg-slate-950/95 backdrop-blur-2xl"
-            onClick={closeSearch}
-          />
+          <div className="absolute inset-0 bg-brand-deep/96 backdrop-blur-2xl" onClick={closeSearch} />
 
           <div
             className="relative w-full max-w-3xl"
             onClick={e => e.stopPropagation()}
             style={{ animation: 'slideUp 0.3s ease forwards' }}
           >
-            {/* Close */}
             <button
               onClick={closeSearch}
-              className="absolute -top-16 right-0 flex items-center gap-2 text-slate-500 hover:text-white transition-colors duration-300 text-xs tracking-[0.2em] uppercase font-semibold"
+              className="absolute -top-16 right-0 flex items-center gap-2 text-brand-cream/60 hover:text-brand-ivory transition-colors duration-300 text-xs tracking-[0.2em] uppercase font-semibold"
             >
               Close <i className="ri-close-line text-xl" />
             </button>
 
-            {/* Search input */}
             <form onSubmit={handleSearch} className="group relative">
               <div className="flex items-center gap-4">
-                <i className="ri-search-line text-2xl text-slate-600 group-focus-within:text-white transition-colors duration-400 flex-shrink-0" />
+                <i className="ri-search-line text-2xl text-brand-gold flex-shrink-0" />
                 <input
                   autoFocus
                   type="text"
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
-                  placeholder="Search products…"
+                  placeholder="Search wigs, bundles, braids…"
                   autoComplete="off"
-                  className="flex-1 bg-transparent text-3xl sm:text-5xl text-white placeholder-slate-700 focus:outline-none font-serif tracking-wide py-4"
+                  className="flex-1 bg-transparent text-3xl sm:text-5xl text-brand-ivory placeholder-brand-cream/25 focus:outline-none font-serif tracking-wide py-4"
                 />
               </div>
-              {/* Animated underline */}
-              <div className="relative h-px bg-slate-800 mt-2">
-                <div className="absolute inset-y-0 left-0 bg-white w-0 group-focus-within:w-full transition-all duration-600 ease-out" />
+              <div className="relative h-px bg-brand-cream/15 mt-2">
+                <div className="absolute inset-y-0 left-0 bg-brand-gold w-0 group-focus-within:w-full transition-all duration-500 ease-out" />
               </div>
             </form>
 
-            {/* Results */}
             {(searchHits.length > 0 || (searchLoading && searchQuery.trim()) || (!searchLoading && searchQuery.trim() && debouncedSearch.trim() && searchHits.length === 0)) && (
-              <div className="mt-6 rounded-2xl overflow-hidden border border-white/8 bg-slate-900/70 backdrop-blur-md shadow-2xl max-h-[50vh] overflow-y-auto">
+              <div className="mt-6 rounded-2xl overflow-hidden border border-brand-gold/20 bg-brand-forest/60 backdrop-blur-md shadow-2xl max-h-[50vh] overflow-y-auto">
                 {searchLoading && searchQuery.trim() && (
-                  <div className="p-6 flex items-center justify-center gap-3 text-slate-500 text-sm">
+                  <div className="p-6 flex items-center justify-center gap-3 text-brand-cream/70 text-sm">
                     <i className="ri-loader-4-line animate-spin text-xl" /> Finding products…
                   </div>
                 )}
                 {!searchLoading && searchQuery.trim() && debouncedSearch.trim() && searchHits.length === 0 && (
-                  <div className="p-8 text-center text-slate-600 text-sm">No products found — try a different search.</div>
+                  <div className="p-8 text-center text-brand-cream/60 text-sm">
+                    No products found — try a different search.
+                  </div>
                 )}
                 {searchHits.length > 0 && (
-                  <ul className="divide-y divide-white/5">
+                  <ul className="divide-y divide-brand-gold/10">
                     {searchHits.map(p => {
                       const { effective, originalDisplay } = resolveProductPrice({
                         salesActive, price: Number(p.price) || 0, salePrice: p.sale_price, compareAtPrice: p.compare_at_price,
@@ -296,19 +361,19 @@ export default function Header() {
                           <Link
                             href={`/product/${encodeURIComponent(p.slug)}`}
                             onClick={closeSearch}
-                            className="flex items-center gap-4 p-4 hover:bg-white/5 transition-colors"
+                            className="flex items-center gap-4 p-4 hover:bg-brand-gold/10 transition-colors"
                           >
-                            <div className="w-14 h-14 flex-shrink-0 rounded-xl overflow-hidden bg-slate-800">
+                            <div className="w-14 h-14 flex-shrink-0 rounded-xl overflow-hidden bg-brand-deep">
                               <img src={p.image || '/logo.png'} alt="" className="w-full h-full object-cover" loading="lazy" />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <p className="text-white font-medium text-sm leading-snug line-clamp-2">{p.name}</p>
-                              {p.categoryName && <p className="text-slate-500 text-xs mt-0.5">{p.categoryName}</p>}
+                              <p className="text-brand-ivory font-medium text-sm leading-snug line-clamp-2">{p.name}</p>
+                              {p.categoryName && <p className="text-brand-cream/55 text-xs mt-0.5">{p.categoryName}</p>}
                             </div>
                             <div className="text-right flex-shrink-0">
-                              <p className="text-white font-semibold text-sm">GH₵{effective.toFixed(2)}</p>
+                              <p className="text-brand-gold font-semibold text-sm">GH₵{effective.toFixed(2)}</p>
                               {originalDisplay != null && originalDisplay > effective && (
-                                <p className="text-slate-600 text-xs line-through">GH₵{originalDisplay.toFixed(2)}</p>
+                                <p className="text-brand-cream/40 text-xs line-through">GH₵{originalDisplay.toFixed(2)}</p>
                               )}
                             </div>
                           </Link>
@@ -321,7 +386,7 @@ export default function Header() {
             )}
 
             {!searchQuery.trim() && (
-              <p className="mt-8 text-slate-700 text-xs tracking-[0.3em] uppercase text-center">
+              <p className="mt-8 text-brand-cream/40 text-xs tracking-[0.3em] uppercase text-center">
                 Start typing to search our store
               </p>
             )}
@@ -332,62 +397,41 @@ export default function Header() {
       {/* ─── FULL-SCREEN MOBILE MENU ─────────────────── */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-[200] lg:hidden flex">
-          {/* Backdrop */}
-          <div
-            className="absolute inset-0 bg-slate-950"
-            style={{ animation: 'fadeIn 0.3s ease forwards' }}
-          />
+          <div className="absolute inset-0 bg-brand-deep" style={{ animation: 'fadeIn 0.3s ease forwards' }} />
 
-          <div
-            className="relative w-full flex flex-col"
-            style={{ animation: 'slideUp 0.35s ease forwards' }}
-          >
-            {/* Top bar */}
+          <div className="relative w-full flex flex-col" style={{ animation: 'slideUp 0.35s ease forwards' }}>
             <div className="flex items-center justify-between px-6 pt-6 pb-4">
-              <BrandLogo
-                onDark
-                imgClassName="h-8 w-auto max-w-[180px]"
-                className=""
-              />
+              <BrandLogo onDark imgClassName="h-8 w-auto max-w-[180px]" />
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-all"
+                className="w-10 h-10 grid place-items-center rounded-full border border-brand-gold/40 text-brand-cream hover:bg-brand-gold hover:text-brand-deep transition-all"
                 aria-label="Close menu"
               >
                 <i className="ri-close-line text-xl" />
               </button>
             </div>
 
-            {/* Thin divider */}
-            <div className="h-px bg-slate-800 mx-6" />
+            <div className="h-px bg-brand-gold/25 mx-6" />
 
-            {/* Nav links — large, editorial */}
-            <nav className="flex-1 px-6 py-8 flex flex-col justify-center gap-1">
-              {[
-                { label: 'Home', href: '/' },
-                ...NAV_LINKS,
-              ].map(({ label, href }, i) => {
+            <nav className="flex-1 px-6 py-8 flex flex-col justify-center gap-1 overflow-y-auto">
+              {[{ label: 'Home', href: '/' }, ...NAV_LINKS].map(({ label, href }) => {
                 const active = isActive(href);
                 return (
                   <Link
                     key={href}
                     href={href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`group flex items-center justify-between py-4 border-b border-slate-800/60 transition-all duration-200 ${
-                      active ? 'text-white' : 'text-slate-500 hover:text-white'
+                    className={`group flex items-center justify-between py-4 border-b border-brand-gold/12 transition-colors duration-200 ${
+                      active ? 'text-brand-gold' : 'text-brand-cream/75 hover:text-brand-ivory'
                     }`}
-                    style={{ animationDelay: `${i * 60}ms` }}
                   >
-                    <span className="font-serif text-4xl sm:text-5xl tracking-tight leading-none">
-                      {label}
-                    </span>
-                    <i className={`ri-arrow-right-up-line text-xl transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 ${active ? 'text-blue-400' : 'text-slate-700 group-hover:text-slate-300'}`} />
+                    <span className="font-serif text-4xl sm:text-5xl tracking-tight leading-none">{label}</span>
+                    <i className="ri-arrow-right-up-line text-xl transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                   </Link>
                 );
               })}
 
-              {/* Sub-links */}
-              <div className="flex flex-wrap gap-x-6 gap-y-2 mt-6">
+              <div className="flex flex-wrap gap-x-6 gap-y-2 mt-8">
                 {[
                   { label: 'Track Order', href: '/order-tracking' },
                   { label: 'Wishlist', href: '/wishlist' },
@@ -397,7 +441,7 @@ export default function Header() {
                     key={href}
                     href={href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-slate-600 hover:text-slate-300 text-xs tracking-[0.25em] uppercase font-semibold transition-colors"
+                    className="text-brand-cream/55 hover:text-brand-gold text-xs tracking-[0.25em] uppercase font-semibold transition-colors"
                   >
                     {label}
                   </Link>
@@ -405,10 +449,22 @@ export default function Header() {
               </div>
             </nav>
 
-            <div className="px-6 pb-10">
-              <p className="text-slate-700 text-xs tracking-widest uppercase">
-                {siteName}
-              </p>
+            <div className="px-6 pb-10 space-y-5">
+              <a
+                href={whatsappHref()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-3 w-full h-14 rounded-full bg-brand-gold text-brand-deep text-[11px] font-black tracking-[0.28em] uppercase"
+              >
+                <i className="ri-whatsapp-line text-lg" />
+                Order on WhatsApp
+              </a>
+              <div className="flex items-center justify-between text-brand-cream/45 text-[10px] tracking-[0.25em] uppercase">
+                <span>{siteName}</span>
+                <a href={`tel:${BRAND.contact.phoneTel}`} className="hover:text-brand-gold transition-colors">
+                  {BRAND.contact.phoneDisplay}
+                </a>
+              </div>
             </div>
           </div>
         </div>

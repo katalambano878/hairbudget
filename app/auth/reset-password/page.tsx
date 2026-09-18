@@ -137,10 +137,10 @@ export default function ResetPasswordPage() {
               <div className="w-14 h-14 rounded-2xl bg-red-50 border border-red-100 flex items-center justify-center mb-6">
                 <i className="ri-close-line text-2xl text-red-500" />
               </div>
-              <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-300 mb-4">Link Expired</p>
+              <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-400 mb-4">Link Expired</p>
               <h1 className="font-serif text-3xl sm:text-4xl text-slate-900 italic mb-2 leading-tight">
                 Reset link<br />
-                <span className="text-slate-300 font-light">no longer valid</span>
+                <span className="text-slate-400 font-light">no longer valid</span>
               </h1>
               <p className="text-slate-500 text-sm font-light mb-8 leading-relaxed">
                 The link may have expired or already been used. Please request a fresh one.
@@ -160,19 +160,19 @@ export default function ResetPasswordPage() {
               <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-6">
                 <i className="ri-shield-check-line text-2xl text-blue-600" />
               </div>
-              <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-300 mb-4">Password Updated</p>
+              <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-400 mb-4">Password Updated</p>
               <h1 className="font-serif text-3xl sm:text-4xl text-slate-900 italic mb-2 leading-tight">
                 You&apos;re all<br />
-                <span className="text-slate-300 font-light">set.</span>
+                <span className="text-slate-400 font-light">set.</span>
               </h1>
               <p className="text-slate-500 text-sm font-light">Redirecting you to sign in…</p>
             </>
           ) : (
             <>
-              <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-300 mb-4">New Password</p>
+              <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-400 mb-4">New Password</p>
               <h1 className="font-serif text-3xl sm:text-4xl text-slate-900 italic mb-2 leading-tight">
                 Set a new<br />
-                <span className="text-slate-300 font-light">password</span>
+                <span className="text-slate-400 font-light">password</span>
               </h1>
               <p className="text-slate-400 text-sm font-light mb-10">
                 Choose something strong — at least 8 characters.
@@ -195,13 +195,13 @@ export default function ResetPasswordPage() {
                       type={showPassword ? 'text' : 'password'}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full pb-3 border-b border-slate-200 focus:border-slate-900 bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-300 pr-8"
+                      className="w-full pb-3 border-b border-slate-200 focus:border-slate-900 bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-400 pr-8"
                       placeholder="At least 8 characters"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-0 bottom-3 text-slate-300 hover:text-slate-700 transition-colors"
+                      className="absolute right-0 bottom-3 text-slate-400 hover:text-slate-700 transition-colors"
                     >
                       <i className={`${showPassword ? 'ri-eye-off-line' : 'ri-eye-line'} text-lg`} />
                     </button>
@@ -218,13 +218,13 @@ export default function ResetPasswordPage() {
                       type={showConfirm ? 'text' : 'password'}
                       value={confirm}
                       onChange={(e) => setConfirm(e.target.value)}
-                      className="w-full pb-3 border-b border-slate-200 focus:border-slate-900 bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-300 pr-8"
+                      className="w-full pb-3 border-b border-slate-200 focus:border-slate-900 bg-transparent text-slate-900 text-sm outline-none transition-colors placeholder:text-slate-400 pr-8"
                       placeholder="Re-enter password"
                     />
                     <button
                       type="button"
                       onClick={() => setShowConfirm(!showConfirm)}
-                      className="absolute right-0 bottom-3 text-slate-300 hover:text-slate-700 transition-colors"
+                      className="absolute right-0 bottom-3 text-slate-400 hover:text-slate-700 transition-colors"
                     >
                       <i className={`${showConfirm ? 'ri-eye-off-line' : 'ri-eye-line'} text-lg`} />
                     </button>
@@ -253,7 +253,7 @@ export default function ResetPasswordPage() {
           <div className="mt-8 text-center">
             <Link
               href="/auth/login"
-              className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-300 hover:text-slate-600 transition-colors"
+              className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400 hover:text-slate-600 transition-colors"
             >
               <i className="ri-arrow-left-line mr-1" />
               Back to Sign In

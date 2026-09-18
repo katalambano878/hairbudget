@@ -395,7 +395,7 @@ function AccountContent() {
                                 <i className="ri-error-warning-fill"></i> <span className="hidden sm:inline">Verify</span>
                               </span>
                             )}
-                            <i className="ri-arrow-right-line text-gray-300 group-hover:text-blue-500 transition-colors"></i>
+                            <i className="ri-arrow-right-line text-gray-400 group-hover:text-blue-500 transition-colors"></i>
                           </div>
                         </Link>
                       ))}

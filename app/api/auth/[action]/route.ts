@@ -9,6 +9,7 @@ import {
 import { signToken, RECOVERY_TOKEN_TTL_SECONDS } from '@/lib/db/jwt';
 import { pool } from '@/lib/db/pool';
 import { checkRateLimit } from '@/lib/rate-limit';
+import { BRAND } from '@/lib/brand';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -159,21 +160,21 @@ async function sendRecoveryEmail(email: string, redirectTo: string): Promise<voi
     const link = `${base}#access_token=${token}&type=recovery`;
 
     const resend = new Resend(process.env.RESEND_API_KEY || 'missing_api_key');
-    const from = process.env.EMAIL_FROM || 'NAD4U <noreply@nad4uhub.com>';
+    const from = process.env.EMAIL_FROM || `${BRAND.name} <noreply@hairbudgetgh.com>`;
 
     await resend.emails.send({
         from,
         to: email,
-        subject: 'Reset your NAD4U password',
+        subject: `Reset your ${BRAND.name} password`,
         html: `<!DOCTYPE html><html><body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:#f3f4f6;padding:24px;">
 <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:16px;overflow:hidden;">
-<tr><td style="background:#000000;padding:28px 40px;text-align:center;">
-<h1 style="margin:0;color:#C5A059;font-size:22px;letter-spacing:0.15em;">NAD4U</h1></td></tr>
+<tr><td style="background:${BRAND.colors.forest};padding:28px 40px;text-align:center;">
+<h1 style="margin:0;color:${BRAND.colors.gold};font-size:22px;letter-spacing:0.15em;">${BRAND.name.toUpperCase()}</h1></td></tr>
 <tr><td style="padding:36px 40px;">
 <h2 style="margin:0 0 12px;color:#111827;font-size:18px;">Reset your password</h2>
 <p style="color:#4b5563;font-size:14px;line-height:1.6;">We received a request to reset the password for your account. Click the button below to choose a new password. This link expires in 1 hour.</p>
 <table role="presentation" cellpadding="0" cellspacing="0" style="margin:24px auto;"><tr>
-<td style="background:#C5A059;border-radius:8px;"><a href="${link}" target="_blank" style="display:inline-block;padding:14px 32px;color:#000000;font-size:15px;font-weight:600;text-decoration:none;">Reset Password</a></td>
+<td style="background:${BRAND.colors.forest};border-radius:8px;"><a href="${link}" target="_blank" style="display:inline-block;padding:14px 32px;color:${BRAND.colors.ivory};font-size:15px;font-weight:600;text-decoration:none;">Reset Password</a></td>
 </tr></table>
 <p style="color:#9ca3af;font-size:12px;">If you didn't request this, you can safely ignore this email.</p>
 </td></tr></table></body></html>`,

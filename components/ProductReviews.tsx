@@ -169,7 +169,7 @@ export default function ProductReviews({ productId }: ProductReviewsProps) {
                 {[1, 2, 3, 4, 5].map((star) => (
                   <i
                     key={star}
-                    className={`ri-star-${star <= Math.round(averageRating) ? 'fill' : 'line'} text-xl ${star <= Math.round(averageRating) ? 'text-yellow-400' : 'text-gray-300'
+                    className={`ri-star-${star <= Math.round(averageRating) ? 'fill' : 'line'} text-xl ${star <= Math.round(averageRating) ? 'text-yellow-400' : 'text-gray-400'
                       }`}
                   ></i>
                 ))}
@@ -242,7 +242,7 @@ export default function ProductReviews({ productId }: ProductReviewsProps) {
                   className="w-10 h-10 flex items-center justify-center"
                 >
                   <i
-                    className={`ri-star-${star <= reviewForm.rating ? 'fill' : 'line'} text-3xl ${star <= reviewForm.rating ? 'text-yellow-400' : 'text-gray-300'
+                    className={`ri-star-${star <= reviewForm.rating ? 'fill' : 'line'} text-3xl ${star <= reviewForm.rating ? 'text-yellow-400' : 'text-gray-400'
                       }`}
                   ></i>
                 </button>
@@ -327,7 +327,7 @@ export default function ProductReviews({ productId }: ProductReviewsProps) {
                 {[1, 2, 3, 4, 5].map((star) => (
                   <i
                     key={star}
-                    className={`ri-star-${star <= review.rating ? 'fill' : 'line'} text-lg ${star <= review.rating ? 'text-yellow-400' : 'text-gray-300'
+                    className={`ri-star-${star <= review.rating ? 'fill' : 'line'} text-lg ${star <= review.rating ? 'text-yellow-400' : 'text-gray-400'
                       }`}
                   ></i>
                 ))}

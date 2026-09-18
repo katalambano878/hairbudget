@@ -85,7 +85,7 @@ export default function WishlistPage() {
         /* ── EMPTY STATE ── */
         <div className="min-h-[50vh] flex flex-col items-center justify-center text-center py-24 px-4">
           <div className="w-20 h-20 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mb-6">
-            <i className="ri-heart-line text-3xl text-slate-300" />
+            <i className="ri-heart-line text-3xl text-slate-400" />
           </div>
           <h2 className="font-serif text-3xl italic text-slate-900 mb-3">Your wishlist is empty</h2>
           <p className="text-slate-400 text-sm max-w-xs mb-8 leading-relaxed">
@@ -107,9 +107,9 @@ export default function WishlistPage() {
             {/* Section header */}
             <div className="flex items-end justify-between mb-10 pb-6 border-b border-slate-100">
               <div>
-                <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-300 mb-1">Your Picks</p>
+                <p className="text-[9px] font-black tracking-[0.5em] uppercase text-slate-400 mb-1">Your Picks</p>
                 <h2 className="font-serif text-3xl italic text-slate-900">
-                  Saved Items <span className="text-slate-300 font-light">({wishlistItems.length})</span>
+                  Saved Items <span className="text-slate-400 font-light">({wishlistItems.length})</span>
                 </h2>
               </div>
               <button
