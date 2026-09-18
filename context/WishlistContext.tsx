@@ -43,10 +43,13 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
         setIsInitialized(true);
     }, []);
 
-    // Save wishlist to localStorage whenever it changes
+    // Save wishlist to localStorage whenever it changes.
+    // The header counts from localStorage and listens for `wishlistUpdated`,
+    // so the event has to fire or its badge goes stale until a reload.
     useEffect(() => {
         if (isInitialized) {
             localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            window.dispatchEvent(new Event('wishlistUpdated'));
         }
     }, [wishlist, isInitialized]);
 

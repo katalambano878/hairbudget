@@ -84,15 +84,16 @@ export default function Home() {
 
         const { data: categoriesData, error: categoriesError } = await supabase
           .from('categories')
-          .select('id, name, slug, image_url, metadata')
+          .select('id, name, slug, image_url, metadata, position')
           .eq('status', 'active')
-          .order('name');
+          .order('position', { ascending: true });
 
         if (categoriesError) throw categoriesError;
 
-        const featuredCategories = (categoriesData || []).filter(
-          (cat: any) => cat.metadata?.featured === true
-        );
+        // The homepage row holds four tiles; `featured` in metadata picks which.
+        const featuredCategories = (categoriesData || [])
+          .filter((cat: any) => cat.metadata?.featured === true)
+          .slice(0, 4);
         setCategories(featuredCategories);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -192,17 +193,17 @@ export default function Home() {
 
           <AnimatedSection className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
-              <span className="inline-flex items-center gap-2 text-slate-500 text-xs tracking-[0.35em] uppercase font-semibold mb-3">
-                <span className="w-5 h-[1px] bg-slate-400 inline-block" />
+              <span className="inline-flex items-center gap-2 text-brand-mid text-xs tracking-[0.35em] uppercase font-semibold mb-3">
+                <span className="w-5 h-[1px] bg-brand-gold inline-block" />
                 Collections
               </span>
-              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-gray-900 leading-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-brand-ink leading-tight">
                 Shop by Category
               </h2>
             </div>
             <Link
               href="/categories"
-              className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-slate-700 border border-slate-200 px-6 py-3 rounded-full hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all duration-300 whitespace-nowrap"
+              className="hidden md:inline-flex items-center gap-2 text-xs font-black tracking-[0.2em] uppercase text-brand-forest border border-brand-forest/20 px-6 py-3 rounded-full hover:bg-brand-forest hover:text-brand-ivory hover:border-brand-forest transition-all duration-300 whitespace-nowrap"
             >
               All Categories
               <i className="ri-arrow-right-line" />
@@ -217,29 +218,28 @@ export default function Home() {
                   key={category.id}
                   className="group block relative"
                 >
-                  <div className="aspect-[3/4] rounded-2xl overflow-hidden relative shadow-sm group-hover:shadow-[0_24px_48px_-12px_rgba(0,0,0,0.35)] transition-all duration-700 group-hover:-translate-y-2">
+                  <div className="aspect-[3/4] rounded-[26px] overflow-hidden relative bg-brand-deep ring-1 ring-brand-forest/15 group-hover:ring-brand-gold transition-all duration-500 group-hover:-translate-y-1.5">
                     <Image
                       src={category.image_url || `https://via.placeholder.com/600x800?text=${encodeURIComponent(category.name)}`}
                       alt={category.name}
                       fill
-                      className="object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110"
+                      className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.07]"
                       sizes="(max-width: 768px) 50vw, 25vw"
                       quality={85}
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-500" />
-                    <div className="absolute inset-0 rounded-2xl border border-white/10 pointer-events-none group-hover:border-white/25 transition-colors duration-500 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-deep via-brand-deep/45 to-brand-deep/5" />
+                    <div className="absolute inset-3 rounded-[18px] border border-brand-ivory/20 group-hover:border-brand-gold/70 transition-colors duration-500 pointer-events-none z-10" />
 
-                    <div className="absolute inset-0 p-5 md:p-7 flex flex-col justify-end z-20">
-                      <div>
-                        <h3 className="font-serif text-white text-xl md:text-2xl lg:text-3xl tracking-wide">
-                          {category.name}
-                        </h3>
-                      </div>
-                      <div className="flex items-center gap-3 text-white/80 mt-2.5 opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500 delay-75">
-                        <span className="text-[11px] font-bold tracking-[0.2em] uppercase">Explore</span>
-                        <div className="flex-1 h-[1px] bg-white/50 max-w-[40px] group-hover:max-w-[60px] transition-all duration-500" />
-                        <i className="ri-arrow-right-line text-sm" />
+                    <div className="absolute inset-0 p-5 md:p-6 flex flex-col justify-end z-20">
+                      <p className="text-[8px] font-black tracking-[0.5em] uppercase text-brand-gold mb-2">Collection</p>
+                      <h3 className="font-serif italic text-brand-ivory text-xl md:text-2xl leading-tight transition-transform duration-500 group-hover:-translate-y-1">
+                        {category.name}
+                      </h3>
+                      <div className="flex items-center gap-2 mt-3 text-brand-ivory text-[9px] font-black tracking-[0.3em] uppercase">
+                        <span>Explore</span>
+                        <span className="w-5 h-px bg-brand-gold group-hover:w-10 transition-all duration-500" />
+                        <i className="ri-arrow-right-up-line text-brand-gold text-sm transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </div>
                     </div>
                   </div>
