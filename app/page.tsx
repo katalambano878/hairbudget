@@ -110,9 +110,9 @@ export default function Home() {
       <section className="relative w-full h-[88vh] md:h-screen overflow-hidden bg-brand-deep">
         <HeroVideo />
 
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-deep/80 via-brand-deep/25 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/70 via-transparent to-brand-deep/15" />
+        <div className="absolute inset-0 bg-black/5" />
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-deep/50 via-brand-deep/10 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/45 via-transparent to-brand-deep/5" />
 
         <div className="absolute inset-0 z-20 flex flex-col justify-end md:justify-center pb-24 md:pb-0 px-6 sm:px-12 md:px-20 lg:px-28 max-w-7xl mx-auto w-full h-full">
           <div className="max-w-xl lg:max-w-2xl">
