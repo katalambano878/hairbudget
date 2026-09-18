@@ -39,18 +39,24 @@ async function loadSchema(): Promise<SchemaCache> {
         WHERE table_schema = 'public'
     `);
 
+    // Read FKs from pg_catalog, not information_schema: the information_schema
+    // constraint views only expose rows to the table owner, so an app role that
+    // merely has GRANTs sees zero foreign keys and every embedded select fails.
     const fksRes = await pool.query(`
         SELECT
-            tc.table_name AS table,
-            kcu.column_name AS column,
-            ccu.table_name AS foreign_table,
-            ccu.column_name AS foreign_column
-        FROM information_schema.table_constraints tc
-        JOIN information_schema.key_column_usage kcu
-            ON tc.constraint_name = kcu.constraint_name AND tc.table_schema = kcu.table_schema
-        JOIN information_schema.constraint_column_usage ccu
-            ON tc.constraint_name = ccu.constraint_name AND tc.table_schema = ccu.table_schema
-        WHERE tc.constraint_type = 'FOREIGN KEY' AND tc.table_schema = 'public'
+            src.relname     AS table,
+            src_att.attname AS column,
+            tgt.relname     AS foreign_table,
+            tgt_att.attname AS foreign_column
+        FROM pg_constraint c
+        JOIN pg_class     src ON src.oid = c.conrelid
+        JOIN pg_class     tgt ON tgt.oid = c.confrelid
+        JOIN pg_namespace ns  ON ns.oid = src.relnamespace
+        JOIN LATERAL unnest(c.conkey)  WITH ORDINALITY AS sk(attnum, ord) ON TRUE
+        JOIN LATERAL unnest(c.confkey) WITH ORDINALITY AS tk(attnum, ord) ON tk.ord = sk.ord
+        JOIN pg_attribute src_att ON src_att.attrelid = c.conrelid  AND src_att.attnum = sk.attnum
+        JOIN pg_attribute tgt_att ON tgt_att.attrelid = c.confrelid AND tgt_att.attnum = tk.attnum
+        WHERE c.contype = 'f' AND ns.nspname = 'public'
     `);
 
     const columns = new Map<string, Map<string, ColumnInfo>>();
