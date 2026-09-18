@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { PUBLIC_ASSET_VERSION } from "./lib/assets";
 
 const nextConfig: NextConfig = {
   images: {
@@ -7,16 +8,11 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 2592000,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
-    // Local assets carry a ?v= cache-busting query (see lib/assets.ts)
+    // Local assets carry a ?v= cache-busting query (see lib/assets.ts).
+    // `search` must match exactly, so it is derived from the same constant.
     localPatterns: [
-      {
-        pathname: '/**',
-        search: '',
-      },
-      {
-        pathname: '/**',
-        search: '?v=*',
-      },
+      { pathname: '/**', search: '' },
+      { pathname: '/**', search: `?v=${PUBLIC_ASSET_VERSION}` },
     ],
     remotePatterns: [
       {
