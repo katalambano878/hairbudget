@@ -125,7 +125,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         { title: 'Orders',       icon: 'ri-shopping-bag-line', path: '/admin/orders' },
         { title: 'POS System',   icon: 'ri-store-3-line',      path: '/admin/pos' },
         { title: 'Products',     icon: 'ri-box-3-line',        path: '/admin/products' },
-        { title: 'Sale Pricing', icon: 'ri-price-tag-2-line',  path: '/admin/sales' },
+        { title: 'Sales',        icon: 'ri-price-tag-2-line',  path: '/admin/sales' },
       ]
     },
     {
@@ -141,6 +141,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     {
       label: 'Insights',
       items: [
+        { title: 'End of Day',        icon: 'ri-calendar-check-line', path: '/admin/end-of-day' },
         { title: 'Analytics',         icon: 'ri-bar-chart-line',    path: '/admin/analytics' },
         { title: 'Customer Insights', icon: 'ri-user-search-line',  path: '/admin/customer-insights', moduleId: 'customer-insights' },
         { title: 'Notifications',     icon: 'ri-notification-3-line', path: '/admin/notifications',   moduleId: 'notifications' },
@@ -278,7 +279,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Link
                 href="/admin/sales"
                 className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold tracking-wide border transition-all ${
-                  pathname === '/admin/sales'
+                  pathname.startsWith('/admin/sales') || pathname.startsWith('/admin/end-of-day')
                     ? 'bg-brand-forest text-brand-ivory border-brand-forest'
                     : 'bg-white text-ui-700 border-ui-200 hover:bg-ui-50'
                 }`}

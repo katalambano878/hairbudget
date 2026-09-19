@@ -9,11 +9,17 @@ import CartCountdown from '@/components/CartCountdown';
 import AdvancedCouponSystem from '@/components/AdvancedCouponSystem';
 import { useCart } from '@/context/CartContext';
 import { usePageTitle } from '@/hooks/usePageTitle';
+import {
+  computeCouponDiscount,
+  readStoredCoupon,
+  storeCoupon,
+  type AppliedCoupon,
+} from '@/lib/coupons';
 
 export default function CartPage() {
   usePageTitle('Shopping Cart');
   const { cart: cartItems, removeFromCart, updateQuantity, subtotal, addToCart } = useCart();
-  const [appliedCoupon, setAppliedCoupon] = useState<any>(null);
+  const [appliedCoupon, setAppliedCoupon] = useState<AppliedCoupon | null>(() => readStoredCoupon());
   const [savedItems, setSavedItems] = useState<any[]>([]);
 
   const saveForLater = (id: string) => {
@@ -32,22 +38,23 @@ export default function CartPage() {
     }
   };
 
-  const applyCoupon = (coupon: any) => setAppliedCoupon(coupon);
-  const removeCoupon = () => setAppliedCoupon(null);
+  const applyCoupon = (coupon: AppliedCoupon) => {
+    setAppliedCoupon(coupon);
+    storeCoupon(coupon);
+  };
+  const removeCoupon = () => {
+    setAppliedCoupon(null);
+    storeCoupon(null);
+  };
 
   const savings = 0;
 
-  let couponDiscount = 0;
-  if (appliedCoupon) {
-    if (appliedCoupon.type === 'percentage') {
-      couponDiscount = subtotal * (appliedCoupon.discount / 100);
-    } else {
-      couponDiscount = appliedCoupon.discount;
-    }
-  }
-
   const shipping = subtotal >= 200 ? 0 : 15;
-  const total = subtotal - couponDiscount + shipping;
+  const couponResult = appliedCoupon
+    ? computeCouponDiscount(appliedCoupon, subtotal, shipping)
+    : null;
+  const couponDiscount = couponResult?.ok ? couponResult.discount : 0;
+  const total = Math.max(0, subtotal - couponDiscount + shipping);
 
   return (
     <div className="min-h-screen bg-white">

@@ -1,195 +1,104 @@
 'use client';
 
 import { useState } from 'react';
-
-interface Coupon {
-  code: string;
-  discount: number;
-  type: 'percentage' | 'fixed';
-  minPurchase?: number;
-  maxDiscount?: number;
-  description: string;
-}
+import { supabase } from '@/lib/supabase';
+import {
+  computeCouponDiscount,
+  isCouponLive,
+  normalizeCouponCode,
+  toAppliedCoupon,
+  type AppliedCoupon,
+  type CouponRow,
+} from '@/lib/coupons';
 
 interface AdvancedCouponSystemProps {
   subtotal: number;
-  onApply: (coupon: Coupon) => void;
+  shipping?: number;
+  onApply: (coupon: AppliedCoupon) => void;
   onRemove: () => void;
-  appliedCoupon: Coupon | null;
+  appliedCoupon: AppliedCoupon | null;
 }
 
-export default function AdvancedCouponSystem({ 
-  subtotal, 
-  onApply, 
+export default function AdvancedCouponSystem({
+  subtotal,
+  shipping = 0,
+  onApply,
   onRemove,
-  appliedCoupon 
+  appliedCoupon,
 }: AdvancedCouponSystemProps) {
   const [couponCode, setCouponCode] = useState('');
   const [error, setError] = useState('');
-  const [showAvailable, setShowAvailable] = useState(false);
+  const [busy, setBusy] = useState(false);
 
-  const availableCoupons: Coupon[] = [
-    { 
-      code: 'WELCOME10', 
-      discount: 10, 
-      type: 'percentage',
-      minPurchase: 100,
-      description: '10% off on orders over GH₵100'
-    },
-    { 
-      code: 'SAVE20', 
-      discount: 20, 
-      type: 'percentage',
-      minPurchase: 200,
-      maxDiscount: 50,
-      description: '20% off (max GH₵50) on orders over GH₵200'
-    },
-    { 
-      code: 'FREE50', 
-      discount: 50, 
-      type: 'fixed',
-      minPurchase: 500,
-      description: 'GH₵50 off on orders over GH₵500'
-    },
-    { 
-      code: 'NEWCUSTOMER', 
-      discount: 15, 
-      type: 'percentage',
-      maxDiscount: 30,
-      description: '15% off (max GH₵30) for new customers'
-    }
-  ];
-
-  const handleApply = () => {
+  const handleApply = async () => {
+    const code = normalizeCouponCode(couponCode);
     setError('');
-    const coupon = availableCoupons.find(c => c.code.toLowerCase() === couponCode.toLowerCase());
-    
-    if (!coupon) {
-      setError('Invalid coupon code');
+    if (!code) {
+      setError('Enter a coupon code');
       return;
     }
-
-    if (coupon.minPurchase && subtotal < coupon.minPurchase) {
-      setError(`Minimum purchase of GH₵${coupon.minPurchase} required`);
-      return;
+    setBusy(true);
+    try {
+      const { data, error: fetchError } = await supabase
+        .from('coupons')
+        .select('*')
+        .ilike('code', code)
+        .maybeSingle();
+      if (fetchError) throw fetchError;
+      if (!data) {
+        setError('Invalid coupon code');
+        return;
+      }
+      const row = data as CouponRow;
+      if (!isCouponLive(row)) {
+        setError('This coupon is not available');
+        return;
+      }
+      const computed = computeCouponDiscount(row, subtotal, shipping);
+      if (!computed.ok) {
+        setError(computed.error);
+        return;
+      }
+      onApply(toAppliedCoupon(row));
+      setCouponCode('');
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : 'Could not apply coupon');
+    } finally {
+      setBusy(false);
     }
-
-    onApply(coupon);
-    setCouponCode('');
-    setShowAvailable(false);
-  };
-
-  const handleQuickApply = (coupon: Coupon) => {
-    if (coupon.minPurchase && subtotal < coupon.minPurchase) {
-      setError(`Add GH₵${(coupon.minPurchase - subtotal).toFixed(2)} more to use this coupon`);
-      return;
-    }
-    setError('');
-    onApply(coupon);
-    setShowAvailable(false);
   };
 
   return (
-    <div className="space-y-4">
-      {!appliedCoupon ? (
-        <>
+    <div className="space-y-3">
+      {appliedCoupon ? (
+        <div className="flex items-center justify-between gap-3 rounded-xl border border-brand-forest/20 bg-brand-cream/40 px-4 py-3">
           <div>
-            <label className="block text-sm font-semibold text-gray-900 mb-2">
-              Have a coupon code?
-            </label>
-            <div className="flex space-x-2">
-              <input
-                type="text"
-                value={couponCode}
-                onChange={(e) => {
-                  setCouponCode(e.target.value.toUpperCase());
-                  setError('');
-                }}
-                placeholder="Enter code"
-                className="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-slate-500 text-sm"
-              />
-              <button
-                onClick={handleApply}
-                className="bg-gray-900 hover:bg-slate-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors whitespace-nowrap"
-              >
-                Apply
-              </button>
-            </div>
-            {error && (
-              <p className="text-sm text-red-600 mt-2 flex items-center">
-                <i className="ri-error-warning-line mr-1"></i>
-                {error}
-              </p>
-            )}
+            <p className="font-mono font-bold text-brand-forest">{appliedCoupon.code}</p>
+            <p className="text-xs text-ui-500">{appliedCoupon.description || 'Discount applied'}</p>
           </div>
-
-          <button
-            onClick={() => setShowAvailable(!showAvailable)}
-            className="text-sm text-slate-700 hover:text-slate-900 font-medium flex items-center whitespace-nowrap"
-          >
-            <i className={`ri-arrow-${showAvailable ? 'up' : 'down'}-s-line mr-1`}></i>
-            {showAvailable ? 'Hide' : 'View'} available coupons
+          <button type="button" onClick={onRemove} className="text-xs font-bold text-red-600">
+            Remove
           </button>
-
-          {showAvailable && (
-            <div className="bg-gray-50 rounded-lg p-4 space-y-3">
-              {availableCoupons.map((coupon) => {
-                const isEligible = !coupon.minPurchase || subtotal >= coupon.minPurchase;
-                const needed = coupon.minPurchase ? coupon.minPurchase - subtotal : 0;
-
-                return (
-                  <div
-                    key={coupon.code}
-                    className={`bg-white rounded-lg p-4 border-2 transition-all ${
-                      isEligible
-                        ? 'border-slate-200 hover:border-slate-300'
-                        : 'border-gray-200 opacity-60'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center space-x-2">
-                        <span className="bg-slate-100 text-slate-800 px-3 py-1 rounded-lg font-bold text-sm">
-                          {coupon.code}
-                        </span>
-                        {!isEligible && (
-                          <span className="text-xs text-gray-500">
-                            Add GH₵{needed.toFixed(2)} more
-                          </span>
-                        )}
-                      </div>
-                      {isEligible && (
-                        <button
-                          onClick={() => handleQuickApply(coupon)}
-                          className="text-slate-700 hover:text-slate-900 font-semibold text-sm whitespace-nowrap"
-                        >
-                          Apply
-                        </button>
-                      )}
-                    </div>
-                    <p className="text-sm text-gray-600">{coupon.description}</p>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </>
+        </div>
       ) : (
-        <div className="bg-slate-50 border-2 border-slate-200 rounded-lg p-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="flex items-center space-x-2 mb-1">
-                <i className="ri-price-tag-3-fill text-slate-700"></i>
-                <span className="font-bold text-slate-800">{appliedCoupon.code}</span>
-              </div>
-              <p className="text-sm text-slate-700">{appliedCoupon.description}</p>
-            </div>
+        <div>
+          <div className="flex gap-2">
+            <input
+              value={couponCode}
+              onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+              placeholder="Coupon code"
+              className="flex-1 px-3 py-2 rounded-xl border border-slate-200 text-sm font-mono"
+            />
             <button
-              onClick={onRemove}
-              className="w-8 h-8 flex items-center justify-center text-slate-700 hover:text-slate-900 transition-colors"
+              type="button"
+              disabled={busy}
+              onClick={handleApply}
+              className="px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold uppercase tracking-wider disabled:opacity-50"
             >
-              <i className="ri-close-line text-xl"></i>
+              {busy ? '…' : 'Apply'}
             </button>
           </div>
+          {error && <p className="text-xs text-red-600 mt-2">{error}</p>}
         </div>
       )}
     </div>

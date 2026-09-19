@@ -13,6 +13,8 @@ interface OrderSummaryProps {
   shipping: number;
   tax: number;
   total: number;
+  discount?: number;
+  couponCode?: string;
   /**
    * Optional override for the right-hand shipping cell. If provided,
    * we render this string (and skip the auto FREE / GH₵ amount).
@@ -33,6 +35,8 @@ export default function OrderSummary({
   shipping,
   tax,
   total,
+  discount = 0,
+  couponCode,
   shippingLabel,
   totalLabel,
   dueNow,
@@ -70,6 +74,12 @@ export default function OrderSummary({
           <span>Subtotal</span>
           <span className="font-semibold">GH₵ {subtotal.toFixed(2)}</span>
         </div>
+        {discount > 0 && (
+          <div className="flex justify-between text-emerald-700">
+            <span>Discount{couponCode ? ` (${couponCode})` : ''}</span>
+            <span className="font-semibold">−GH₵ {discount.toFixed(2)}</span>
+          </div>
+        )}
         <div className="flex justify-between text-gray-700">
           <span>Shipping</span>
           <span className={`font-semibold ${shippingLabel ? 'text-blue-600' : ''}`}>

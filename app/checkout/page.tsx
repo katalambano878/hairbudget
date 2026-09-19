@@ -19,6 +19,12 @@ import {
   roundMoney,
   type PaymentPlan,
 } from '@/lib/payments';
+import {
+  computeCouponDiscount,
+  readStoredCoupon,
+  storeCoupon,
+  type AppliedCoupon,
+} from '@/lib/coupons';
 
 // Comprehensive Ghana regions → major cities / towns.
 // "Other (not listed)" lets shoppers type a town that isn't in the list.
@@ -139,6 +145,7 @@ export default function CheckoutPage() {
   const [deliveryMethod, setDeliveryMethod] = useState('pickup');
   const [paymentMethod, setPaymentMethod] = useState('moolre');
   const [paymentPlan, setPaymentPlan] = useState<PaymentPlan>('full');
+  const [appliedCoupon, setAppliedCoupon] = useState<AppliedCoupon | null>(null);
   const [errors, setErrors] = useState<any>({});
 
 
@@ -165,6 +172,10 @@ export default function CheckoutPage() {
     return () => clearTimeout(timer);
   }, [cart, router, isLoading]);
 
+  useEffect(() => {
+    setAppliedCoupon(readStoredCoupon());
+  }, []);
+
   // Scroll to top when step changes
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -174,7 +185,11 @@ export default function CheckoutPage() {
   const subtotal = cartSubtotal;
   const shippingCost = 0; // Delivery options temporarily disabled
   const tax = 0; // No Tax
-  const total = subtotal + shippingCost + tax;
+  const couponMath = appliedCoupon
+    ? computeCouponDiscount(appliedCoupon, subtotal, shippingCost)
+    : null;
+  const couponDiscount = couponMath?.ok ? couponMath.discount : 0;
+  const total = Math.max(0, subtotal + shippingCost + tax - couponDiscount);
   const dueNow = amountDueAtCheckout(total, paymentPlan);
   const balanceAfterDeposit = roundMoney(total - dueNow);
 
@@ -305,7 +320,12 @@ export default function CheckoutPage() {
       }
 
       const checkoutSubtotal = computedSubtotal;
-      const checkoutTotal = checkoutSubtotal + shippingCost + tax;
+      const liveCoupon = appliedCoupon || readStoredCoupon();
+      const liveDiscount = liveCoupon
+        ? computeCouponDiscount(liveCoupon, checkoutSubtotal, shippingCost)
+        : null;
+      const checkoutDiscount = liveDiscount?.ok ? liveDiscount.discount : 0;
+      const checkoutTotal = Math.max(0, checkoutSubtotal + shippingCost + tax - checkoutDiscount);
       // Charged for this attempt. The payment routes verify against
       // metadata.payable_now, so the deposit must be recorded there.
       const checkoutPayableNow = amountDueAtCheckout(checkoutTotal, paymentPlan);
@@ -325,8 +345,9 @@ export default function CheckoutPage() {
             subtotal: checkoutSubtotal,
             tax_total: tax,
             shipping_total: shippingCost,
-            discount_total: 0,
+            discount_total: checkoutDiscount,
             total: checkoutTotal,
+            coupon_code: liveDiscount?.ok && liveCoupon ? liveCoupon.code : null,
             shipping_method: deliveryMethod,
             payment_method: paymentMethod,
             payment_plan: paymentPlan,
@@ -356,6 +377,11 @@ export default function CheckoutPage() {
         .insert(orderItems);
 
       if (itemsError) throw itemsError;
+
+      if (liveDiscount?.ok && liveCoupon?.code) {
+        await supabase.rpc('redeem_coupon', { p_code: liveCoupon.code });
+        storeCoupon(null);
+      }
 
       // Note: Stock reduction happens in mark_order_paid when payment is confirmed
 
@@ -940,6 +966,8 @@ export default function CheckoutPage() {
               }
               dueNow={dueNow}
               balanceDue={balanceAfterDeposit}
+              discount={couponDiscount}
+              couponCode={appliedCoupon?.code}
             />
           </div>
         </div>

@@ -181,6 +181,7 @@ const RPC_RULES: Record<string, CallerRole[]> = {
     get_all_customer_phones: ['staff'],
     reduce_stock_on_order: ['staff'],
     update_customer_stats: ['staff'],
+    redeem_coupon: ['anon', 'user', 'staff'],
 };
 
 export interface AuthorizedPlan {

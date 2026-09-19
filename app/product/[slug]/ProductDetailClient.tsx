@@ -13,6 +13,8 @@ import { StructuredData, generateProductSchema, generateBreadcrumbSchema } from 
 import { notFound } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { usePageTitle } from '@/hooks/usePageTitle';
+import { useStorePricing } from '@/context/StorePricingContext';
+import { resolveProductPrice, resolveVariantPrice } from '@/lib/pricing';
 
 // Map common color names to hex values for the swatch preview
 function colorNameToHex(name: string): string {
@@ -43,6 +45,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
   const [relatedProducts, setRelatedProducts] = useState<any[]>([]);
 
   const { addToCart } = useCart();
+  const { salesActive } = useStorePricing();
 
   useEffect(() => {
     async function fetchProduct() {
@@ -200,7 +203,23 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
   const needsColorSelection = hasColors && !selectedColor;
 
   // Determine the active price: variant price if selected, otherwise base price
-  const activePrice = selectedVariant?.price ?? product?.price ?? 0;
+  const resolvedPrice = selectedVariant
+    ? resolveVariantPrice({
+        salesActive,
+        productPrice: product?.price ?? 0,
+        productSalePrice: product?.sale_price,
+        variantPrice: Number(selectedVariant.price ?? product?.price ?? 0),
+        variantSalePrice: selectedVariant.sale_price,
+        compareAtPrice: product?.compare_at_price,
+      })
+    : resolveProductPrice({
+        salesActive,
+        price: product?.price ?? 0,
+        salePrice: product?.sale_price,
+        compareAtPrice: product?.compare_at_price,
+      });
+  const activePrice = resolvedPrice.effective;
+  const comparePrice = resolvedPrice.originalDisplay;
   const activeStock = selectedVariant ? (selectedVariant.stock ?? selectedVariant.quantity ?? product?.stockCount ?? 0) : (product?.stockCount ?? 0);
 
   const handleAddToCart = () => {
@@ -281,14 +300,29 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
     );
   }
 
-  const discount = product.compare_at_price ? Math.round((1 - activePrice / product.compare_at_price) * 100) : 0;
-  const minVariantPrice = hasVariants ? Math.min(...product.variants.map((v: any) => v.price || product.price)) : product.price;
+  const discount = comparePrice && comparePrice > activePrice
+    ? Math.round((1 - activePrice / comparePrice) * 100)
+    : 0;
+  const minVariantPrice = hasVariants
+    ? Math.min(
+        ...product.variants.map((v: any) =>
+          resolveVariantPrice({
+            salesActive,
+            productPrice: product.price,
+            productSalePrice: product.sale_price,
+            variantPrice: Number(v.price ?? product.price),
+            variantSalePrice: v.sale_price,
+            compareAtPrice: product.compare_at_price,
+          }).effective
+        )
+      )
+    : activePrice;
 
   const productSchema = generateProductSchema({
     name: product.name,
     description: product.description,
     image: product.images[0],
-    price: hasVariants ? minVariantPrice : product.price,
+    price: hasVariants ? minVariantPrice : activePrice,
     currency: 'GHS',
     sku: product.sku,
     rating: product.rating,
@@ -498,10 +532,10 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
                         GH₵{activePrice.toFixed(2)}
                       </span>
                     )}
-                    {product.compare_at_price && product.compare_at_price > activePrice && (
+                    {comparePrice && comparePrice > activePrice && (
                       <>
                         <span className="text-slate-400 line-through font-light text-xl">
-                          GH₵{product.compare_at_price.toFixed(2)}
+                          GH₵{comparePrice.toFixed(2)}
                         </span>
                         {discount > 0 && (
                           <span className="text-blue-600 font-serif italic text-sm">
