@@ -28,7 +28,7 @@ export default function Footer() {
       links: [
         { href: '/shop', label: 'All Products' },
         { href: '/categories', label: 'Collections' },
-        { href: '/shop?sort=newest', label: 'New Arrivals' },
+        { href: '/shop?sort=new', label: 'New Arrivals' },
         { href: '/shop?sale=true', label: 'On Sale' },
       ],
     },

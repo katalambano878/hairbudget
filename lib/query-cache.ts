@@ -27,6 +27,10 @@ export async function cachedQuery<T>(
   }
   
   const data = await queryFn();
+  // Never cache failed queries — a broken first hit would stick for the TTL.
+  if (data && typeof data === 'object' && 'error' in (data as object) && (data as { error?: unknown }).error) {
+    return data;
+  }
   cache.set(key, { data, timestamp: Date.now() });
   return data;
 }

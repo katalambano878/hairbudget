@@ -142,6 +142,28 @@ async function compileSimpleFilter(
     params: Param,
     negate = false
 ): Promise<string> {
+    // PostgREST-style embed filter: `.eq('categories.slug', 'wigs')`
+    if (column.includes('.')) {
+        const parts = column.split('.');
+        if (parts.length !== 2 || !IDENT_RE.test(parts[0]) || !IDENT_RE.test(parts[1])) {
+            throw new QueryError(`Unknown column ${table}.${column}`);
+        }
+        const [relName, relCol] = parts;
+        if (!(await tableExists(relName))) {
+            throw new QueryError(`Unknown embedded table: ${relName}`);
+        }
+        const rel = await resolveRelationship(table, relName);
+        if (!rel) throw new QueryError(`No relationship between ${table} and ${relName}`);
+        const subAlias = `_f_${relName}`;
+        const inner = await compileSimpleFilter(relName, subAlias, op, relCol, value, params, false);
+        const join =
+            rel.type === 'many-to-one'
+                ? `${subAlias}.${quoteIdent(rel.foreignColumn)} = ${alias}.${quoteIdent(rel.baseColumn)}`
+                : `${subAlias}.${quoteIdent(rel.childColumn)} = ${alias}.${quoteIdent(rel.baseColumn)}`;
+        const exists = `EXISTS (SELECT 1 FROM ${quoteIdent(relName)} ${subAlias} WHERE ${join} AND ${inner})`;
+        return negate ? `NOT (${exists})` : exists;
+    }
+
     const cols = await getColumns(table);
     const col = cols.get(column);
     if (!col) throw new QueryError(`Unknown column ${table}.${column}`);
