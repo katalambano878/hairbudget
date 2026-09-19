@@ -332,7 +332,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
         </header>
 
-        <main className="p-4 lg:p-6">
+        <main className="p-4 lg:p-6 tracking-normal [&_input]:tracking-normal [&_select]:tracking-normal [&_textarea]:tracking-normal">
           {children}
         </main>
       </div>

@@ -12,6 +12,8 @@ type ProductsListState = {
   sortBy: string;
   searchQuery: string;
   showFilters: boolean;
+  categoryFilter: string;
+  statusFilter: string;
   scrollY: number;
   savedAt: number;
 };
@@ -23,6 +25,7 @@ export default function ProductsPage() {
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
   const [showFilters, setShowFilters] = useState(false);
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'draft' | 'archived'>('active');
+  const [categoryFilter, setCategoryFilter] = useState('all');
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<any[]>([]);
@@ -43,7 +46,11 @@ export default function ProductsPage() {
   };
 
   const fetchCategories = useCallback(async () => {
-    const { data } = await supabase.from('categories').select('name');
+    const { data } = await supabase
+      .from('categories')
+      .select('id, name, slug, parent_id')
+      .eq('status', 'active')
+      .order('position');
     if (data) setCategories(data);
   }, []);
 
@@ -54,7 +61,7 @@ export default function ProductsPage() {
         .from('products')
         .select(`
           *,
-          categories(name),
+          categories(id, name),
           product_variants(count),
           product_images(url, position)
         `);
@@ -79,6 +86,7 @@ export default function ProductsPage() {
         const transformedProducts = data.map((p: any) => ({
           ...p,
           category: p.categories?.name || 'Uncategorized',
+          categoryId: p.category_id || p.categories?.id || null,
           image: p.product_images?.find((img: any) => img.position === 0)?.url
             || p.product_images?.[0]?.url
             || 'https://via.placeholder.com/300?text=No+Image',
@@ -121,11 +129,13 @@ export default function ProductsPage() {
       sortBy,
       searchQuery,
       showFilters,
+      categoryFilter,
+      statusFilter,
       scrollY: window.scrollY,
       savedAt: Date.now(),
     };
     sessionStorage.setItem(LIST_STATE_KEY, JSON.stringify(state));
-  }, [viewMode, sortBy, searchQuery, showFilters]);
+  }, [viewMode, sortBy, searchQuery, showFilters, categoryFilter, statusFilter]);
 
   useEffect(() => {
     fetchProducts();
@@ -147,6 +157,10 @@ export default function ProductsPage() {
       if (typeof parsed.sortBy === 'string') setSortBy(parsed.sortBy);
       if (typeof parsed.searchQuery === 'string') setSearchQuery(parsed.searchQuery);
       if (typeof parsed.showFilters === 'boolean') setShowFilters(parsed.showFilters);
+      if (typeof parsed.categoryFilter === 'string') setCategoryFilter(parsed.categoryFilter);
+      if (parsed.statusFilter === 'all' || parsed.statusFilter === 'active' || parsed.statusFilter === 'draft' || parsed.statusFilter === 'archived') {
+        setStatusFilter(parsed.statusFilter);
+      }
       if (typeof parsed.scrollY === 'number' && parsed.scrollY >= 0) setRestoreScrollY(parsed.scrollY);
     } catch {
       sessionStorage.removeItem(LIST_STATE_KEY);
@@ -241,12 +255,27 @@ export default function ProductsPage() {
     }
   };
 
+  const categoryIdsForFilter = (() => {
+    if (categoryFilter === 'all') return null;
+    const selected = categories.find((c: any) => c.id === categoryFilter);
+    if (!selected) return [categoryFilter];
+    const childIds = categories.filter((c: any) => c.parent_id === selected.id).map((c: any) => c.id);
+    return [selected.id, ...childIds];
+  })();
+
   const filteredProducts = products.filter(product => {
-    const term = searchQuery.toLowerCase();
-    return product.name.toLowerCase().includes(term) ||
+    const term = searchQuery.toLowerCase().trim();
+    const matchesSearch = !term ||
+      product.name.toLowerCase().includes(term) ||
       (product.sku && product.sku.toLowerCase().includes(term)) ||
       (product.category && product.category.toLowerCase().includes(term));
+    const matchesCategory = !categoryIdsForFilter ||
+      (product.categoryId && categoryIdsForFilter.includes(product.categoryId));
+    return matchesSearch && matchesCategory;
   });
+
+  const parentCategories = categories.filter((c: any) => !c.parent_id);
+  const selectedCategory = categories.find((c: any) => c.id === categoryFilter);
 
   return (
     <div className="space-y-6">
@@ -339,9 +368,28 @@ export default function ProductsPage() {
 
           {showFilters && (
             <div className="mt-4 p-4 bg-gray-50 rounded-lg grid md:grid-cols-4 gap-4">
-              <select className="px-3 py-2 pr-8 border-2 border-gray-300 rounded-lg text-sm cursor-pointer">
-                <option value="">All Categories</option>
-                {categories.map((cat: any) => <option key={cat.name} value={cat.name}>{cat.name}</option>)}
+              <select
+                value={categoryFilter}
+                onChange={(e) => setCategoryFilter(e.target.value)}
+                className="px-3 py-2 pr-8 border-2 border-gray-300 rounded-lg text-sm cursor-pointer bg-white"
+              >
+                <option value="all">All categories</option>
+                {parentCategories.map((parent: any) => {
+                  const children = categories.filter((c: any) => c.parent_id === parent.id);
+                  if (children.length === 0) {
+                    return (
+                      <option key={parent.id} value={parent.id}>{parent.name}</option>
+                    );
+                  }
+                  return (
+                    <optgroup key={parent.id} label={parent.name}>
+                      <option value={parent.id}>All {parent.name}</option>
+                      {children.map((child: any) => (
+                        <option key={child.id} value={child.id}>{child.name}</option>
+                      ))}
+                    </optgroup>
+                  );
+                })}
               </select>
               <select
                 value={statusFilter}
@@ -382,7 +430,11 @@ export default function ProductsPage() {
           <div className="p-12 text-center text-gray-500">
             <i className="ri-inbox-line text-4xl mb-4 text-gray-300 inline-block"></i>
             <p className="text-lg">No products found</p>
-            <p className="text-sm text-gray-400 mt-1">Try adjusting your search or filters</p>
+            <p className="text-sm text-gray-400 mt-1 max-w-md mx-auto">
+              {selectedCategory
+                ? `${selectedCategory.name} has no matching products. Open a product and set its category, or pick All categories.`
+                : 'Try adjusting your search or filters'}
+            </p>
           </div>
         ) : viewMode === 'list' ? (
           <div className="overflow-x-auto">
