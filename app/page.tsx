@@ -84,8 +84,9 @@ export default function Home() {
 
         const { data: categoriesData, error: categoriesError } = await supabase
           .from('categories')
-          .select('id, name, slug, image_url, metadata, position')
+          .select('id, name, slug, image_url, metadata, position, parent_id')
           .eq('status', 'active')
+          .is('parent_id', null)
           .order('position', { ascending: true });
 
         if (categoriesError) throw categoriesError;

@@ -17,8 +17,9 @@ export const metadata: Metadata = buildMetadata({
 export default async function CategoriesPage() {
   const { data: categoriesData } = await supabase
     .from('categories')
-    .select(`id, name, slug, description, image_url, position`)
+    .select(`id, name, slug, description, image_url, position, parent_id`)
     .eq('status', 'active')
+    .is('parent_id', null)
     .order('position', { ascending: true });
 
   const palette = [

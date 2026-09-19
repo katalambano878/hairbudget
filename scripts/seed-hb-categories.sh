@@ -8,7 +8,7 @@ sudo docker exec fleet-postgres psql -U postgres -d $DB -v ON_ERROR_STOP=1 -f /t
 
 echo "==== rows now ===="
 sudo docker exec fleet-postgres psql -U postgres -d $DB -c \
-  "select position, name, slug, status, metadata->>'featured' as featured, image_url from public.categories order by position;"
+  "select c.position, c.name, c.slug, p.slug as parent, c.status, c.metadata->>'featured' as featured from public.categories c left join public.categories p on p.id = c.parent_id order by coalesce(p.position, c.position), c.parent_id nulls first, c.position;"
 
 echo "==== featured count (homepage shows these) ===="
 sudo docker exec fleet-postgres psql -U postgres -d $DB -tAc \
