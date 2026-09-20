@@ -51,7 +51,7 @@ export async function GET(
                     const sliceEnd = Math.min(end, body.length - 1);
                     headers['Content-Range'] = `bytes ${start}-${sliceEnd}/${body.length}`;
                     headers['Content-Length'] = String(sliceEnd - start + 1);
-                    return new NextResponse(body.subarray(start, sliceEnd + 1), {
+                    return new NextResponse(new Uint8Array(body.subarray(start, sliceEnd + 1)), {
                         status: 206,
                         headers,
                     });
@@ -60,7 +60,7 @@ export async function GET(
         }
 
         headers['Content-Length'] = String(body.length);
-        return new NextResponse(body, { status: 200, headers });
+        return new NextResponse(new Uint8Array(body), { status: 200, headers });
     } catch (err) {
         console.error('[storage/serve] error:', err);
         return new NextResponse('Storage error', { status: 500 });
