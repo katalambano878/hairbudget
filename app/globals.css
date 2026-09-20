@@ -5,7 +5,17 @@
 
 /* Native form controls inherit Outfit poorly on Windows — last letters
    clip and words run together. Keep these at normal tracking. */
-input, select, textarea, option, button {
+input, select, textarea, option, button, th, td, label {
+  letter-spacing: normal;
+  word-spacing: normal;
+}
+
+.admin-shell h1,
+.admin-shell h2,
+.admin-shell h3,
+.admin-shell p,
+.admin-shell span,
+.admin-shell li {
   letter-spacing: normal;
   word-spacing: normal;
 }

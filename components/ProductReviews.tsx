@@ -124,13 +124,13 @@ export default function ProductReviews({ productId }: ProductReviewsProps) {
         rating: reviewForm.rating,
         title: reviewForm.title,
         content: reviewForm.content,
-        status: 'approved', // Auto-approve for demo
-        verified_purchase: false // We could check orders here but keeping it simple
+        status: 'pending',
+        verified_purchase: false
       }]);
 
       if (error) throw error;
 
-      alert('Review submitted successfully!');
+      alert('Thanks — your review is pending approval.');
       setShowReviewForm(false);
       setReviewForm({ rating: 5, title: '', content: '' });
       invalidateCache(`reviews:${productId}`); // Clear cache so fresh data is fetched

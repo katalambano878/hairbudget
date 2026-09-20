@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
+import AdminOrderBell from '@/components/admin/AdminOrderBell';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -125,7 +126,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         { title: 'Orders',       icon: 'ri-shopping-bag-line', path: '/admin/orders' },
         { title: 'POS System',   icon: 'ri-store-3-line',      path: '/admin/pos' },
         { title: 'Products',     icon: 'ri-box-3-line',        path: '/admin/products' },
-        { title: 'Sales',        icon: 'ri-price-tag-2-line',  path: '/admin/sales' },
+        { title: 'Sales',        icon: 'ri-price-tag-2-line',      path: '/admin/sales', exact: true },
+        { title: 'End of Day',   icon: 'ri-calendar-check-line',   path: '/admin/end-of-day' },
       ]
     },
     {
@@ -141,7 +143,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     {
       label: 'Insights',
       items: [
-        { title: 'End of Day',        icon: 'ri-calendar-check-line', path: '/admin/end-of-day' },
         { title: 'Analytics',         icon: 'ri-bar-chart-line',    path: '/admin/analytics' },
         { title: 'Customer Insights', icon: 'ri-user-search-line',  path: '/admin/customer-insights', moduleId: 'customer-insights' },
         { title: 'Notifications',     icon: 'ri-notification-3-line', path: '/admin/notifications',   moduleId: 'notifications' },
@@ -165,7 +166,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (pathname === '/admin/login') return <>{children}</>;
 
   return (
-    <div className="min-h-screen bg-ui-100">
+    <div className="min-h-screen bg-ui-100 admin-shell">
 
       {/* Mobile overlay */}
       {isSidebarOpen && (
@@ -292,10 +293,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </div>
 
             <div className="flex items-center gap-2">
-              <button className="relative w-9 h-9 flex items-center justify-center rounded-xl text-ui-500 hover:text-ui-900 hover:bg-ui-100 transition-all cursor-pointer">
-                <i className="ri-notification-3-line text-lg" />
-                <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-brand-gold rounded-full" />
-              </button>
+              <AdminOrderBell />
 
               <div className="relative user-menu-container">
                 <button
