@@ -94,7 +94,7 @@ export default async function CategoriesPage() {
                   />
 
                   {/* Forest wash keeps the cream type readable over any photo */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/75 via-brand-deep/25 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/70 via-brand-deep/20 to-transparent" />
 
                   {/* Thin champagne frame */}
                   <div className="absolute inset-3 rounded-[18px] border border-brand-ivory/20 group-hover:border-brand-gold/70 transition-colors duration-500 pointer-events-none" />

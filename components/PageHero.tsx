@@ -48,7 +48,7 @@ export default function PageHero({
         <div className="absolute inset-0 bg-gradient-to-br from-brand-deep via-brand-forest to-brand-deep" />
       )}
 
-      <div className="absolute inset-0 bg-brand-deep/78 z-0" />
+      <div className="absolute inset-0 bg-brand-deep/[0.73] z-0" />
       <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brand-gold/70 to-transparent z-20" />
 
       {ghostLetter ? (

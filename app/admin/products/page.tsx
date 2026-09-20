@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/lib/supabase';
+import { firstProductThumb } from '@/lib/product-image';
 
 const LIST_STATE_KEY = 'admin-products-list-state-v1';
 const LIST_STATE_TTL_MS = 30 * 60 * 1000;
@@ -87,9 +88,7 @@ export default function ProductsPage() {
           ...p,
           category: p.categories?.name || 'Uncategorized',
           categoryId: p.category_id || p.categories?.id || null,
-          image: p.product_images?.find((img: any) => img.position === 0)?.url
-            || p.product_images?.[0]?.url
-            || 'https://via.placeholder.com/300?text=No+Image',
+          image: firstProductThumb(p.product_images) || 'https://via.placeholder.com/300?text=No+Image',
           variantsCount: p.product_variants?.[0]?.count || 0,
           stock: p.quantity,
           sales: 0,

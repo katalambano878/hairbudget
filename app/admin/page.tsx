@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
+import { firstProductThumb } from '@/lib/product-image';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 export default function AdminDashboard() {
@@ -94,7 +95,7 @@ export default function AdminDashboard() {
         if (productData) {
           setTopProducts(productData.map((p: any) => ({
             id: p.slug, name: p.name,
-            image: p.product_images?.[0]?.url || 'https://via.placeholder.com/200',
+            image: firstProductThumb(p.product_images) || 'https://via.placeholder.com/200',
             sales: 0, revenue: 0, stock: p.quantity
           })));
         }
@@ -225,6 +226,7 @@ export default function AdminDashboard() {
               { label: 'Manage Orders',    icon: 'ri-file-list-line',   href: '/admin/orders',       accent: 'text-brand-mid' },
               { label: 'View Analytics',   icon: 'ri-bar-chart-line',   href: '/admin/analytics',    accent: 'text-brand-forest'},
               { label: 'Store-wide Sale',  icon: 'ri-price-tag-2-line', href: '/admin/sales',        accent: 'text-red-600'   },
+              { label: 'End of Day',       icon: 'ri-calendar-check-line', href: '/admin/end-of-day', accent: 'text-brand-forest' },
             ].map(action => (
               <Link
                 key={action.href}
