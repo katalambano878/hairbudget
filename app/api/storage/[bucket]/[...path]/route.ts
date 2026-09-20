@@ -33,13 +33,34 @@ export async function GET(
             return new NextResponse('Not found', { status: 404 });
         }
         const row = res.rows[0];
-        return new NextResponse(row.data, {
-            status: 200,
-            headers: {
-                'Content-Type': row.content_type || 'application/octet-stream',
-                'Cache-Control': 'public, max-age=31536000, immutable',
-            },
-        });
+        const body: Buffer = Buffer.isBuffer(row.data) ? row.data : Buffer.from(row.data);
+        const contentType = row.content_type || 'application/octet-stream';
+        const range = _request.headers.get('range');
+        const headers: Record<string, string> = {
+            'Content-Type': contentType,
+            'Cache-Control': 'public, max-age=31536000, immutable',
+            'Accept-Ranges': 'bytes',
+        };
+
+        if (range) {
+            const match = range.match(/bytes=(\d*)-(\d*)/);
+            if (match) {
+                const start = match[1] ? parseInt(match[1], 10) : 0;
+                const end = match[2] ? parseInt(match[2], 10) : body.length - 1;
+                if (start <= end && start < body.length) {
+                    const sliceEnd = Math.min(end, body.length - 1);
+                    headers['Content-Range'] = `bytes ${start}-${sliceEnd}/${body.length}`;
+                    headers['Content-Length'] = String(sliceEnd - start + 1);
+                    return new NextResponse(body.subarray(start, sliceEnd + 1), {
+                        status: 206,
+                        headers,
+                    });
+                }
+            }
+        }
+
+        headers['Content-Length'] = String(body.length);
+        return new NextResponse(body, { status: 200, headers });
     } catch (err) {
         console.error('[storage/serve] error:', err);
         return new NextResponse('Storage error', { status: 500 });

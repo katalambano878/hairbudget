@@ -14,13 +14,34 @@ export function videoPosterUrl(url: string): string {
 
 type MediaItem = { url?: string; position?: number } | string;
 
-/** First still photo for cards/admin. Never returns a video URL. */
-export function firstProductThumb(images?: MediaItem[] | null): string {
-  if (!images?.length) return '';
-  const items = images.map((item, index) =>
+function normalizeMedia(images?: MediaItem[] | null) {
+  if (!images?.length) return [];
+  return images.map((item, index) =>
     typeof item === 'string' ? { url: item, position: index } : item
   );
-  const sorted = [...items].sort((a, b) => (a.position ?? 0) - (b.position ?? 0));
+}
+
+/** Videos first (then stills), so customers see motion before a photo. */
+export function sortStorefrontMedia<T extends { url?: string; position?: number }>(images?: T[] | null): T[] {
+  if (!images?.length) return [];
+  return [...images].sort((a, b) => {
+    const aVid = isVideoUrl(a.url) ? 0 : 1;
+    const bVid = isVideoUrl(b.url) ? 0 : 1;
+    if (aVid !== bVid) return aVid - bVid;
+    return (a.position ?? 0) - (b.position ?? 0);
+  });
+}
+
+/** First media customers should see — video when the product has one. */
+export function firstStorefrontMedia(images?: MediaItem[] | null): string {
+  const sorted = sortStorefrontMedia(normalizeMedia(images));
+  const picked = sorted.find((item) => item.url)?.url || '';
+  return resolveProductImageUrl(picked);
+}
+
+/** First still photo for cards/admin. Never returns a video URL. */
+export function firstProductThumb(images?: MediaItem[] | null): string {
+  const sorted = [...normalizeMedia(images)].sort((a, b) => (a.position ?? 0) - (b.position ?? 0));
   const still = sorted.find((item) => item.url && !isVideoUrl(item.url));
   const picked = still?.url || (sorted[0]?.url ? videoPosterUrl(sorted[0].url) : '');
   return resolveProductImageUrl(picked);

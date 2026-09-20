@@ -11,6 +11,7 @@ import { supabase } from '@/lib/supabase';
 import { cachedQuery } from '@/lib/query-cache';
 import { useStorePricing } from '@/context/StorePricingContext';
 import { getProductCardPricing } from '@/lib/pricing';
+import { firstStorefrontMedia } from '@/lib/product-image';
 
 const SORT_OPTIONS = [
   { value: 'popular',    label: 'Popular'    },
@@ -182,7 +183,7 @@ function ShopContent() {
             return {
               id: p.id, slug: p.slug, name: p.name,
               price: pricing.price, originalPrice: pricing.originalPrice,
-              image: p.product_images?.[0]?.url || 'https://via.placeholder.com/800x800?text=No+Image',
+              image: firstStorefrontMedia(p.product_images) || 'https://via.placeholder.com/800x800?text=No+Image',
               rating: p.rating_avg || 0, reviewCount: 0,
               badge: pricing.saleBadge ? 'Sale' : undefined,
               inStock: effectiveStock > 0, maxStock: effectiveStock || 50,

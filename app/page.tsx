@@ -13,6 +13,7 @@ import WhatsAppButton from '@/components/WhatsAppButton';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { useStorePricing } from '@/context/StorePricingContext';
 import { getProductCardPricing } from '@/lib/pricing';
+import { firstStorefrontMedia } from '@/lib/product-image';
 
 const HERO = {
   tag: 'HairBudget by Yassi',
@@ -330,7 +331,7 @@ export default function Home() {
                     name={product.name}
                     price={pricing.price}
                     originalPrice={pricing.originalPrice}
-                    image={product.product_images?.[0]?.url || 'https://via.placeholder.com/400x500'}
+                    image={firstStorefrontMedia(product.product_images) || 'https://via.placeholder.com/400x500'}
                     rating={product.rating_avg || 5}
                     reviewCount={product.review_count || 0}
                     badge={pricing.saleBadge ? 'Sale' : product.featured ? 'Featured' : undefined}

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
+import { isVideoUrl, videoPosterUrl } from '@/lib/product-image';
 import { useRouter } from 'next/navigation';
 
 interface ProductFormProps {
@@ -890,7 +891,13 @@ export default function ProductForm({ initialData, isEditMode = false }: Product
                     await supabase.from('product_images').delete().eq('product_id', productId);
                 }
                 if (images.length > 0) {
-                    const imageInserts = images.map((img, idx) => ({
+                    const ordered = [...images].sort((a, b) => {
+                        const aVid = isVideoUrl(a.url);
+                        const bVid = isVideoUrl(b.url);
+                        if (aVid === bVid) return 0;
+                        return aVid ? -1 : 1;
+                    });
+                    const imageInserts = ordered.map((img, idx) => ({
                         product_id: productId,
                         url: img.url,
                         position: idx,
@@ -2027,23 +2034,16 @@ export default function ProductForm({ initialData, isEditMode = false }: Product
                                         <div key={index} className="relative group">
                                             <div className="aspect-square bg-gray-100 rounded-xl overflow-hidden border-2 border-gray-200">
                                                 {isVid ? (
-                                                    <video
-                                                        src={img.url}
-                                                        className="w-full h-full object-cover"
-                                                        muted
-                                                        playsInline
-                                                        loop
-                                                        preload="metadata"
-                                                        onMouseEnter={(e) => {
-                                                            const v = e.currentTarget as HTMLVideoElement;
-                                                            v.play().catch(() => {});
-                                                        }}
-                                                        onMouseLeave={(e) => {
-                                                            const v = e.currentTarget as HTMLVideoElement;
-                                                            v.pause();
-                                                            v.currentTime = 0;
-                                                        }}
-                                                    />
+                                                    <div className="relative w-full h-full">
+                                                        <img
+                                                            src={videoPosterUrl(img.url)}
+                                                            alt=""
+                                                            className="w-full h-full object-cover"
+                                                        />
+                                                        <span className="absolute inset-0 flex items-center justify-center bg-black/25">
+                                                            <i className="ri-play-fill text-white text-2xl" />
+                                                        </span>
+                                                    </div>
                                                 ) : (
                                                     // eslint-disable-next-line @next/next/no-img-element
                                                     <img src={img.url} alt={`Product ${index + 1}`} className="w-full h-full object-cover" />

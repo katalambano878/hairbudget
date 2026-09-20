@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { isVideoUrl } from '@/components/LazyImage';
-import { productImageUnoptimized, resolveProductImageUrl } from '@/lib/product-image';
+import { firstStorefrontMedia, productImageUnoptimized, resolveProductImageUrl, sortStorefrontMedia, videoPosterUrl } from '@/lib/product-image';
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { cachedQuery } from '@/lib/query-cache';
@@ -103,7 +103,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
 
         const transformedProduct = {
           ...productData,
-          images: productData.product_images?.sort((a: any, b: any) => a.position - b.position).map((img: any) => resolveProductImageUrl(img.url)) || [],
+          images: sortStorefrontMedia(productData.product_images || []).map((img: any) => resolveProductImageUrl(img.url)),
           category: productData.categories?.name || 'Shop',
           rating: productData.rating_avg || 0,
           reviewCount: 0,
@@ -172,7 +172,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
                 slug: p.slug,
                 name: p.name,
                 price: p.price,
-                image: p.product_images?.[0]?.url || 'https://via.placeholder.com/800?text=No+Image',
+                image: firstStorefrontMedia(p.product_images) || 'https://via.placeholder.com/800?text=No+Image',
                 rating: p.rating_avg || 0,
                 reviewCount: 0,
                 inStock: effectiveStock > 0,
@@ -383,6 +383,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
                     <video
                       key={product.images[selectedImage]}
                       src={product.images[selectedImage]}
+                      poster={videoPosterUrl(product.images[selectedImage])}
                       className="absolute inset-0 w-full h-full object-cover object-center"
                       autoPlay
                       muted
@@ -449,12 +450,10 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
                         >
                           {isVid ? (
                             <>
-                              <video
-                                src={image}
+                              <img
+                                src={videoPosterUrl(image)}
+                                alt=""
                                 className="absolute inset-0 w-full h-full object-cover object-center"
-                                muted
-                                playsInline
-                                preload="metadata"
                               />
                               <span className="absolute inset-0 flex items-center justify-center bg-black/30 pointer-events-none">
                                 <i className="ri-play-fill text-white text-2xl drop-shadow"></i>
