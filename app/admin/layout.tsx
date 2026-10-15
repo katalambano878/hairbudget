@@ -154,6 +154,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       items: [
         { title: 'Blog',    icon: 'ri-article-line', path: '/admin/blog',    moduleId: 'blog' },
         { title: 'Modules', icon: 'ri-puzzle-line',  path: '/admin/modules' },
+        { title: 'Buy SMS', icon: 'ri-message-2-line', path: '/admin/sms-credit' },
       ]
     },
   ];
