@@ -125,6 +125,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         { title: 'Dashboard',    icon: 'ri-dashboard-line',    path: '/admin',        exact: true },
         { title: 'Orders',       icon: 'ri-shopping-bag-line', path: '/admin/orders' },
         { title: 'POS System',   icon: 'ri-store-3-line',      path: '/admin/pos' },
+        { title: 'Buy SMS', icon: 'ri-message-2-line', path: '/admin/sms-credit' },
         { title: 'Products',     icon: 'ri-box-3-line',        path: '/admin/products' },
         { title: 'Sales',        icon: 'ri-price-tag-2-line',      path: '/admin/sales', exact: true },
         { title: 'End of Day',   icon: 'ri-calendar-check-line',   path: '/admin/end-of-day' },
@@ -154,7 +155,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       items: [
         { title: 'Blog',    icon: 'ri-article-line', path: '/admin/blog',    moduleId: 'blog' },
         { title: 'Modules', icon: 'ri-puzzle-line',  path: '/admin/modules' },
-        { title: 'Buy SMS', icon: 'ri-message-2-line', path: '/admin/sms-credit' },
       ]
     },
   ];
