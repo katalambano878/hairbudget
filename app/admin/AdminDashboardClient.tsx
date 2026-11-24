@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { firstProductThumb } from '@/lib/product-image';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { SmsCreditDashboardCard } from '@/components/admin/SmsCreditDashboardCard';
 import type { DashboardSmsCredit } from '@/lib/sms-credit-types';
 
 export default function AdminDashboardClient({ smsCredit }: { smsCredit: DashboardSmsCredit }) {
@@ -170,8 +169,7 @@ export default function AdminDashboardClient({ smsCredit }: { smsCredit: Dashboa
             <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-ui-500">{stat.title}</p>
           </div>
         ))}
-        <SmsCreditDashboardCard smsCredit={smsCredit} />
-      </div>
+</div>
 
       {/* ── CHART + QUICK ACTIONS ────────────────────────── */}
       <div className="grid lg:grid-cols-3 gap-4">
