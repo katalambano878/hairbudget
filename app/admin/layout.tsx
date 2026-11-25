@@ -5,8 +5,6 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import AdminOrderBell from '@/components/admin/AdminOrderBell';
-import { ADMIN_NAV, canAccessAdminPath } from '@/lib/admin-access';
-import { blankStaffPermissions, canOpen, firstAllowedPath, hasSavedScreens, parseStaffPermissions, permissionsFromProfile, screenForPath, type StaffPermissions } from '@/lib/admin-permissions';
 import { SmsCreditDashboardCard } from '@/components/admin/SmsCreditDashboardCard';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -18,7 +16,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [user, setUser] = useState<any>(null);
   const [userRole, setUserRole] = useState<string | null>(null);
-  const [staffPermissions, setStaffPermissions] = useState<StaffPermissions>(blankStaffPermissions);
   const [enabledModules, setEnabledModules] = useState<string[]>([]);
 
   useEffect(() => {
@@ -39,7 +36,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       const { data: profile, error: profileError } = await supabase
         .from('profiles')
-        .select('role, preferences')
+        .select('role')
         .eq('id', session.user.id)
         .single();
 
@@ -59,19 +56,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       setUser(session.user);
       setUserRole(profile.role);
-      let permissions = profile.role === 'staff' ? permissionsFromProfile(profile.preferences) : {};
-      if (profile.role === 'staff' && !hasSavedScreens(profile.preferences)) {
-        const { data: access } = await supabase.from('site_settings').select('value').eq('key', 'staff_permissions').maybeSingle();
-        if (access?.value) permissions = parseStaffPermissions(access.value);
-      }
-      setStaffPermissions(permissions);
-      const screen = screenForPath(pathname);
-      if (!canAccessAdminPath(profile.role, pathname) || (profile.role === 'staff' && screen && !canOpen(profile.role, screen, permissions))) {
-        router.replace(profile.role === 'staff' ? firstAllowedPath(profile.role, permissions) : '/admin');
-        setIsAuthenticated(true);
-        setIsLoading(false);
-        return;
-      }
       setIsAuthenticated(true);
       setIsLoading(false);
     }
@@ -135,12 +119,50 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     );
   }
 
-  const filteredSections = ADMIN_NAV.map(section => ({
+  const menuSections: { label: string; items: { title: string; icon: string; path: string; exact?: boolean; moduleId?: string }[] }[] = [
+    {
+      label: 'Core',
+      items: [
+        { title: 'Dashboard',    icon: 'ri-dashboard-line',    path: '/admin',        exact: true },
+        { title: 'Orders',       icon: 'ri-shopping-bag-line', path: '/admin/orders' },
+        { title: 'POS System',   icon: 'ri-store-3-line',      path: '/admin/pos' },
+        { title: 'Buy SMS', icon: 'ri-message-2-line', path: '/admin/sms-credit' },
+        { title: 'Products',     icon: 'ri-box-3-line',        path: '/admin/products' },
+        { title: 'Sales',        icon: 'ri-price-tag-2-line',      path: '/admin/sales', exact: true },
+        { title: 'End of Day',   icon: 'ri-calendar-check-line',   path: '/admin/end-of-day' },
+      ]
+    },
+    {
+      label: 'Manage',
+      items: [
+        { title: 'Categories',   icon: 'ri-folder-line',       path: '/admin/categories' },
+        { title: 'Customers',    icon: 'ri-group-line',        path: '/admin/customers' },
+        { title: 'Reviews',      icon: 'ri-chat-smile-2-line', path: '/admin/reviews' },
+        { title: 'Inventory',    icon: 'ri-stack-line',        path: '/admin/inventory' },
+        { title: 'Coupons',      icon: 'ri-coupon-2-line',     path: '/admin/coupons' },
+      ]
+    },
+    {
+      label: 'Insights',
+      items: [
+        { title: 'Analytics',         icon: 'ri-bar-chart-line',    path: '/admin/analytics' },
+        { title: 'Customer Insights', icon: 'ri-user-search-line',  path: '/admin/customer-insights', moduleId: 'customer-insights' },
+        { title: 'Notifications',     icon: 'ri-notification-3-line', path: '/admin/notifications',   moduleId: 'notifications' },
+        { title: 'SMS Debugger',      icon: 'ri-message-2-line',    path: '/admin/test-sms' },
+      ]
+    },
+    {
+      label: 'System',
+      items: [
+        { title: 'Blog',    icon: 'ri-article-line', path: '/admin/blog',    moduleId: 'blog' },
+        { title: 'Modules', icon: 'ri-puzzle-line',  path: '/admin/modules' },
+      ]
+    },
+  ];
+
+  const filteredSections = menuSections.map(section => ({
     ...section,
-    items: section.items.filter(item =>
-      canOpen(userRole, item.screen, staffPermissions) &&
-      (!item.moduleId || enabledModules.includes(item.moduleId))
-    )
+    items: section.items.filter(item => !item.moduleId || enabledModules.includes(item.moduleId))
   })).filter(section => section.items.length > 0);
 
   if (pathname === '/admin/login') return <>{children}</>;
